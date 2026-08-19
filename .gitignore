@@ -3,3 +3,7 @@
 
 /target
 /dist
+.cache/
+logs/
+__pycache__/
+*.py[cod]

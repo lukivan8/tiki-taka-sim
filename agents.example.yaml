@@ -1,0 +1,11 @@
+agents:
+  - { teamId: 0, playerId: 0, name: home-gk, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 0, playerId: 1, name: home-def, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 0, playerId: 2, name: home-mid, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 0, playerId: 3, name: home-fwd1, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 0, playerId: 4, name: home-fwd2, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 1, playerId: 0, name: away-gk, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 1, playerId: 1, name: away-def, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 1, playerId: 2, name: away-mid, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 1, playerId: 3, name: away-fwd1, url: "http://127.0.0.1:8100/invocations" }
+  - { teamId: 1, playerId: 4, name: away-fwd2, url: "http://127.0.0.1:8100/invocations" }

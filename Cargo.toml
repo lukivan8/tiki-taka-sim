@@ -4,10 +4,18 @@ version = "0.1.0"
 authors = ["Arkadiusz Górecki <arkadiusz.gorecki52@gmail.com>", "Tomasz Karwowski <to.karwowski@gmail.com>"]
 edition = "2021"
 license = "MIT OR APACHE-2.0"
-description = "2D real-time multiplayer game in a browser."
-homepage = "http://wasm-peers-footballers.s3-website.eu-central-1.amazonaws.com/"
-repository = "https://github.com/wasm-peers/footballers"
-keywords = ["wasm", "webrtc", "peer-to-peer", "webassembly", "football"]
+description = "Deterministic local 5v5 arena for HTTP and LLM football agents."
+repository = "https://github.com/lukivan8/tiki-taka-sim"
+keywords = ["agents", "llm", "simulation", "webassembly", "football"]
+
+[workspace]
+members = [
+    ".",
+    "crates/football-protocol",
+    "crates/football-core",
+    "crates/football-runner",
+]
+resolver = "2"
 
 [features]
 default = ["console_error_panic_hook"]

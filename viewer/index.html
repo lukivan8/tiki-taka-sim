@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agentic Football Replay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">AFC-compatible local arena</p>
+        <h1>Agentic Football Replay</h1>
+      </div>
+      <label class="file">Open NDJSON<input id="file" type="file" accept=".ndjson,.jsonl"></label>
+    </header>
+    <section class="scorebar">
+      <span id="clock">00:00</span>
+      <strong><span id="homeScore">0</span> — <span id="awayScore">0</span></strong>
+      <span id="tick">decision 0</span>
+    </section>
+    <canvas id="pitch" width="1100" height="700"></canvas>
+    <section class="controls">
+      <button id="play" disabled>Play</button>
+      <input id="range" type="range" min="0" max="0" value="0" disabled>
+    </section>
+    <section>
+      <h2>Agent decisions</h2>
+      <div id="decisions" class="grid"><p>Choose <code>logs/sample-agents.ndjson</code>.</p></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
