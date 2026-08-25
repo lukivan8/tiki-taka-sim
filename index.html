@@ -1,16 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <title>Footballers</title>
-  <link data-trunk rel="icon" href="favicon.ico"/>
-  <link data-trunk rel="css" href="style.css"/>
-  <link data-trunk rel="copy-file" href="grass.jpg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07130e">
+  <title>Tiki Taka — Live Match</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/viewer/style.css?v=20260825-formations">
 </head>
-
 <body>
+  <div class="live-shell">
+    <aside class="match-builder" aria-label="Live match setup">
+      <div class="builder-heading">
+        <p class="eyebrow">Arena · exact 60 Hz</p>
+        <h1>Live match</h1>
+        <p>Choose two teams and watch every physics frame as the simulator produces it.</p>
+      </div>
+      <form id="matchForm" class="team-picker">
+        <label>Invite token<input id="inviteToken" type="password" autocomplete="off" placeholder="Required to spend Nova calls"></label>
+        <div class="side-picker home-picker">
+          <span class="side-label">Home</span>
+          <label>Team<select id="homeTeam" aria-label="Home team"></select></label>
+          <label>Formation<select id="homeFormation" aria-label="Home formation"></select></label>
+        </div>
+        <button id="swapTeams" class="swap-button" type="button" aria-label="Swap home and away teams">⇅ Swap sides</button>
+        <div class="side-picker away-picker">
+          <span class="side-label">Away</span>
+          <label>Team<select id="awayTeam" aria-label="Away team"></select></label>
+          <label>Formation<select id="awayFormation" aria-label="Away formation"></select></label>
+        </div>
+        <button id="startMatch" class="start-match" type="submit" disabled>Start live match</button>
+      </form>
+      <div class="catalog-heading"><span>Team baseline</span><strong id="teamCount">0</strong></div>
+      <div id="teamCatalog" class="team-catalog" aria-live="polite"></div>
+      <div class="builder-footer"><a href="/viewer/">Open a generated replay →</a></div>
+    </aside>
 
+    <main class="live-stage">
+      <header class="stage-heading live-heading">
+        <div>
+          <p class="eyebrow">Live simulation</p>
+          <h2 id="matchTitle">Select two teams</h2>
+          <p id="matchReason" class="match-reason">The match runs in real wall-clock time. Frames are streamed directly from the physics loop.</p>
+        </div>
+        <span id="liveState" class="status-pill">Ready</span>
+      </header>
+      <section class="scoreboard" aria-label="Live match score">
+        <div class="team home-team"><span class="team-dot"></span><strong id="homeName">Home</strong></div>
+        <div class="score-lockup">
+          <span id="clock">00:00.0</span>
+          <strong><span id="homeScore">0</span><span class="score-separator">—</span><span id="awayScore">0</span></strong>
+          <span id="tick">decision 0</span>
+        </div>
+        <div class="team away-team"><strong id="awayName">Away</strong><span class="team-dot"></span></div>
+      </section>
+      <div class="live-metadata" aria-label="Live stream telemetry">
+        <span><strong id="physicsRate">60 Hz</strong> physics</span>
+        <span><strong id="frameCount">0</strong> exact frames</span>
+        <span><strong id="streamRate">0.0 fps</strong> received</span>
+        <span class="no-interpolation">No interpolation</span>
+      </div>
+      <div class="pitch-frame live-pitch">
+        <canvas id="pitch" width="1200" height="760" aria-label="Live football match"></canvas>
+        <div id="pitchPrompt" class="pitch-prompt"><span>Choose teams</span><strong>Start live match</strong></div>
+      </div>
+      <section class="match-detail live-detail">
+        <article class="event-panel">
+          <div class="section-title"><h3>Live events</h3><span id="playMode">OPEN PLAY</span></div>
+          <div id="events" class="event-feed"><p class="muted">Events will appear during the match.</p></div>
+        </article>
+        <article class="decision-panel">
+          <div class="section-title"><h3>Latest decisions</h3><span>Same snapshot · 10 players</span></div>
+          <div id="decisions" class="decision-grid"><p class="muted decision-placeholder">Start a match to see agent commands.</p></div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="/viewer/live.js?v=20260825-portable-recording"></script>
 </body>
-
 </html>

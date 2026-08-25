@@ -1,0 +1,21 @@
+[Unit]
+Description=AWS Nova live 60 Hz football server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=lukivan8
+Group=lukivan8
+WorkingDirectory=/home/lukivan8/dev/tiki-taka-sim
+ExecStart=/home/lukivan8/dev/tiki-taka-sim/.venv-afc/bin/python /home/lukivan8/dev/tiki-taka-sim/tools/live_match_server.py --host 127.0.0.1 --port 8300
+Restart=always
+RestartSec=2
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=AWS_REGION=us-east-1
+Environment=AFC_GATEWAY_TOKENS_FILE=/home/lukivan8/.config/tiki-taka-sim/gateway-tokens.json
+Environment=AFC_GATEWAY_USAGE_DB=/home/lukivan8/dev/tiki-taka-sim/var/gateway-usage.sqlite3
+
+[Install]
+WantedBy=multi-user.target

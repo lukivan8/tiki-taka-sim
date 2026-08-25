@@ -1,9 +1,10 @@
-.idea
-.vs
-
-/target
-/dist
-.cache/
-logs/
+.idea/
+.vscode/
+.venv/
+.venv-afc/
+.env
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+var/

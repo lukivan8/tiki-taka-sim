@@ -3,33 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Agentic Football Replay</title>
+  <meta name="theme-color" content="#07130e">
+  <title>Tiki Taka — Replay</title>
+  <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <header>
-      <div>
-        <p class="eyebrow">AFC-compatible local arena</p>
-        <h1>Agentic Football Replay</h1>
+  <div class="app-shell">
+    <aside class="replay-library" aria-label="Match replay">
+      <div class="library-heading">
+        <p class="eyebrow">Arena · exact 60 Hz</p>
+        <h1>Replay</h1>
+        <p class="library-intro">Open a newly generated match or a local physics recording.</p>
       </div>
-      <label class="file">Open NDJSON<input id="file" type="file" accept=".ndjson,.jsonl"></label>
-    </header>
-    <section class="scorebar">
-      <span id="clock">00:00</span>
-      <strong><span id="homeScore">0</span> — <span id="awayScore">0</span></strong>
-      <span id="tick">decision 0</span>
-    </section>
-    <canvas id="pitch" width="1100" height="700"></canvas>
-    <section class="controls">
-      <button id="play" disabled>Play</button>
-      <input id="range" type="range" min="0" max="0" value="0" disabled>
-    </section>
-    <section>
-      <h2>Agent decisions</h2>
-      <div id="decisions" class="grid"><p>Choose <code>logs/sample-agents.ndjson</code>.</p></div>
-    </section>
-  </main>
-  <script src="app.js"></script>
+      <nav id="replayList" class="replay-list" aria-live="polite"></nav>
+      <div class="library-footer"><label class="file">Open replay or 60 Hz recording<input id="file" type="file" accept=".ndjson,.jsonl"></label></div>
+    </aside>
+    <main class="replay-stage">
+      <header class="stage-heading"><div><p id="matchKicker" class="eyebrow">AWS Nova replay</p><h2 id="matchTitle">Open a generated match</h2><p id="matchReason" class="match-reason">Use the link produced after a live match or open a local recording.</p></div><span id="playbackState" class="status-pill">Ready</span></header>
+      <section class="scoreboard" aria-label="Match score"><div class="team home-team"><span class="team-dot"></span><strong id="homeName">Home</strong></div><div class="score-lockup"><span id="clock">00:00.0</span><strong><span id="homeScore">0</span><span class="score-separator">—</span><span id="awayScore">0</span></strong><span id="tick">decision 0</span></div><div class="team away-team"><strong id="awayName">Away</strong><span class="team-dot"></span></div></section>
+      <p id="metadata" class="metadata">Arena and team identity load with the replay.</p>
+      <div class="pitch-frame"><canvas id="pitch" width="1200" height="760" aria-label="Animated football match replay"></canvas><button id="canvasPlay" class="canvas-play" type="button" aria-label="Play replay" disabled>▶</button></div>
+      <section class="transport" aria-label="Replay controls"><button id="play" class="play-button" type="button" disabled>Play</button><div class="timeline-wrap"><input id="range" aria-label="Replay position" type="range" min="0" max="0" step="0.01" value="0" disabled><div class="timeline-labels"><span id="elapsed">00:00</span><span id="duration">00:00</span></div></div><label class="speed-control">Speed<select id="speed" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option></select></label></section>
+      <section class="match-detail"><article class="event-panel"><div class="section-title"><h3>Match events</h3><span id="playMode">OPEN PLAY</span></div><div id="events" class="event-feed"><p class="muted">No replay loaded.</p></div></article><article class="decision-panel"><div class="section-title"><h3>Agent decisions</h3><span>Current decision</span></div><div id="decisions" class="decision-grid"><p class="muted">Choose a replay from the match list.</p></div></article></section>
+    </main>
+  </div>
+  <script src="app.js?v=20260825-portable-recording"></script>
 </body>
 </html>

@@ -1,10 +1,27 @@
-.PHONY: check verify-sample-agents play-local-model
+.PHONY: check test-nova test-simulator test-live live create-invite verify-remote clean-generated
 
-check:
-	cargo test --workspace
+PYTHON ?= python3
 
-verify-sample-agents:
-	bash scripts/verify-sample-agents.sh
+check: test-nova test-simulator test-live
 
-play-local-model:
-	bash scripts/play-local-model.sh
+test-nova:
+	PYTHONPATH=tools $(PYTHON) -m unittest -v tools.test_nova_team
+
+test-simulator:
+	PYTHONPATH=tools $(PYTHON) -m unittest -v tools.test_simulator
+
+test-live:
+	PYTHONPATH=tools $(PYTHON) -m unittest -v tools.test_live_match_server
+
+live:
+	$(PYTHON) tools/live_match_server.py --host 127.0.0.1 --port $${SIMULATOR_PORT:-8300}
+
+create-invite:
+	@test -n "$(NAME)" || (echo 'usage: make create-invite NAME=alice' && exit 2)
+	$(PYTHON) tools/create_gateway_invite.py "$(NAME)"
+
+verify-remote:
+	PYTHONPATH=tools $(PYTHON) tools/verify_remote_workshop.py
+
+clean-generated:
+	find var/matches -type f -delete 2>/dev/null || true

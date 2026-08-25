@@ -1,0 +1,128 @@
+schemaVersion: afc-arena/v2
+arenaVersion: nova-baseline-v1
+replaySchemaVersion: afc-replay/v2
+description: Canonical 60 Hz football simulation for the AWS Nova team.
+
+# This is the single authoritative object for every gameplay/timing constant in
+# The runner rejects unknown or missing keys so parameters cannot
+# silently migrate back into implementation code.
+simulationParameters:
+  timing:
+    physicsHz: 60
+    durationSeconds: 120.0
+    decisionIntervalSeconds: 2.0
+    decisionDeadlineMs: 10000
+  field:
+    halfLength: 55.0
+    halfWidth: 35.0
+    goalHalfWidth: 3.66
+    boundaryRestitution: 0.35
+    playerBoundaryMargin: 0.65
+  players:
+    walkSpeed: 5.6
+    runSpeed: 7.2
+    sprintSpeed: 9.2
+    acceleration: 14.0
+    braking: 18.0
+    idleVelocityRetentionPerSecond: 0.03
+    targetStopDistance: 0.20
+    physicalRadius: 0.62
+    separationStrength: 0.72
+    possessionBallOffset: 0.82
+    attackingStanceSpeedFactor: 1.04
+    defensiveStanceSpeedFactor: 0.96
+  stamina:
+    sprintThreshold: 0.08
+    sprintDrainPerSecond: 0.085
+    movingRecoveryPerSecond: 0.018
+    idleRecoveryPerSecond: 0.055
+    exhaustedSpeedFactor: 0.78
+  ball:
+    dragPerSecond: 0.42
+    stopSpeed: 0.18
+    controlRadius: 1.18
+    intendedReceiverRadius: 1.42
+    maxControlSpeed: 11.5
+    maxIntendedReceiveSpeed: 23.0
+    goalkeeperControlRadius: 2.15
+    goalkeeperMaxControlSpeed: 26.0
+    goalkeeperControlDepth: 16.5
+    kickSeparation: 1.05
+    kickerRecontrolSeconds: 0.48
+    lostPossessionRecontrolSeconds: 0.18
+    kickerVelocityRetention: 0.35
+  goalkeeping:
+    # Tactical commands still arrive every 2s; this reflex loop is evaluated on
+    # every 60Hz physics tick and only takes over for a ball travelling at goal.
+    goalLineOffset: 5.0
+    reactionDelaySeconds: 0.18
+    maximumPredictionSeconds: 3.0
+    minimumIncomingSpeed: 8.0
+    lateralSpeed: 7.5
+    acceleration: 22.0
+    predictionMargin: 1.0
+    maximumLateralPosition: 4.2
+  passing:
+    normalSpeed: 18.0
+    throughSpeed: 22.0
+    aerialSpeed: 24.0
+    goalkeeperThrowSpeed: 14.0
+    goalkeeperKickSpeed: 23.0
+    targetLeadSeconds: 0.32
+    minimumTravelDistance: 2.2
+  shooting:
+    baseSpeed: 28.0
+    minimumPower: 0.25
+    maximumPower: 1.0
+    targetLeftY: -3.05
+    targetRightY: 3.05
+    targetDepth: 1.0
+  clearances:
+    speed: 24.0
+    lateralBias: 0.28
+  defending:
+    defaultPressIntensity: 0.7
+    sprintPressThreshold: 0.65
+    tightMarkDistance: 1.7
+    looseMarkDistance: 3.8
+    minimumMarkDistance: 1.0
+    maximumMarkDistance: 8.0
+    interceptLookaheadSeconds: 0.32
+    tackleMinimumReach: 1.15
+    tackleMaximumReach: 2.15
+    tackleBallReleaseSpeed: 4.5
+    tackleRecoverySeconds: 0.35
+  formation:
+    defaultPreset: 1-1-1-2
+    presets:
+      1-1-1-2:
+        label: Nova 1-1-1-2
+        description: Goalkeeper, central defender, pivot, and two separated forwards.
+        coordinates:
+          - { playerId: 0, x: -50.0, y: 0.0 }
+          - { playerId: 1, x: -29.0, y: 0.0 }
+          - { playerId: 2, x: -3.0, y: 0.0 }
+          - { playerId: 3, x: -8.0, y: -14.0 }
+          - { playerId: 4, x: -8.0, y: 14.0 }
+    awayMirrorX: true
+    awayMirrorY: true
+  rules:
+    initialKickoffTeam: 0
+    kickoffPlayerId: 2
+    kickoffPlayerXOffset: 0.9
+
+commandVocabulary:
+  - MOVE_TO
+  - DRIBBLE
+  - PASS
+  - SHOOT
+  - CLEAR
+  - GK_DISTRIBUTE
+  - PRESS_BALL
+  - MARK
+  - INTERCEPT
+  - SLIDE_TACKLE
+  - IDLE
+fallback:
+  command: IDLE
+  conditions: [timeout, http_error, malformed_response, invalid_command]
