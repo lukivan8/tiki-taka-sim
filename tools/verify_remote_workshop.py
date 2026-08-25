@@ -20,7 +20,7 @@ def main() -> None:
         previous = live_match_server.LIVE_ROOT
         live_match_server.LIVE_ROOT = Path(directory)
         try:
-            match = LiveMatch("nova", "nova", realtime=False, duration_seconds=0.2)
+            match = LiveMatch("nova-baseline", "nova-baseline", realtime=False, duration_seconds=0.2)
             match.start()
             match.thread.join(180)
         finally:

@@ -1,5 +1,5 @@
 schema_version: afc-model-oriented-team/v1
-name: AWS Nova — связная схема 1-1-1-2
+name: Nova Baseline — связная схема 1-1-1-2
 version: v1
 model: us.amazon.nova-micro-v1:0
 formation:

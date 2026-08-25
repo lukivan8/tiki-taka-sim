@@ -1,13 +1,7 @@
 """Create the five isolated AWS Nova players used by the live simulator."""
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT))
-
-from shared.runtime import create_agent, invoke_agent
+from .shared.runtime import create_agent, invoke_agent
 
 
 class LiveTeam:

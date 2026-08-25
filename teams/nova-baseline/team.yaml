@@ -1,9 +1,13 @@
 schemaVersion: afc-team/v1
-teamId: nova
+teamId: nova-baseline
 teamVersion: v1
+displayName: Nova Baseline
+backend: nova-micro
+style: 1-1-1-2
+defaultFormation: 1-1-1-2
 implementation:
   source: agent.py
-  entrypoint: python3 team/agent.py
+  entrypoint: python3 teams/nova-baseline/agent.py
   arguments: {playerProcesses: 5}
 model:
   family: Amazon Nova

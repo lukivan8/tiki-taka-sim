@@ -9,7 +9,6 @@ import hmac
 import json
 import os
 import sqlite3
-import sys
 import threading
 import time
 from collections import defaultdict, deque
@@ -19,12 +18,10 @@ from pathlib import Path
 from typing import Any, Iterator
 
 
-ROOT = Path(__file__).resolve().parents[1]
-TEAM_ROOT = ROOT / "team"
-sys.path.insert(0, str(TEAM_ROOT))
+from nova_backend import MODEL_ID, ModelDecision, create_bedrock_agent
 
-from shared.commands import ModelDecision  # noqa: E402
-from shared.runtime import create_bedrock_agent  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 MAX_BODY_BYTES = 64 * 1024
@@ -202,7 +199,7 @@ def validate_inference_payload(payload: dict[str, Any]) -> tuple[int, str, str]:
 
 def invoke_fixed_nova(player_id: int, system_prompt: str, observation: str) -> ModelDecision:
     """Invoke the only server-side model. Client requests cannot select a model."""
-    agent = create_bedrock_agent(player_id, system_prompt)
+    agent = create_bedrock_agent(system_prompt)
     result = agent.structured_output(ModelDecision, observation)
     decision = getattr(result, "structured_output", result)
     return decision if isinstance(decision, ModelDecision) else ModelDecision.model_validate(decision)
@@ -224,7 +221,7 @@ class NovaGateway:
         return {
             "schemaVersion": "afc-nova-decision/v1",
             "decision": decision.model_dump(by_alias=True),
-            "model": "us.amazon.nova-micro-v1:0",
+            "model": MODEL_ID,
             "latencyMs": round((time.perf_counter() - started) * 1000, 3),
             "callsRemainingToday": remaining,
         }

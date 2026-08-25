@@ -14,7 +14,7 @@ except ModuleNotFoundError as error:
     raise unittest.SkipTest("Nova contract tests require pydantic; run make test-nova") from error
 
 ROOT = Path(__file__).resolve().parents[1]
-TEAM_ROOT = ROOT / "team"
+TEAM_ROOT = ROOT / "teams/nova-baseline"
 sys.path.insert(0, str(TEAM_ROOT))
 
 from shared.commands import AgentDecision, ModelDecision, MoveTo, Pass, to_wire  # noqa: E402

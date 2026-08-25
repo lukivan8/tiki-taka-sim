@@ -7,8 +7,11 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import re
+import sys
 import threading
 import time
+import types
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
@@ -24,22 +27,52 @@ from simulator import SimulationParameters, World, normalize_wire_command
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TEAM_ROOT = ROOT / "team"
+TEAMS_ROOT = ROOT / "teams"
 LIVE_ROOT = ROOT / "var/matches"
 ARENA_PATH = ROOT / "arena/arena.yaml"
 
-TEAM_CATALOG = (
-    {
-        "id": "nova", "name": "AWS Nova Micro", "style": "1-1-1-2",
-        "description": "Five isolated stateless roles with shared geometric perception.",
-        "defaultFormation": "1-1-1-2", "version": "v1",
-    },
-)
-TEAMS = {team["id"]: team for team in TEAM_CATALOG}
+TEAM_ID_PATTERN = re.compile(r"[a-z0-9][a-z0-9-]{1,47}")
+
+
+def discover_teams(root: Path | None = None) -> dict[str, dict[str, Any]]:
+    """Discover strict, self-contained Nova teams from direct child folders."""
+    catalog: dict[str, dict[str, Any]] = {}
+    teams_root = root or TEAMS_ROOT
+    if not teams_root.is_dir():
+        return catalog
+    for folder in sorted(teams_root.iterdir()):
+        if not folder.is_dir() or folder.is_symlink() or folder.name.startswith((".", "_")):
+            continue
+        manifest_path = folder / "team.yaml"
+        if not manifest_path.is_file():
+            continue
+        manifest = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
+        if not isinstance(manifest, dict) or manifest.get("schemaVersion") != "afc-team/v1":
+            raise RuntimeError(f"{manifest_path}: unsupported schemaVersion")
+        team_id = str(manifest.get("teamId", ""))
+        if not TEAM_ID_PATTERN.fullmatch(team_id) or team_id != folder.name:
+            raise RuntimeError(f"{manifest_path}: teamId must equal its slug folder name")
+        if manifest.get("backend") != "nova-micro":
+            raise RuntimeError(f"{manifest_path}: backend must be nova-micro")
+        required = ("displayName", "teamVersion", "style", "description", "defaultFormation")
+        missing = [key for key in required if not str(manifest.get(key, "")).strip()]
+        if missing:
+            raise RuntimeError(f"{manifest_path}: missing {', '.join(missing)}")
+        catalog[team_id] = {
+            "id": team_id,
+            "name": str(manifest["displayName"]),
+            "style": str(manifest["style"]),
+            "description": str(manifest["description"]),
+            "defaultFormation": str(manifest["defaultFormation"]),
+            "version": str(manifest["teamVersion"]),
+            "backend": "nova-micro",
+            "root": folder.resolve(),
+        }
+    return catalog
 
 
 def public_team(team: dict[str, Any]) -> dict[str, Any]:
-    return dict(team)
+    return {key: value for key, value in team.items() if key != "root"}
 
 
 def formation_catalog() -> list[dict[str, str]]:
@@ -49,17 +82,26 @@ def formation_catalog() -> list[dict[str, str]]:
 
 
 def load_strategy(team: dict[str, Any], instance: str):
-    source = TEAM_ROOT / "live_team.py"
-    spec = importlib.util.spec_from_file_location(f"live_{team['id']}_{instance}", source)
+    team_root = Path(team["root"])
+    source = team_root / "live_team.py"
+    package_name = "_afc_team_" + hashlib.sha256(
+        f"{team_root}:{instance}".encode()
+    ).hexdigest()[:20]
+    package = types.ModuleType(package_name)
+    package.__path__ = [str(team_root)]
+    package.__package__ = package_name
+    sys.modules[package_name] = package
+    spec = importlib.util.spec_from_file_location(f"{package_name}.live_team", source)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot load strategy {source}")
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module.create_team()
 
 
 def load_manifest(team: dict[str, Any], side: int) -> dict[str, Any]:
-    path = TEAM_ROOT / "team.yaml"
+    path = Path(team["root"]) / "team.yaml"
     manifest = yaml.safe_load(path.read_text(encoding="utf-8"))
     manifest["teamId"] = team["id"]
     manifest["teamVersion"] = team.get("version", manifest.get("teamVersion", "v1"))
@@ -77,8 +119,9 @@ class LiveMatch:
                  realtime: bool = True, duration_seconds: float | None = None,
                  home_formation: str | None = None, away_formation: str | None = None):
         self.id = uuid.uuid4().hex[:12]
-        self.home = TEAMS[home_id]
-        self.away = TEAMS[away_id]
+        teams = discover_teams()
+        self.home = teams[home_id]
+        self.away = teams[away_id]
         self.seed = seed
         arena, parameters = SimulationParameters.load_arena(ARENA_PATH)
         if duration_seconds is not None:
@@ -348,7 +391,7 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         path = urlparse(self.path).path
         if path == "/api/teams":
-            self.send_json({"teams": [public_team(team) for team in TEAM_CATALOG],
+            self.send_json({"teams": [public_team(team) for team in discover_teams().values()],
                             "formations": formation_catalog()})
             return
         parts = path.strip("/").split("/")
@@ -385,7 +428,8 @@ class Handler(SimpleHTTPRequestHandler):
             try:
                 payload = self.read_json()
                 home_id, away_id = payload["homeTeamId"], payload["awayTeamId"]
-                if home_id not in TEAMS or away_id not in TEAMS:
+                teams = discover_teams()
+                if home_id not in teams or away_id not in teams:
                     raise ValueError("unknown team")
                 identity = self.server.gateway.authenticate(self.headers.get("authorization"))
                 match = LiveMatch(home_id, away_id, int(payload.get("seed", 42)),

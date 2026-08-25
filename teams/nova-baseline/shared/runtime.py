@@ -17,8 +17,8 @@ from .perception import build_perception, validate_semantics
 from .prompting import build_observation, build_system_prompt
 
 
-MODEL_ID = os.environ.get("AFC_MODEL_ID", "us.amazon.nova-micro-v1:0")
-AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
+MODEL_ID = "us.amazon.nova-micro-v1:0"
+AWS_REGION = "us-east-1"
 GATEWAY_URL = os.environ.get("AFC_NOVA_GATEWAY_URL", "").rstrip("/")
 GATEWAY_TOKEN = os.environ.get("AFC_GATEWAY_TOKEN", "")
 GATEWAY_TIMEOUT_SECONDS = float(os.environ.get("AFC_GATEWAY_TIMEOUT_SECONDS", "90"))

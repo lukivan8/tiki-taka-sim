@@ -45,8 +45,8 @@ async function loadTeams() {
   awaySelect.innerHTML = options;
   homeFormationSelect.innerHTML = formationOptions;
   awayFormationSelect.innerHTML = formationOptions;
-  homeSelect.value = 'nova';
-  awaySelect.value = 'nova';
+  homeSelect.value = teams[0]?.id || '';
+  awaySelect.value = teams[1]?.id || teams[0]?.id || '';
   homeFormationSelect.value = '1-1-1-2';
   awayFormationSelect.value = '1-1-1-2';
   $('#teamCount').textContent = `${teams.length}`;

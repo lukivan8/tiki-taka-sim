@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import json
+import os
+import shutil
 import tempfile
 import threading
 import time
@@ -13,13 +15,10 @@ from pathlib import Path
 from unittest.mock import patch
 
 import live_match_server
-from live_match_server import Handler, LiveMatch, LiveServer, TEAM_CATALOG
+import create_team as create_team_tool
+from live_match_server import Handler, LiveMatch, LiveServer, discover_teams, load_strategy
 from nova_gateway import GatewayAccess, NovaGateway
-
-TEAM_ROOT = Path(__file__).resolve().parents[1] / "team"
-import sys
-sys.path.insert(0, str(TEAM_ROOT))
-from shared.commands import ModelDecision  # noqa: E402
+from nova_backend import ModelDecision
 
 
 TEST_TOKEN = "test-token-that-is-long-enough-for-gateway-authentication"
@@ -55,9 +54,72 @@ class SlowFakeStrategy(FakeStrategy):
 
 
 class LiveMatchTests(unittest.TestCase):
-    def test_catalog_contains_only_the_nova_team(self):
-        self.assertEqual([team["id"] for team in TEAM_CATALOG], ["nova"])
-        self.assertTrue((live_match_server.TEAM_ROOT / "live_team.py").is_file())
+    def test_catalog_discovers_the_nova_baseline(self):
+        teams = discover_teams()
+        self.assertEqual(list(teams), ["nova-baseline"])
+        self.assertEqual(teams["nova-baseline"]["backend"], "nova-micro")
+        self.assertTrue((teams["nova-baseline"]["root"] / "live_team.py").is_file())
+
+    def test_create_team_is_immediately_discoverable(self):
+        with tempfile.TemporaryDirectory() as directory:
+            teams_root = Path(directory) / "teams"
+            shutil.copytree(live_match_server.TEAMS_ROOT / "nova-baseline",
+                            teams_root / "nova-baseline")
+            previous = create_team_tool.TEAMS_ROOT
+            create_team_tool.TEAMS_ROOT = teams_root
+            try:
+                target = create_team_tool.create_team("alice-press", "Alice Press")
+            finally:
+                create_team_tool.TEAMS_ROOT = previous
+            teams = discover_teams(teams_root)
+            self.assertEqual(list(teams), ["alice-press", "nova-baseline"])
+            self.assertEqual(teams["alice-press"]["name"], "Alice Press")
+            self.assertEqual(teams["alice-press"]["backend"], "nova-micro")
+            self.assertIn("teams/alice-press/agent.py",
+                          (target / "team.yaml").read_text(encoding="utf-8"))
+
+    def test_strategy_modules_are_isolated_between_teams(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            loaded = []
+            for team_id in ("alpha-team", "beta-team"):
+                folder = root / team_id
+                folder.mkdir()
+                (folder / "helper.py").write_text(f"TEAM_ID = {team_id!r}\n", encoding="utf-8")
+                (folder / "live_team.py").write_text(
+                    "from .helper import TEAM_ID\n"
+                    "class Team:\n"
+                    "    identity = TEAM_ID\n"
+                    "def create_team(): return Team()\n", encoding="utf-8")
+                loaded.append(load_strategy({"id":team_id, "root":folder}, team_id))
+            self.assertEqual([team.identity for team in loaded], ["alpha-team", "beta-team"])
+
+    def test_generated_real_teams_build_distinct_prompts_on_the_same_gateway(self):
+        with tempfile.TemporaryDirectory() as directory:
+            teams_root = Path(directory) / "teams"
+            shutil.copytree(live_match_server.TEAMS_ROOT / "nova-baseline",
+                            teams_root / "nova-baseline")
+            previous = create_team_tool.TEAMS_ROOT
+            create_team_tool.TEAMS_ROOT = teams_root
+            try:
+                create_team_tool.create_team("alpha-nova", "Alpha Nova")
+                create_team_tool.create_team("beta-nova", "Beta Nova")
+            finally:
+                create_team_tool.TEAMS_ROOT = previous
+            teams = discover_teams(teams_root)
+            with patch.dict(os.environ, {
+                "AFC_NOVA_GATEWAY_URL":"https://gateway.invalid/api/inference",
+                "AFC_GATEWAY_TOKEN":TEST_TOKEN,
+            }):
+                alpha = load_strategy(teams["alpha-nova"], "alpha")
+                beta = load_strategy(teams["beta-nova"], "beta")
+            alpha_prompt = alpha.agents[0].afc_system_prompt
+            beta_prompt = beta.agents[0].afc_system_prompt
+            self.assertIn("Alpha Nova", alpha_prompt)
+            self.assertIn("Beta Nova", beta_prompt)
+            self.assertNotEqual(alpha_prompt, beta_prompt)
+            self.assertEqual(alpha.agents[0].afc_decision_source, "nova-gateway")
+            self.assertEqual(beta.agents[0].afc_decision_source, "nova-gateway")
 
     def test_local_clone_can_reuse_its_remote_invite_for_match_auth(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -74,7 +136,7 @@ class LiveMatchTests(unittest.TestCase):
             live_match_server.LIVE_ROOT = Path(directory)
             try:
                 with patch("live_match_server.load_strategy", return_value=FakeStrategy()):
-                    match = LiveMatch("nova", "nova", realtime=False, duration_seconds=0.2)
+                    match = LiveMatch("nova-baseline", "nova-baseline", realtime=False, duration_seconds=0.2)
                     match.start()
                     match.thread.join(5)
             finally:
@@ -91,7 +153,7 @@ class LiveMatchTests(unittest.TestCase):
             timestamps = []
             try:
                 with patch("live_match_server.load_strategy", return_value=SlowFakeStrategy()):
-                    match = LiveMatch("nova", "nova", realtime=True,
+                    match = LiveMatch("nova-baseline", "nova-baseline", realtime=True,
                                       duration_seconds=0.4,
                                       home_formation="1-1-1-2",
                                       away_formation="1-1-1-2")
@@ -121,10 +183,10 @@ class LiveMatchTests(unittest.TestCase):
             base = f"http://127.0.0.1:{server.server_address[1]}"
             try:
                 catalog = json.load(urllib.request.urlopen(f"{base}/api/teams"))
-                self.assertEqual([team["id"] for team in catalog["teams"]], ["nova"])
+                self.assertEqual([team["id"] for team in catalog["teams"]], ["nova-baseline"])
                 self.assertEqual([item["id"] for item in catalog["formations"]], ["1-1-1-2"])
                 request = urllib.request.Request(f"{base}/api/matches",
-                    json.dumps({"homeTeamId":"nova", "awayTeamId":"nova",
+                    json.dumps({"homeTeamId":"nova-baseline", "awayTeamId":"nova-baseline",
                                 "homeFormation":"1-1-1-2",
                                 "awayFormation":"1-1-1-2"}).encode(),
                     authorization_headers({"content-type":"application/json"}))

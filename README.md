@@ -1,13 +1,14 @@
 # AWS Nova Football Workshop
 
-Минимальный 5v5 baseline: одна команда из пяти изолированных Amazon Nova Micro
-агентов, один конфиг симуляции и live/replay UI с точными 60 Hz кадрами.
+5v5 workshop: каталог независимых команд из пяти Amazon Nova Micro агентов,
+один конфиг симуляции и live/replay UI с точными 60 Hz кадрами. `nova-baseline`
+служит примером, а новые команды автоматически появляются в выборе матча.
 
 ## Структура
 
-- `team/` — финальная команда. Русские роли и ситуации отделены от английского Python-кода.
-- `team/shared/perception.py` — общая геометрия без готового «лучшего действия».
-- `team/shared/commands.py` — строгий Pydantic-контракт решения.
+- `teams/nova-baseline/` — неизменяемый пример полноценной команды.
+- `teams/<team-id>/` — самостоятельные стратегии, роли и расчёты геометрии команд.
+- `teams/<team-id>/shared/commands.py` — локальный строгий Pydantic-контракт решения.
 - `arena/arena.yaml` — все параметры физики и единственная схема `1-1-1-2`.
 - `tools/simulator.py` — детерминированная физика 60 Hz.
 - `tools/live_match_server.py` — Nova vs Nova в реальном времени и запись матчей.
@@ -26,10 +27,11 @@ make check
 make live
 ```
 
-Откройте `http://127.0.0.1:8300/`. Для Nova нужны AWS credentials с доступом к
-Bedrock в `us-east-1`. Модель можно переопределить через `AFC_MODEL_ID`.
+Откройте `http://127.0.0.1:8300/`. Для прямого Nova-вызова нужны AWS credentials
+с доступом к Bedrock в `us-east-1`. Backend всех команд фиксирован на
+`us.amazon.nova-micro-v1:0`.
 
-Подробнее о настройке ролей: [`team/README.md`](team/README.md).
+Подробнее о настройке ролей: [`teams/nova-baseline/README.md`](teams/nova-baseline/README.md).
 
 ## Работа друзей без AWS credentials
 
@@ -41,7 +43,7 @@ Pydantic-валидацию, пять ролей и viewer. На ваш серв
 или получить AWS credentials.
 
 ```text
-локальный team/ + геометрия + 60 Hz симулятор
+локальные teams/* + геометрия + 60 Hz симулятор
                    |
                    | HTTPS + персональный invite-token
                    v
@@ -109,7 +111,7 @@ make check
 make live
 ```
 
-Открыть `http://127.0.0.1:8300/`. Все изменения в `team/` остаются на компьютере
+Открыть `http://127.0.0.1:8300/`. Все изменения в `teams/` остаются на компьютере
 друга; AWS-вызовы выполняются сервером. В decision log поле `decisionSource`
 будет равно `nova-gateway`, что позволяет проверить, что локальные AWS credentials
 не использовались.
@@ -127,13 +129,42 @@ make verify-remote
 Команда получает десять решений через публичный gateway и не сохраняет тестовый
 replay.
 
-### 3. Что друг может менять
+### 3. Создание нескольких команд
 
-- `team/strategy.md` и `team/strategy.yaml`;
-- `team/players/*/role.md`;
-- `team/players/*/situations.md`;
-- `team/players/*/player.yaml`;
-- расчёты в `team/shared/perception.py`;
+Новая команда создаётся из baseline одной командой:
+
+```bash
+make create-team NAME=alice-press DISPLAY_NAME="Alice Press"
+```
+
+Можно клонировать уже существующую экспериментальную команду:
+
+```bash
+make create-team NAME=alice-v2 DISPLAY_NAME="Alice v2" SOURCE=alice-press
+```
+
+Генератор создаёт `teams/alice-press/`, меняет `teamId`, отображаемое имя и
+entrypoint. Регистрировать команду в Python или JavaScript не нужно: сервер
+сканирует `teams/*/team.yaml`. После создания или изменения команды перезапустите
+`make live`; новая команда появится в обоих выпадающих списках, и её можно
+запустить против любой другой, включая саму себя.
+
+Требования к команде:
+
+- имя папки и `teamId` совпадают и являются lowercase slug;
+- `backend` всегда равен `nova-micro`;
+- в папке присутствуют `team.yaml`, `strategy.yaml`, `strategy.md`, `live_team.py`
+  и пять каталогов игроков;
+- каждая команда загружается в отдельном Python package, поэтому её `shared/`,
+  промпты и геометрия не смешиваются с другими командами.
+
+### 4. Что друг может менять
+
+- `teams/<team-id>/strategy.md` и `strategy.yaml`;
+- `teams/<team-id>/players/*/role.md`;
+- `teams/<team-id>/players/*/situations.md`;
+- `teams/<team-id>/players/*/player.yaml`;
+- расчёты в `teams/<team-id>/shared/perception.py`;
 - локальную Pydantic/семантическую проверку команд.
 
 После изменения файлов достаточно остановить `make live` и запустить его снова.

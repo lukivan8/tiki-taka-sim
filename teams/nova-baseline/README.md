@@ -1,8 +1,14 @@
-# Команда AWS Nova
+# Nova Baseline
 
 Пять игроков — пять независимых stateless Strands Agent на
 `us.amazon.nova-micro-v1:0`. Каждый получает человекочитаемые геометрические
 факты на русском и возвращает ровно одну команду через Pydantic.
+
+Не редактируйте baseline для нового эксперимента. Сначала создайте копию:
+
+```bash
+make create-team NAME=my-team DISPLAY_NAME="My Team"
+```
 
 ## Где настраивать
 
