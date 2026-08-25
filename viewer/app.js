@@ -12,20 +12,35 @@ const PUBLIC_BASE_URL = 'https://afc.ivanlukov.com';
 const REPLAY_CATALOG = [
   {
     label: 'Nova Vertical vs KD Verticalis',
-    path: '/var/matches/matches/20260825T145557Z-68034493aaca-nova-vertical-vs-kd-verticalis.ndjson'
+    matches: [
+      { number: 1, path: '/var/matches/matches/20260825T145557Z-68034493aaca-nova-vertical-vs-kd-verticalis.ndjson' },
+      { number: 2, path: '/var/matches/matches/20260825T150911Z-84bdc1e7f735-nova-vertical-vs-kd-verticalis.ndjson' },
+      { number: 3, path: '/var/matches/matches/20260825T151122Z-a20e2e050c2b-nova-vertical-vs-kd-verticalis.ndjson' }
+    ]
   },
   {
     label: 'Nova Vertical vs Vertical Wingbacks',
-    path: '/var/matches/matches/20260825T145557Z-e30cd57afd23-nova-vertical-vs-vertical-wingbacks.ndjson'
+    matches: [
+      { number: 1, path: '/var/matches/matches/20260825T145557Z-e30cd57afd23-nova-vertical-vs-vertical-wingbacks.ndjson' },
+      { number: 2, path: '/var/matches/matches/20260825T150913Z-bf05a797a187-nova-vertical-vs-vertical-wingbacks.ndjson' },
+      { number: 3, path: '/var/matches/matches/20260825T151329Z-4d405658630a-nova-vertical-vs-vertical-wingbacks.ndjson' }
+    ]
   },
   {
     label: 'KD Verticalis vs Vertical Wingbacks',
-    path: '/var/matches/matches/20260825T145557Z-46f6e7cce201-kd-verticalis-vs-vertical-wingbacks.ndjson'
+    matches: [
+      { number: 1, path: '/var/matches/matches/20260825T145557Z-46f6e7cce201-kd-verticalis-vs-vertical-wingbacks.ndjson' },
+      { number: 2, path: '/var/matches/matches/20260825T151122Z-e66cfc862221-kd-verticalis-vs-vertical-wingbacks.ndjson' },
+      { number: 3, path: '/var/matches/matches/20260825T151329Z-162ce57218b3-kd-verticalis-vs-vertical-wingbacks.ndjson' }
+    ]
   }
-].map(replay => ({
-  ...replay,
-  logUrl: `${PUBLIC_BASE_URL}${replay.path}`,
-  viewerUrl: `${PUBLIC_BASE_URL}/viewer/?log=${encodeURIComponent(`${PUBLIC_BASE_URL}${replay.path}`)}`
+].map(group => ({
+  ...group,
+  matches: group.matches.map(replay => ({
+    ...replay,
+    logUrl: `${PUBLIC_BASE_URL}${replay.path}`,
+    viewerUrl: `${PUBLIC_BASE_URL}/viewer/?log=${encodeURIComponent(`${PUBLIC_BASE_URL}${replay.path}`)}`
+  }))
 }));
 
 let rows = [];
@@ -66,12 +81,12 @@ function compactReplayName(path) {
 }
 
 function renderCatalog() {
-  replayList.innerHTML = `<section class="replay-group">
-    <h2>Internal tournament</h2>
-    ${REPLAY_CATALOG.map(replay => `<a class="replay-item ${activeReplayUrl === replay.logUrl ? 'active' : ''}" href="${escapeHtml(replay.viewerUrl)}">
-      <span>${escapeHtml(replay.label)}</span><span class="watch">Watch</span>
+  replayList.innerHTML = REPLAY_CATALOG.map(group => `<section class="replay-group">
+    <h2>${escapeHtml(group.label)}</h2>
+    ${group.matches.map(replay => `<a class="replay-item ${activeReplayUrl === replay.logUrl ? 'active' : ''}" href="${escapeHtml(replay.viewerUrl)}">
+      <span>Match ${replay.number}</span><span class="watch">Watch</span>
     </a>`).join('')}
-  </section>`;
+  </section>`).join('');
 }
 
 fileInput.addEventListener('change', async () => {
