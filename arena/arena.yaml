@@ -104,6 +104,15 @@ simulationParameters:
           - { playerId: 2, x: -3.0, y: 0.0 }
           - { playerId: 3, x: -8.0, y: -14.0 }
           - { playerId: 4, x: -8.0, y: 14.0 }
+      1-1-1-2-high:
+        label: Nova 1-1-1-2 high
+        description: Same shape with both forwards pushed level with the kickoff spot.
+        coordinates:
+          - { playerId: 0, x: -50.0, y: 0.0 }
+          - { playerId: 1, x: -29.0, y: 0.0 }
+          - { playerId: 2, x: -3.0, y: 0.0 }
+          - { playerId: 3, x: -2.0, y: -14.0 }
+          - { playerId: 4, x: -2.0, y: 14.0 }
     awayMirrorX: true
     awayMirrorY: true
   rules:
