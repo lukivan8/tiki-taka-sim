@@ -8,6 +8,26 @@ const canvasPlay = $('#canvasPlay');
 const speed = $('#speed');
 const replayList = $('#replayList');
 
+const PUBLIC_BASE_URL = 'https://afc.ivanlukov.com';
+const REPLAY_CATALOG = [
+  {
+    label: 'Nova Vertical vs KD Verticalis',
+    path: '/var/matches/matches/20260825T145557Z-68034493aaca-nova-vertical-vs-kd-verticalis.ndjson'
+  },
+  {
+    label: 'Nova Vertical vs Vertical Wingbacks',
+    path: '/var/matches/matches/20260825T145557Z-e30cd57afd23-nova-vertical-vs-vertical-wingbacks.ndjson'
+  },
+  {
+    label: 'KD Verticalis vs Vertical Wingbacks',
+    path: '/var/matches/matches/20260825T145557Z-46f6e7cce201-kd-verticalis-vs-vertical-wingbacks.ndjson'
+  }
+].map(replay => ({
+  ...replay,
+  logUrl: `${PUBLIC_BASE_URL}${replay.path}`,
+  viewerUrl: `${PUBLIC_BASE_URL}/viewer/?log=${encodeURIComponent(`${PUBLIC_BASE_URL}${replay.path}`)}`
+}));
+
 let rows = [];
 let simulationFrames = [];
 let physicsHz = 0;
@@ -46,7 +66,12 @@ function compactReplayName(path) {
 }
 
 function renderCatalog() {
-  replayList.innerHTML = '<p class="muted">Start a live match, follow its replay link, or open a local 60 Hz recording.</p>';
+  replayList.innerHTML = `<section class="replay-group">
+    <h2>Internal tournament</h2>
+    ${REPLAY_CATALOG.map(replay => `<a class="replay-item ${activeReplayUrl === replay.logUrl ? 'active' : ''}" href="${escapeHtml(replay.viewerUrl)}">
+      <span>${escapeHtml(replay.label)}</span><span class="watch">Watch</span>
+    </a>`).join('')}
+  </section>`;
 }
 
 fileInput.addEventListener('change', async () => {
