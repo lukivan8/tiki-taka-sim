@@ -1,0 +1,25 @@
+schemaVersion: afc-team/v1
+teamId: nova-vertical
+teamVersion: v1
+displayName: Nova Vertical
+backend: nova-micro
+style: 1-1-1-2 high
+defaultFormation: 1-1-1-2-high
+implementation:
+  source: agent.py
+  entrypoint: python3 teams/nova-vertical/agent.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: one-call-per-player-per-tick
+    failurePolicy: deterministic-fallback
+formationPreset: 1-1-1-2-high
+strategyFamily: isolated-nova-micro
+description: Эксперимент над nova-baseline. Вратарь исключён из блокирующих тел, поэтому
+  SHOOT снова попадает в маску; форварды бегут на пас вперёд мяча, а не следуют за ним;
+  передача назад запрещена при открытой линии вперёд; недостающие параметры команды
+  достраиваются вместо деградации в IDLE.
