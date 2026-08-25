@@ -1,0 +1,10 @@
+schema_version: afc-model-oriented-team/v1
+name: KD Verticalis — вертикаль в забивные карманы
+version: v1
+model: us.amazon.nova-micro-v1:0
+players:
+  0: players/0-goalkeeper
+  1: players/1-central-defender
+  2: players/2-midfielder
+  3: players/3-left-forward
+  4: players/4-right-forward

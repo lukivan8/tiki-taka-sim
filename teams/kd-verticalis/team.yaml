@@ -1,0 +1,22 @@
+schemaVersion: afc-team/v1
+teamId: kd-verticalis
+teamVersion: v1
+displayName: KD Verticalis
+backend: nova-micro
+formationPreset: 1-1-2
+implementation:
+  source: agent.py
+  entrypoint: python3 teams/kd-verticalis/agent.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: one-call-per-player-per-tick
+    failurePolicy: explicit-idle
+strategyFamily: vertical-pocket-finishing
+description: 'Пять ролей Nova Micro с детерминированной моделью рефлекса вратаря:
+  SHOOT доступен только когда удар расчётно не берётся, а форварды закреплены за широкими
+  глубокими забивными карманами (44, ±12).'
