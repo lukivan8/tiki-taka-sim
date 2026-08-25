@@ -68,13 +68,16 @@ class LiveMatchTests(unittest.TestCase):
             previous = create_team_tool.TEAMS_ROOT
             create_team_tool.TEAMS_ROOT = teams_root
             try:
-                target = create_team_tool.create_team("alice-press", "Alice Press")
+                target = create_team_tool.create_team(
+                    "alice-press", "Alice Press", formation="3-1"
+                )
             finally:
                 create_team_tool.TEAMS_ROOT = previous
             teams = discover_teams(teams_root)
             self.assertEqual(list(teams), ["alice-press", "nova-baseline"])
             self.assertEqual(teams["alice-press"]["name"], "Alice Press")
             self.assertEqual(teams["alice-press"]["backend"], "nova-micro")
+            self.assertEqual(teams["alice-press"]["formationPreset"], "3-1")
             self.assertIn("teams/alice-press/agent.py",
                           (target / "team.yaml").read_text(encoding="utf-8"))
 
@@ -154,9 +157,7 @@ class LiveMatchTests(unittest.TestCase):
             try:
                 with patch("live_match_server.load_strategy", return_value=SlowFakeStrategy()):
                     match = LiveMatch("nova-baseline", "nova-baseline", realtime=True,
-                                      duration_seconds=0.4,
-                                      home_formation="1-1-1-2",
-                                      away_formation="1-1-1-2")
+                                      duration_seconds=0.4)
                     original_publish = match._publish
                     def timed_publish(message):
                         if message["type"] == "simulation_frame":
@@ -184,16 +185,25 @@ class LiveMatchTests(unittest.TestCase):
             try:
                 catalog = json.load(urllib.request.urlopen(f"{base}/api/teams"))
                 self.assertEqual([team["id"] for team in catalog["teams"]], ["nova-baseline"])
-                self.assertEqual([item["id"] for item in catalog["formations"]], ["1-1-1-2"])
+                self.assertEqual([item["id"] for item in catalog["formations"]], [
+                    "1-1-2", "1-2-1", "2-1-1", "2-2-0", "3-1", "1-3",
+                ])
+                override = urllib.request.Request(f"{base}/api/matches",
+                    json.dumps({"homeTeamId":"nova-baseline",
+                                "awayTeamId":"nova-baseline",
+                                "homeFormation":"3-1"}).encode(),
+                    authorization_headers({"content-type":"application/json"}))
+                with self.assertRaises(urllib.error.HTTPError) as caught:
+                    urllib.request.urlopen(override)
+                self.assertEqual(caught.exception.code, 400)
                 request = urllib.request.Request(f"{base}/api/matches",
-                    json.dumps({"homeTeamId":"nova-baseline", "awayTeamId":"nova-baseline",
-                                "homeFormation":"1-1-1-2",
-                                "awayFormation":"1-1-1-2"}).encode(),
+                    json.dumps({"homeTeamId":"nova-baseline",
+                                "awayTeamId":"nova-baseline"}).encode(),
                     authorization_headers({"content-type":"application/json"}))
                 with patch("live_match_server.load_strategy", return_value=FakeStrategy()):
                     created = json.load(urllib.request.urlopen(request))
                     self.assertEqual(created["formations"],
-                                     {"home":"1-1-1-2", "away":"1-1-1-2"})
+                                     {"home":"1-1-2", "away":"1-1-2"})
                     ticks = []
                     with urllib.request.urlopen(f"{base}{created['streamUrl']}", timeout=3) as response:
                         while len(ticks) < 3:

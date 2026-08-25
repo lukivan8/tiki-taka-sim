@@ -7,12 +7,13 @@
 Не редактируйте baseline для нового эксперимента. Сначала создайте копию:
 
 ```bash
-make create-team NAME=my-team DISPLAY_NAME="My Team"
+make create-team NAME=my-team DISPLAY_NAME="My Team" FORMATION=1-2-1
 ```
 
 ## Где настраивать
 
-- `strategy.yaml` — имя команды, схема и каталоги пяти игроков.
+- `team.yaml` — идентификатор и стандартная расстановка команды в `formationPreset`.
+- `strategy.yaml` — имя команды и каталоги пяти игроков.
 - `strategy.md` — общие принципы одного текущего тика.
 - `players/*/player.yaml` — зона, цель, приоритеты и контрольные точки игрока.
 - `players/*/role.md` — персональная роль и границы ответственности.

@@ -40,6 +40,8 @@ def discover_teams(root: Path | None = None) -> dict[str, dict[str, Any]]:
     teams_root = root or TEAMS_ROOT
     if not teams_root.is_dir():
         return catalog
+    _, parameters = SimulationParameters.load_arena(ARENA_PATH)
+    available_formations = set(parameters.formation["presets"])
     for folder in sorted(teams_root.iterdir()):
         if not folder.is_dir() or folder.is_symlink() or folder.name.startswith((".", "_")):
             continue
@@ -54,16 +56,22 @@ def discover_teams(root: Path | None = None) -> dict[str, dict[str, Any]]:
             raise RuntimeError(f"{manifest_path}: teamId must equal its slug folder name")
         if manifest.get("backend") != "nova-micro":
             raise RuntimeError(f"{manifest_path}: backend must be nova-micro")
-        required = ("displayName", "teamVersion", "style", "description", "defaultFormation")
+        required = ("displayName", "teamVersion", "description", "formationPreset")
         missing = [key for key in required if not str(manifest.get(key, "")).strip()]
         if missing:
             raise RuntimeError(f"{manifest_path}: missing {', '.join(missing)}")
+        formation_preset = str(manifest["formationPreset"])
+        if formation_preset not in available_formations:
+            raise RuntimeError(
+                f"{manifest_path}: unknown formationPreset {formation_preset!r}; "
+                f"choose one of {sorted(available_formations)}"
+            )
         catalog[team_id] = {
             "id": team_id,
             "name": str(manifest["displayName"]),
-            "style": str(manifest["style"]),
+            "style": formation_preset,
             "description": str(manifest["description"]),
-            "defaultFormation": str(manifest["defaultFormation"]),
+            "formationPreset": formation_preset,
             "version": str(manifest["teamVersion"]),
             "backend": "nova-micro",
             "root": folder.resolve(),
@@ -116,8 +124,7 @@ def write_ndjson(path: Path, rows: list[dict[str, Any]]) -> None:
 
 class LiveMatch:
     def __init__(self, home_id: str, away_id: str, seed: int = 42,
-                 realtime: bool = True, duration_seconds: float | None = None,
-                 home_formation: str | None = None, away_formation: str | None = None):
+                 realtime: bool = True, duration_seconds: float | None = None):
         self.id = uuid.uuid4().hex[:12]
         teams = discover_teams()
         self.home = teams[home_id]
@@ -130,8 +137,7 @@ class LiveMatch:
             parameters = SimulationParameters(values)
         self.arena = arena
         self.parameters = parameters
-        default_formation = str(parameters.formation["defaultPreset"])
-        self.formations = (home_formation or default_formation, away_formation or default_formation)
+        self.formations = (self.home["formationPreset"], self.away["formationPreset"])
         self.world = World(parameters, seed, self.formations)
         self.realtime = realtime
         self.condition = threading.Condition()
@@ -427,14 +433,18 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/api/matches":
             try:
                 payload = self.read_json()
+                unknown = set(payload) - {"homeTeamId", "awayTeamId", "seed"}
+                if unknown:
+                    raise ValueError(
+                        "match formations belong to teams; unsupported fields: "
+                        + ", ".join(sorted(unknown))
+                    )
                 home_id, away_id = payload["homeTeamId"], payload["awayTeamId"]
                 teams = discover_teams()
                 if home_id not in teams or away_id not in teams:
                     raise ValueError("unknown team")
                 identity = self.server.gateway.authenticate(self.headers.get("authorization"))
-                match = LiveMatch(home_id, away_id, int(payload.get("seed", 42)),
-                                  home_formation=payload.get("homeFormation"),
-                                  away_formation=payload.get("awayFormation"))
+                match = LiveMatch(home_id, away_id, int(payload.get("seed", 42)))
                 expected_calls = round(
                     match.parameters.timing["durationSeconds"] /
                     match.parameters.timing["decisionIntervalSeconds"]

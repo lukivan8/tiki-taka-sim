@@ -56,6 +56,9 @@ class SimulationV2Tests(unittest.TestCase):
 
     def test_every_formation_starts_in_its_own_half(self):
         parameters = SimulationParameters.load_arena(ARENA)[1]
+        self.assertEqual(list(parameters.formation["presets"]), [
+            "1-1-2", "1-2-1", "2-1-1", "2-2-0", "3-1", "1-3",
+        ])
         for home_preset in parameters.formation["presets"]:
             for away_preset in parameters.formation["presets"]:
                 world = World(parameters, formation_presets=(home_preset, away_preset))
@@ -66,16 +69,16 @@ class SimulationV2Tests(unittest.TestCase):
 
     def test_selected_formations_survive_goal_reset(self):
         parameters = SimulationParameters.load_arena(ARENA)[1]
-        world = World(parameters, formation_presets=("1-1-1-2", "1-1-1-2"))
+        world = World(parameters, formation_presets=("3-1", "1-3"))
         world.ball.owner = None
         world.ball.position = [parameters.field["halfLength"] + 0.1, 0.0]
         world.ball.velocity = [1.0, 0.0]
         world.advance_one()
         self.assertEqual(world.score, [1, 0])
-        self.assertEqual(world.players[(0, 1)].position, [-29.0, 0.0])
-        self.assertEqual(world.players[(0, 4)].position, [-8.0, 14.0])
-        self.assertEqual(world.players[(1, 1)].position, [29.0, 0.0])
-        self.assertEqual(world.players[(1, 4)].position, [8.0, -14.0])
+        self.assertEqual(world.players[(0, 1)].position, [-32.0, -15.0])
+        self.assertEqual(world.players[(0, 4)].position, [-7.0, 0.0])
+        self.assertEqual(world.players[(1, 1)].position, [31.0, 0.0])
+        self.assertEqual(world.players[(1, 4)].position, [10.0, -17.0])
 
     def test_goalkeeper_reacts_each_physics_tick_and_saves_long_shot(self):
         world = self.world()

@@ -126,6 +126,7 @@ canvas { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 760; }
 .team-picker { display: grid; gap: 10px; padding: 0 20px 20px; }
 .team-picker label { display: grid; gap: 6px; color: #769083; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .team-picker select, .team-picker input { width: 100%; border: 1px solid #345443; border-radius: 10px; padding: 11px 12px; color: #edf8f1; background: #102219; font-size: 13px; font-weight: 750; text-transform: none; letter-spacing: 0; }
+.team-picker select:disabled { cursor: default; opacity: 1; color: #b7d6c4; background: #0b1b13; }
 .side-picker { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .78fr); gap: 8px; padding: 11px; border: 1px solid #254535; border-radius: 14px; background: #0a1b12; }
 .side-picker .side-label { grid-column: 1 / -1; color: #a6d56b; font-size: 10px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
 .away-picker .side-label { color: #ff8798; }

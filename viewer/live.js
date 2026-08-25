@@ -47,8 +47,8 @@ async function loadTeams() {
   awayFormationSelect.innerHTML = formationOptions;
   homeSelect.value = teams[0]?.id || '';
   awaySelect.value = teams[1]?.id || teams[0]?.id || '';
-  homeFormationSelect.value = '1-1-1-2';
-  awayFormationSelect.value = '1-1-1-2';
+  applyTeamFormation(homeSelect, homeFormationSelect);
+  applyTeamFormation(awaySelect, awayFormationSelect);
   $('#teamCount').textContent = `${teams.length}`;
   $('#teamCatalog').innerHTML = teams.map(team => `<article class="team-card" data-team="${escapeHtml(team.id)}">
     <div><strong>${escapeHtml(team.name)}</strong><span>${escapeHtml(team.style)}</span></div>
@@ -62,8 +62,8 @@ function selectedTeam(select) { return teams.find(team => team.id === select.val
 function selectedFormation(select) { return formations.find(formation => formation.id === select.value); }
 function applyTeamFormation(teamSelect, formationSelect) {
   const team = selectedTeam(teamSelect);
-  if (team?.defaultFormation && formations.some(formation => formation.id === team.defaultFormation)) {
-    formationSelect.value = team.defaultFormation;
+  if (team?.formationPreset && formations.some(formation => formation.id === team.formationPreset)) {
+    formationSelect.value = team.formationPreset;
   }
 }
 
@@ -87,17 +87,14 @@ function updatePreview() {
 
 $('#swapTeams').addEventListener('click', () => {
   const home = homeSelect.value;
-  const homeFormation = homeFormationSelect.value;
   homeSelect.value = awaySelect.value;
-  homeFormationSelect.value = awayFormationSelect.value;
   awaySelect.value = home;
-  awayFormationSelect.value = homeFormation;
+  applyTeamFormation(homeSelect, homeFormationSelect);
+  applyTeamFormation(awaySelect, awayFormationSelect);
   updatePreview();
 });
 homeSelect.addEventListener('change', () => { applyTeamFormation(homeSelect, homeFormationSelect); updatePreview(); });
 awaySelect.addEventListener('change', () => { applyTeamFormation(awaySelect, awayFormationSelect); updatePreview(); });
-homeFormationSelect.addEventListener('change', updatePreview);
-awayFormationSelect.addEventListener('change', updatePreview);
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
@@ -119,8 +116,7 @@ async function startMatch() {
   setState('Starting', true);
   const response = await fetch('/api/matches', {
     method: 'POST', headers: authHeaders({ 'content-type': 'application/json' }),
-    body: JSON.stringify({ homeTeamId: homeSelect.value, awayTeamId: awaySelect.value,
-      homeFormation: homeFormationSelect.value, awayFormation: awayFormationSelect.value, seed: 42 })
+    body: JSON.stringify({ homeTeamId: homeSelect.value, awayTeamId: awaySelect.value, seed: 42 })
   });
   const result = await response.json();
   if (!response.ok) {
@@ -134,8 +130,6 @@ async function startMatch() {
   activeMatch = result;
   homeSelect.disabled = true;
   awaySelect.disabled = true;
-  homeFormationSelect.disabled = true;
-  awayFormationSelect.disabled = true;
   $('#swapTeams').disabled = true;
   startButton.disabled = false;
   startButton.textContent = 'Stop match';
@@ -191,8 +185,6 @@ function finishMatch() {
   stream = null;
   homeSelect.disabled = false;
   awaySelect.disabled = false;
-  homeFormationSelect.disabled = false;
-  awayFormationSelect.disabled = false;
   $('#swapTeams').disabled = false;
   startButton.disabled = false;
   startButton.textContent = 'Start another match';

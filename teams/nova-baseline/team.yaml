@@ -3,8 +3,7 @@ teamId: nova-baseline
 teamVersion: v1
 displayName: Nova Baseline
 backend: nova-micro
-style: 1-1-1-2
-defaultFormation: 1-1-1-2
+formationPreset: 1-1-2
 implementation:
   source: agent.py
   entrypoint: python3 teams/nova-baseline/agent.py
@@ -13,6 +12,5 @@ model:
   family: Amazon Nova
   name: us.amazon.nova-micro-v1:0
   inference: {mode: strands-pydantic-structured-output, modelCallPolicy: one-call-per-player-per-tick, failurePolicy: explicit-idle}
-formationPreset: 1-1-1-2
 strategyFamily: isolated-nova-micro
 description: Five stateless Nova Micro roles with ranked ball responsibility, dynamic role anchors, full geometric perception, semantic command masks, and strict Pydantic validation.

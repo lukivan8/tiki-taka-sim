@@ -82,6 +82,7 @@ class NovaTeamTests(unittest.TestCase):
             self.assertNotIn("combinations", config)
             system_prompt = build_system_prompt(player_id)
             self.assertIn(f"ТОЛЬКО игроком №{player_id}", system_prompt)
+            self.assertIn("Стартовая схема 1-1-2", system_prompt)
             self.assertIn(role, system_prompt)
             self.assertIn(situations, system_prompt)
             self.assertIn("stateless", system_prompt)

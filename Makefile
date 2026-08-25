@@ -17,8 +17,8 @@ live:
 	$(PYTHON) tools/live_match_server.py --host 127.0.0.1 --port $${SIMULATOR_PORT:-8300}
 
 create-team:
-	@test -n "$(NAME)" || (echo 'usage: make create-team NAME=alice-team [DISPLAY_NAME="Alice Team"] [SOURCE=nova-baseline]' && exit 2)
-	$(PYTHON) tools/create_team.py "$(NAME)" --source "$(or $(SOURCE),nova-baseline)" $(if $(DISPLAY_NAME),--display-name "$(DISPLAY_NAME)",)
+	@test -n "$(NAME)" || (echo 'usage: make create-team NAME=alice-team [DISPLAY_NAME="Alice Team"] [FORMATION=1-2-1] [SOURCE=nova-baseline]' && exit 2)
+	$(PYTHON) tools/create_team.py "$(NAME)" --source "$(or $(SOURCE),nova-baseline)" $(if $(DISPLAY_NAME),--display-name "$(DISPLAY_NAME)",) $(if $(FORMATION),--formation "$(FORMATION)",)
 
 create-invite:
 	@test -n "$(NAME)" || (echo 'usage: make create-invite NAME=alice' && exit 2)

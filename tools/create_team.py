@@ -30,7 +30,7 @@ def write_yaml(path: Path, value: dict) -> None:
 
 
 def create_team(team_id: str, display_name: str | None = None,
-                source_id: str = "nova-baseline") -> Path:
+                source_id: str = "nova-baseline", formation: str | None = None) -> Path:
     if not TEAM_ID_PATTERN.fullmatch(team_id):
         raise SystemExit("team id must be a 2-48 character lowercase slug: letters, digits, hyphens")
     if not TEAM_ID_PATTERN.fullmatch(source_id):
@@ -45,6 +45,13 @@ def create_team(team_id: str, display_name: str | None = None,
     source_manifest = load_yaml(source / "team.yaml")
     if source_manifest.get("backend") != "nova-micro":
         raise SystemExit("source team does not use the required nova-micro backend")
+    selected_formation = formation or str(source_manifest["formationPreset"])
+    arena = load_yaml(ROOT / "arena/arena.yaml")
+    presets = arena["simulationParameters"]["formation"]["presets"]
+    if selected_formation not in presets:
+        raise SystemExit(
+            f"unknown formation {selected_formation!r}; choose one of {', '.join(presets)}"
+        )
 
     shutil.copytree(
         source,
@@ -57,6 +64,8 @@ def create_team(team_id: str, display_name: str | None = None,
         manifest["displayName"] = display_name or team_id.replace("-", " ").title()
         manifest["teamVersion"] = "v1"
         manifest["backend"] = "nova-micro"
+        manifest["formationPreset"] = selected_formation
+        manifest.pop("style", None)
         manifest["implementation"]["entrypoint"] = f"python3 teams/{team_id}/agent.py"
         write_yaml(target / "team.yaml", manifest)
 
@@ -76,8 +85,9 @@ def main() -> None:
     parser.add_argument("team_id")
     parser.add_argument("--display-name")
     parser.add_argument("--source", default="nova-baseline")
+    parser.add_argument("--formation")
     args = parser.parse_args()
-    target = create_team(args.team_id, args.display_name, args.source)
+    target = create_team(args.team_id, args.display_name, args.source, args.formation)
     print(f"Created {target.relative_to(ROOT)}")
     print(f"Edit roles in {target.relative_to(ROOT)}/players, refresh the page, and start a new match")
 

@@ -9,7 +9,7 @@
 - `teams/nova-baseline/` — неизменяемый пример полноценной команды.
 - `teams/<team-id>/` — самостоятельные стратегии, роли и расчёты геометрии команд.
 - `teams/<team-id>/shared/commands.py` — локальный строгий Pydantic-контракт решения.
-- `arena/arena.yaml` — все параметры физики и единственная схема `1-1-1-2`.
+- `arena/arena.yaml` — все параметры физики и шесть стандартных стартовых схем.
 - `tools/simulator.py` — детерминированная физика 60 Hz.
 - `tools/live_match_server.py` — Nova vs Nova в реальном времени и запись матчей.
 - `viewer/` — live canvas и проигрыватель новых записей.
@@ -134,25 +134,44 @@ replay.
 Новая команда создаётся из baseline одной командой:
 
 ```bash
-make create-team NAME=alice-press DISPLAY_NAME="Alice Press"
+make create-team NAME=alice-press DISPLAY_NAME="Alice Press" FORMATION=1-2-1
 ```
 
 Можно клонировать уже существующую экспериментальную команду:
 
 ```bash
-make create-team NAME=alice-v2 DISPLAY_NAME="Alice v2" SOURCE=alice-press
+make create-team NAME=alice-v2 DISPLAY_NAME="Alice v2" SOURCE=alice-press FORMATION=3-1
 ```
 
-Генератор создаёт `teams/alice-press/`, меняет `teamId`, отображаемое имя и
-entrypoint. Регистрировать команду в Python или JavaScript не нужно: сервер
+Генератор создаёт `teams/alice-press/`, меняет `teamId`, отображаемое имя,
+`formationPreset` и entrypoint. Если `FORMATION` не указан, схема наследуется от
+исходной команды. Регистрировать команду в Python или JavaScript не нужно: сервер
 сканирует `teams/*/team.yaml`. После создания команды обновите страницу; она
 появится в обоих выпадающих списках. Изменения стратегии применяются к следующему
 матчу без restart сервера. Любую команду можно запустить против другой или самой себя.
+
+Доступны шесть схем для четырёх полевых игроков; вратарь №0 всегда расположен
+отдельно у своих ворот:
+
+| `formationPreset` | Структура |
+|---|---|
+| `1-1-2` | защитник, связующий и два форварда |
+| `1-2-1` | ромб: защитник, два полузащитника и форвард |
+| `2-1-1` | два защитника, связующий и форвард |
+| `2-2-0` | квадрат без закреплённого форварда |
+| `3-1` | низкий блок из трёх и один форвард |
+| `1-3` | один защитник и высокая линия из трёх |
+
+Схема принадлежит команде: live-страница показывает её без возможности изменить,
+а `POST /api/matches` не принимает `homeFormation`/`awayFormation`. Для ручной
+смены отредактируйте `formationPreset` в `teams/<team-id>/team.yaml`.
+Координаты берутся из arena и автоматически включаются в системные промпты игроков.
 
 Требования к команде:
 
 - имя папки и `teamId` совпадают и являются lowercase slug;
 - `backend` всегда равен `nova-micro`;
+- `formationPreset` содержит одну из шести стандартных схем;
 - в папке присутствуют `team.yaml`, `strategy.yaml`, `strategy.md`, `live_team.py`
   и пять каталогов игроков;
 - каждая команда загружается в отдельном Python package, поэтому её `shared/`,
