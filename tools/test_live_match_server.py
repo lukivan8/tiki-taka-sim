@@ -57,8 +57,10 @@ class LiveMatchTests(unittest.TestCase):
     def test_catalog_discovers_the_nova_baseline(self):
         teams = discover_teams()
         self.assertIn("nova-baseline", teams)
+        self.assertIn("vertical-wingbacks", teams)
         self.assertEqual(teams["nova-baseline"]["backend"], "nova-micro")
         self.assertTrue((teams["nova-baseline"]["root"] / "live_team.py").is_file())
+        self.assertEqual(teams["vertical-wingbacks"]["formationPreset"], "3-1")
 
     def test_create_team_is_immediately_discoverable(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -184,7 +186,9 @@ class LiveMatchTests(unittest.TestCase):
             base = f"http://127.0.0.1:{server.server_address[1]}"
             try:
                 catalog = json.load(urllib.request.urlopen(f"{base}/api/teams"))
-                self.assertIn("nova-baseline", [team["id"] for team in catalog["teams"]])
+                team_ids = [team["id"] for team in catalog["teams"]]
+                self.assertIn("nova-baseline", team_ids)
+                self.assertIn("vertical-wingbacks", team_ids)
                 self.assertEqual([item["id"] for item in catalog["formations"]], [
                     "1-1-2", "1-2-1", "2-1-1", "2-2-0", "3-1", "1-3",
                     "1-1-1-2-high",

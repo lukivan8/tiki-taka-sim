@@ -1,0 +1,22 @@
+schemaVersion: afc-team/v1
+teamId: vertical-wingbacks
+teamVersion: v1
+displayName: Vertical Wingbacks
+backend: nova-micro
+formationPreset: 3-1
+implementation:
+  source: agent.py
+  entrypoint: python3 teams/vertical-wingbacks/agent.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: one-call-per-player-per-tick
+    failurePolicy: explicit-idle
+strategyFamily: vertical-wingback-counter
+description: A stateless 3-1 low block that becomes 1-3 in possession. Two wingbacks
+  defend their channels and counter vertically, one central defender protects the
+  goal, and one central forward hunts open passing and shooting points.

@@ -1,11 +1,14 @@
-.PHONY: check test-nova test-simulator test-live live create-team create-invite verify-remote clean-generated
+.PHONY: check test-nova test-vertical-wingbacks test-simulator test-live live create-team create-invite verify-remote clean-generated
 
 PYTHON ?= $(shell if [ -x .venv/bin/python ]; then echo .venv/bin/python; elif [ -x .venv-afc/bin/python ]; then echo .venv-afc/bin/python; else echo python3; fi)
 
-check: test-nova test-simulator test-live
+check: test-nova test-vertical-wingbacks test-simulator test-live
 
 test-nova:
 	PYTHONPATH=tools $(PYTHON) -m unittest -v tools.test_nova_team
+
+test-vertical-wingbacks:
+	PYTHONPATH=tools $(PYTHON) -m unittest -v tools.test_vertical_wingbacks
 
 test-simulator:
 	PYTHONPATH=tools $(PYTHON) -m unittest -v tools.test_simulator
