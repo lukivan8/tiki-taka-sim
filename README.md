@@ -83,7 +83,7 @@ make create-invite NAME=alice
 ### 2. Друг настраивает клон
 
 ```bash
-git clone <URL-РЕПОЗИТОРИЯ>
+git clone https://github.com/lukivan8/tiki-taka-sim.git
 cd tiki-taka-sim
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt

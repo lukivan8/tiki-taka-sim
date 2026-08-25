@@ -1,6 +1,6 @@
 .PHONY: check test-nova test-simulator test-live live create-invite verify-remote clean-generated
 
-PYTHON ?= python3
+PYTHON ?= $(shell if [ -x .venv/bin/python ]; then echo .venv/bin/python; elif [ -x .venv-afc/bin/python ]; then echo .venv-afc/bin/python; else echo python3; fi)
 
 check: test-nova test-simulator test-live
 
