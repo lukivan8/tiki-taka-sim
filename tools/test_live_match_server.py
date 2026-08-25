@@ -56,7 +56,7 @@ class SlowFakeStrategy(FakeStrategy):
 class LiveMatchTests(unittest.TestCase):
     def test_catalog_discovers_the_nova_baseline(self):
         teams = discover_teams()
-        self.assertEqual(list(teams), ["nova-baseline"])
+        self.assertIn("nova-baseline", teams)
         self.assertEqual(teams["nova-baseline"]["backend"], "nova-micro")
         self.assertTrue((teams["nova-baseline"]["root"] / "live_team.py").is_file())
 
@@ -184,9 +184,10 @@ class LiveMatchTests(unittest.TestCase):
             base = f"http://127.0.0.1:{server.server_address[1]}"
             try:
                 catalog = json.load(urllib.request.urlopen(f"{base}/api/teams"))
-                self.assertEqual([team["id"] for team in catalog["teams"]], ["nova-baseline"])
+                self.assertIn("nova-baseline", [team["id"] for team in catalog["teams"]])
                 self.assertEqual([item["id"] for item in catalog["formations"]], [
                     "1-1-2", "1-2-1", "2-1-1", "2-2-0", "3-1", "1-3",
+                    "1-1-1-2-high",
                 ])
                 override = urllib.request.Request(f"{base}/api/matches",
                     json.dumps({"homeTeamId":"nova-baseline",

@@ -58,6 +58,7 @@ class SimulationV2Tests(unittest.TestCase):
         parameters = SimulationParameters.load_arena(ARENA)[1]
         self.assertEqual(list(parameters.formation["presets"]), [
             "1-1-2", "1-2-1", "2-1-1", "2-2-0", "3-1", "1-3",
+            "1-1-1-2-high",
         ])
         for home_preset in parameters.formation["presets"]:
             for away_preset in parameters.formation["presets"]:
