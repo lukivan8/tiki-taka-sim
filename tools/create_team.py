@@ -79,7 +79,7 @@ def main() -> None:
     args = parser.parse_args()
     target = create_team(args.team_id, args.display_name, args.source)
     print(f"Created {target.relative_to(ROOT)}")
-    print(f"Edit roles in {target.relative_to(ROOT)}/players and restart make live")
+    print(f"Edit roles in {target.relative_to(ROOT)}/players, refresh the page, and start a new match")
 
 
 if __name__ == "__main__":
