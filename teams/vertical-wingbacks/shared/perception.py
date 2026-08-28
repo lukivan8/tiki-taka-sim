@@ -389,7 +389,18 @@ def _shot_geometry(perception: Perception, origin: Point) -> tuple[float, float,
             visible, sorted(all_blockers))
 
 
+def high_quality_shot(perception: Perception) -> bool:
+    """A conservative ready-made finish where further play is needless risk."""
+    if not perception.owns_ball or perception.player_id == 0:
+        return False
+    distance, angle, visible, blockers = _shot_geometry(perception, perception.self_player.position)
+    return (distance <= 16 and angle >= 12 and not blockers and
+            "CENTER" in visible and len(visible) >= 2)
+
+
 def allowed_commands(perception: Perception) -> tuple[str, ...]:
+    if high_quality_shot(perception):
+        return ("SHOOT",)
     team_rank, _ = responsibility(perception)
     primary = team_rank[0][1]
     phase = control_phase(perception)
@@ -599,6 +610,9 @@ def describe(perception: Perception, player_config: dict) -> str:
     lines.append(f"Удар от тебя: до ворот {goal_distance:.1f} м; угол {goal_angle:.1f}°; "
                  f"открытые направления {visible_aims or 'нет'}; блокируют {shot_blockers or 'нет'}; "
                  f"вратарь ({perception.opponents[0].position.x:.1f},{perception.opponents[0].position.y:.1f}).")
+    if high_quality_shot(perception):
+        lines.append("HIGH_QUALITY_SHOT: готовый удар обязателен. Выбери только SHOOT CENTER power=1.0; "
+                     "не выбирай DRIBBLE или PASS.")
     lines.append("ДОСТУПНЫЕ КОМАНДЫ: " + ", ".join(allowed_commands(perception)) + ".")
     if not is_primary and not perception.owns_ball:
         radius = 8 if phase in {"THEIR_CONTROL", "LIKELY_THEIRS", "CONTESTED"} else 16

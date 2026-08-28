@@ -199,6 +199,24 @@ class VerticalWingbacksTests(unittest.TestCase):
         self.assertIn("Открытые вингеры для завершения", observation)
         self.assertIn("после приёма: до ворот", observation)
 
+    def test_high_quality_shot_is_the_only_available_command(self):
+        state = snapshot(ball=(44, 0), owner_team=0, owner_player=3)
+        replacements = {"home_3": (44, 0), "away_0": (50, 10), "away_1": (20, -25),
+                        "away_2": (20, 25), "away_3": (5, -25), "away_4": (5, 25)}
+        for raw in state["players"]:
+            if raw["agentId"] in replacements:
+                x, y = replacements[raw["agentId"]]
+                raw["position"] = {"x": x, "y": y}
+        winger = view(3, state)
+        self.assertTrue(perception.high_quality_shot(winger))
+        self.assertEqual(perception.allowed_commands(winger), ("SHOOT",))
+        with self.assertRaisesRegex(ValueError, "DRIBBLE недоступна"):
+            perception.validate_semantics(winger, "DRIBBLE", target_x=50, target_y=0)
+        config = yaml.safe_load((TEAM_ROOT / "players/3-right-wingback/player.yaml").read_text())
+        observation = perception.describe(winger, config)
+        self.assertIn("HIGH_QUALITY_SHOT", observation)
+        self.assertIn("ДОСТУПНЫЕ КОМАНДЫ: SHOOT", observation)
+
     def test_observation_names_phase_corridors_and_goal_coverage(self):
         defender_state = snapshot(ball=(-25, 0), owner_team=1, owner_player=4)
         config = yaml.safe_load((TEAM_ROOT / "players/2-central-defender/player.yaml").read_text())
