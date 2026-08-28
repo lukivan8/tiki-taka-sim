@@ -1,0 +1,25 @@
+schemaVersion: afc-team/v1
+teamId: nova-strict
+teamVersion: v1
+displayName: Nova Strict
+backend: nova-micro
+style: 1-1-1-2 high
+defaultFormation: 1-1-1-2-high
+implementation:
+  source: agent.py
+  entrypoint: python3 teams/nova-strict/agent.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: one-call-per-player-per-tick
+    failurePolicy: deterministic-fallback
+formationPreset: 1-1-1-2-high
+strategyFamily: isolated-nova-micro
+description: Три жёстко закодированных правила поверх nova-vertical. Удар в атакующих
+  2/3 поля и свободный проход вперёд не предлагаются моделью как варианты — код
+  сжимает список доступных команд до одной, если правило применимо. Столкновения
+  с партнёрами запрещены на уровне validate_semantics, а не только текстом промпта.
