@@ -1,0 +1,30 @@
+schema_version: afc-model-oriented-team/v1
+name: Nova Strict — три жёстких правила
+version: v1
+model: us.amazon.nova-micro-v1:0
+formation:
+  name: 1-1-1-2-high
+  description: Вратарь, один центральный защитник, связующий полузащитник и два форварда,
+    стоящих на линии точки вбрасывания, а не позади неё.
+  points:
+    0:
+    - -50.0
+    - 0.0
+    1:
+    - -29.0
+    - 0.0
+    2:
+    - -3.0
+    - 0.0
+    3:
+    - -2.0
+    - -14.0
+    4:
+    - -2.0
+    - 14.0
+players:
+  0: players/0-goalkeeper
+  1: players/1-central-defender
+  2: players/2-midfielder
+  3: players/3-left-forward
+  4: players/4-right-forward
