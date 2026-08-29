@@ -1,0 +1,16 @@
+schemaVersion: afc-team/v1
+teamId: simulator-probe
+teamVersion: v1
+displayName: Deterministic Simulator Probe
+backend: nova-micro
+formationPreset: 1-1-2
+implementation:
+  source: live_team.py
+  entrypoint: python3 teams/simulator-probe/live_team.py
+  arguments: {playerProcesses: 5}
+model:
+  family: none
+  name: deterministic-no-llm
+  inference: {mode: deterministic-probe, modelCallPolicy: no-model-calls, failurePolicy: no-idle}
+strategyFamily: simulator-calibration-probe
+description: One-sided deterministic choreography for calibration against the tournament's uncontrolled built-in sample team.

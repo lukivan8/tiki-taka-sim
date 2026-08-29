@@ -1,0 +1,11 @@
+schemaVersion: afc-team/v1
+teamId: workshop-balanced-baseline
+teamVersion: upstream-cc2dbacf
+displayName: Workshop Balanced Baseline
+backend: nova-micro
+formationPreset: 1-1-2
+implementation: {source: live_team.py, entrypoint: upstream adapter, arguments: {playerProcesses: 5}}
+model: {family: Amazon Nova, name: upstream-role-specific, inference: {mode: strands-upstream}}
+strategyFamily: workshop-upstream-baseline
+description: Exact balanced workshop role prompts, models, fallbacks, memory, and tactics from upstream commit cc2dbacf, with only unsupported Arena commands mapped.
+

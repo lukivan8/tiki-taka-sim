@@ -1,0 +1,11 @@
+schemaVersion: afc-team/v1
+teamId: workshop-aggressive-baseline
+teamVersion: upstream-cc2dbacf
+displayName: Workshop Extremely Aggressive Baseline
+backend: nova-micro
+formationPreset: 1-1-2
+implementation: {source: live_team.py, entrypoint: upstream adapter, arguments: {playerProcesses: 5}}
+model: {family: Amazon Nova, name: upstream-role-specific, inference: {mode: strands-upstream-with-overrides}}
+strategyFamily: workshop-upstream-baseline
+description: Exact extremely aggressive workshop role prompts, models, fallbacks, memory, tactics, and hard overrides from upstream commit cc2dbacf, with only unsupported Arena commands mapped.
+

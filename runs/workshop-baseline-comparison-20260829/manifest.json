@@ -1,0 +1,474 @@
+{
+  "status": "user-stopped-partial",
+  "results": [
+    {
+      "index": 1,
+      "matchId": "86ca27a3978d",
+      "home": "release-deep-denial-g4",
+      "away": "workshop-balanced-baseline",
+      "seed": 24001,
+      "durationSeconds": 120.0,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "metrics": {
+        "kicks": 25,
+        "passes": 14,
+        "shots": 11,
+        "tackles": 1,
+        "successfulTackles": 0,
+        "possessionChanges": 28,
+        "kickerRecaptures": 2,
+        "completedPasses": 2,
+        "interceptedPasses": 12,
+        "looseBallSeconds": 86.56666666666304,
+        "clusterFrames": 285,
+        "duelFrames": 694,
+        "minimumPlayerDistance": 1.1319742701157405,
+        "goalkeeperSaves": 11,
+        "pressChallenges": 3,
+        "goalkeeperChallenges": 0
+      },
+      "auditReplay": "audit-replays/01-seed-24001-release-deep-denial-g4-vs-workshop-balanced-baseline.ndjson",
+      "auditSha256": "864c98991d670c72111462db40f43c41eddccae03a07f73163cc2b249ff620a0",
+      "visualReplay": "visual-replays/01-seed-24001-release-deep-denial-g4-vs-workshop-balanced-baseline.frames.ndjson",
+      "visualSha256": "f6f3ff5f333e2c69fbbdfa13b0ea895896b3ac993349f46987a2361b20604d61",
+      "replayAudit": {
+        "appliedShots": {
+          "home": 0,
+          "away": 11
+        },
+        "shotDistancesMetres": {
+          "home": [],
+          "away": [
+            55.7,
+            50.6,
+            38.2,
+            56.4,
+            50.7,
+            57.2,
+            52.9,
+            55.7,
+            50.5,
+            39.5,
+            55.4
+          ]
+        },
+        "decisionSources": {
+          "0:nova-micro": 300,
+          "1:upstream-llm": 253,
+          "1:upstream-parse-fallback": 40,
+          "1:upstream-llm+local-adapter": 7
+        },
+        "decisionErrors": {},
+        "operationallyClean": true
+      }
+    },
+    {
+      "index": 2,
+      "matchId": "521c30c1a877",
+      "home": "workshop-balanced-baseline",
+      "away": "release-deep-denial-g4",
+      "seed": 24001,
+      "durationSeconds": 120.0,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "metrics": {
+        "kicks": 27,
+        "passes": 15,
+        "shots": 12,
+        "tackles": 1,
+        "successfulTackles": 0,
+        "possessionChanges": 32,
+        "kickerRecaptures": 2,
+        "completedPasses": 7,
+        "interceptedPasses": 8,
+        "looseBallSeconds": 83.1333333333299,
+        "clusterFrames": 333,
+        "duelFrames": 853,
+        "minimumPlayerDistance": 1.1271072864505933,
+        "goalkeeperSaves": 13,
+        "pressChallenges": 5,
+        "goalkeeperChallenges": 0
+      },
+      "auditReplay": "audit-replays/02-seed-24001-workshop-balanced-baseline-vs-release-deep-denial-g4.ndjson",
+      "auditSha256": "cb70de4dced3a70db52c7bc77ae4419ff5f56a01a82e22908ad02010b7b31b53",
+      "visualReplay": "visual-replays/02-seed-24001-workshop-balanced-baseline-vs-release-deep-denial-g4.frames.ndjson",
+      "visualSha256": "d2c9426bfc019aa1f462211173a40ca773b916c8270e92753b77ea43b2650ba1",
+      "replayAudit": {
+        "appliedShots": {
+          "home": 12,
+          "away": 0
+        },
+        "shotDistancesMetres": {
+          "home": [
+            55.9,
+            68.9,
+            78.9,
+            73.6,
+            59.7,
+            55.0,
+            52.8,
+            44.8,
+            49.7,
+            41.3,
+            54.7,
+            38.3
+          ],
+          "away": []
+        },
+        "decisionSources": {
+          "0:upstream-llm": 249,
+          "1:nova-micro": 299,
+          "0:upstream-parse-fallback": 35,
+          "0:upstream-llm+local-adapter": 16,
+          "1:deterministic-recovery": 1
+        },
+        "decisionErrors": {},
+        "operationallyClean": true
+      }
+    },
+    {
+      "index": 3,
+      "matchId": "2bfe64cf9797",
+      "home": "release-deep-denial-g4",
+      "away": "workshop-aggressive-baseline",
+      "seed": 24002,
+      "durationSeconds": 120.0,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "metrics": {
+        "kicks": 13,
+        "passes": 10,
+        "shots": 3,
+        "tackles": 18,
+        "successfulTackles": 2,
+        "possessionChanges": 28,
+        "kickerRecaptures": 4,
+        "completedPasses": 4,
+        "interceptedPasses": 4,
+        "looseBallSeconds": 49.916666666665115,
+        "clusterFrames": 802,
+        "duelFrames": 1869,
+        "minimumPlayerDistance": 1.0695838271214748,
+        "goalkeeperSaves": 1,
+        "pressChallenges": 12,
+        "goalkeeperChallenges": 1
+      },
+      "auditReplay": "audit-replays/03-seed-24002-release-deep-denial-g4-vs-workshop-aggressive-baseline.ndjson",
+      "auditSha256": "fbdb3a7d81f0c5aadbe316d3f12bfb5b8e10622cf30c96d74b7eb6a88386d206",
+      "visualReplay": "visual-replays/03-seed-24002-release-deep-denial-g4-vs-workshop-aggressive-baseline.frames.ndjson",
+      "visualSha256": "be2f2b88aad14ad0457d7860105c9799d4914082202f06576958918d9d10d16b",
+      "replayAudit": {
+        "appliedShots": {
+          "home": 0,
+          "away": 3
+        },
+        "shotDistancesMetres": {
+          "home": [],
+          "away": [
+            53.1,
+            106.5,
+            94.1
+          ]
+        },
+        "decisionSources": {
+          "0:nova-micro": 300,
+          "1:upstream-llm+override:gk-line": 53,
+          "1:upstream-llm+override:no-chase": 18,
+          "1:upstream-llm+override:hold-line": 61,
+          "1:upstream-llm": 61,
+          "1:upstream-llm+override:tackle": 7,
+          "1:upstream-parse-fallback": 30,
+          "1:upstream-llm+override:mark-near": 34,
+          "1:upstream-llm+override:support": 19,
+          "1:upstream-llm+override:press-cap": 2,
+          "1:upstream-llm+override:anchor": 2,
+          "1:upstream-llm+override:counter": 4,
+          "1:upstream-llm+override:intercept": 2,
+          "1:upstream-llm+override:gk-blast": 1,
+          "1:upstream-llm+override:gk-cover": 6
+        },
+        "decisionErrors": {},
+        "operationallyClean": true
+      }
+    },
+    {
+      "index": 4,
+      "matchId": "27ba02e456cd",
+      "home": "workshop-aggressive-baseline",
+      "away": "release-deep-denial-g4",
+      "seed": 24002,
+      "durationSeconds": 120.0,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "metrics": {
+        "kicks": 25,
+        "passes": 15,
+        "shots": 10,
+        "tackles": 6,
+        "successfulTackles": 0,
+        "possessionChanges": 30,
+        "kickerRecaptures": 1,
+        "completedPasses": 3,
+        "interceptedPasses": 9,
+        "looseBallSeconds": 85.29999999999644,
+        "clusterFrames": 94,
+        "duelFrames": 500,
+        "minimumPlayerDistance": 1.1077226859243168,
+        "goalkeeperSaves": 10,
+        "pressChallenges": 5,
+        "goalkeeperChallenges": 0
+      },
+      "auditReplay": "audit-replays/04-seed-24002-workshop-aggressive-baseline-vs-release-deep-denial-g4.ndjson",
+      "auditSha256": "552389cb4e3119afbef64a5cc97c52d2556a06a54b6025d2522b2fb5e9eb13b1",
+      "visualReplay": "visual-replays/04-seed-24002-workshop-aggressive-baseline-vs-release-deep-denial-g4.frames.ndjson",
+      "visualSha256": "bd763fc4017ca9eaa04a64f182a5ddcb3cc66c51bbd3ee0007a0afc40842c8d9",
+      "replayAudit": {
+        "appliedShots": {
+          "home": 10,
+          "away": 0
+        },
+        "shotDistancesMetres": {
+          "home": [
+            55.9,
+            55.9,
+            39.2,
+            45.7,
+            56.6,
+            54.9,
+            50.0,
+            59.8,
+            60.5,
+            46.2
+          ],
+          "away": []
+        },
+        "decisionSources": {
+          "0:upstream-llm+override:gk-line": 59,
+          "0:upstream-parse-fallback": 35,
+          "0:upstream-llm": 51,
+          "1:nova-micro": 300,
+          "0:upstream-llm+override:mark-near": 63,
+          "0:upstream-llm+override:press-cap": 6,
+          "0:upstream-llm+override:no-chase": 22,
+          "0:upstream-llm+override:hold-line": 38,
+          "0:upstream-llm+override:support": 15,
+          "0:upstream-llm+override:tackle": 3,
+          "0:upstream-llm+override:intercept": 4,
+          "0:upstream-llm+override:gk-cover": 1,
+          "0:upstream-llm+override:counter": 3
+        },
+        "decisionErrors": {},
+        "operationallyClean": true
+      }
+    },
+    {
+      "index": 5,
+      "matchId": "eff51aacd03b",
+      "home": "release-deep-denial-g4",
+      "away": "workshop-defensive-baseline",
+      "seed": 24003,
+      "durationSeconds": 120.0,
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "metrics": {
+        "kicks": 27,
+        "passes": 21,
+        "shots": 6,
+        "tackles": 1,
+        "successfulTackles": 0,
+        "possessionChanges": 35,
+        "kickerRecaptures": 4,
+        "completedPasses": 8,
+        "interceptedPasses": 9,
+        "looseBallSeconds": 87.08333333332968,
+        "clusterFrames": 136,
+        "duelFrames": 505,
+        "minimumPlayerDistance": 1.1123856045437572,
+        "goalkeeperSaves": 5,
+        "pressChallenges": 7,
+        "goalkeeperChallenges": 3
+      },
+      "auditReplay": "audit-replays/05-seed-24003-release-deep-denial-g4-vs-workshop-defensive-baseline.ndjson",
+      "auditSha256": "10a0eac8012f82726386475f56937426aebf352dfaa583d12e875f13f9f18439",
+      "visualReplay": "visual-replays/05-seed-24003-release-deep-denial-g4-vs-workshop-defensive-baseline.frames.ndjson",
+      "visualSha256": "248a45cd4567fbac91f87d756cccfdc89e436e6d2392b756804f603a250f6e03",
+      "replayAudit": {
+        "appliedShots": {
+          "home": 1,
+          "away": 5
+        },
+        "shotDistancesMetres": {
+          "home": [
+            14.9
+          ],
+          "away": [
+            55.7,
+            57.8,
+            36.6,
+            49.2,
+            63.3
+          ]
+        },
+        "decisionSources": {
+          "0:nova-micro": 300,
+          "1:runner-idle": 46,
+          "1:upstream-llm": 242,
+          "1:upstream-parse-fallback": 2,
+          "1:upstream-llm+local-adapter": 10
+        },
+        "decisionErrors": {
+          "1:KeyError: 'target_x'": 46
+        },
+        "operationallyClean": false
+      }
+    },
+    {
+      "index": 6,
+      "matchId": "acc77dfb88d2",
+      "home": "workshop-defensive-baseline",
+      "away": "release-deep-denial-g4",
+      "seed": 24003,
+      "durationSeconds": 120.0,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "metrics": {
+        "kicks": 26,
+        "passes": 23,
+        "shots": 3,
+        "tackles": 1,
+        "successfulTackles": 1,
+        "possessionChanges": 41,
+        "kickerRecaptures": 8,
+        "completedPasses": 12,
+        "interceptedPasses": 8,
+        "looseBallSeconds": 61.76666666666444,
+        "clusterFrames": 1198,
+        "duelFrames": 2060,
+        "minimumPlayerDistance": 1.0553210600194114,
+        "goalkeeperSaves": 5,
+        "pressChallenges": 13,
+        "goalkeeperChallenges": 1
+      },
+      "auditReplay": "audit-replays/06-seed-24003-workshop-defensive-baseline-vs-release-deep-denial-g4.ndjson",
+      "auditSha256": "a758915129731216ed7f541a84669799d73eed9893f2941fb869379a6e3b7509",
+      "visualReplay": "visual-replays/06-seed-24003-workshop-defensive-baseline-vs-release-deep-denial-g4.frames.ndjson",
+      "visualSha256": "73a8cc26a55ef8e65574ff3b3689c3f8396b7987392eaf264c932a22c567a26d",
+      "replayAudit": {
+        "appliedShots": {
+          "home": 3,
+          "away": 0
+        },
+        "shotDistancesMetres": {
+          "home": [
+            41.9,
+            38.6,
+            28.3
+          ],
+          "away": []
+        },
+        "decisionSources": {
+          "0:upstream-llm": 257,
+          "1:nova-micro": 300,
+          "0:runner-idle": 35,
+          "0:upstream-llm+local-adapter": 7,
+          "0:upstream-parse-fallback": 1
+        },
+        "decisionErrors": {
+          "0:KeyError: 'target_x'": 35
+        },
+        "operationallyClean": false
+      }
+    },
+    {
+      "index": 7,
+      "matchId": "4cd3a14e0807",
+      "home": "simple-four-modes",
+      "away": "workshop-balanced-baseline",
+      "seed": 24004,
+      "durationSeconds": 120.0,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "metrics": {
+        "kicks": 25,
+        "passes": 12,
+        "shots": 11,
+        "tackles": 1,
+        "successfulTackles": 0,
+        "possessionChanges": 35,
+        "kickerRecaptures": 4,
+        "completedPasses": 6,
+        "interceptedPasses": 6,
+        "looseBallSeconds": 71.73333333333055,
+        "clusterFrames": 160,
+        "duelFrames": 857,
+        "minimumPlayerDistance": 1.046216317791772,
+        "goalkeeperSaves": 11,
+        "pressChallenges": 10,
+        "goalkeeperChallenges": 0
+      },
+      "auditReplay": "audit-replays/07-seed-24004-simple-four-modes-vs-workshop-balanced-baseline.ndjson",
+      "auditSha256": "16e2e17dcd4226309a58bd90bd48afd995eff180594a9b725ac0db65cde6dd8e",
+      "visualReplay": "visual-replays/07-seed-24004-simple-four-modes-vs-workshop-balanced-baseline.frames.ndjson",
+      "visualSha256": "0523c81fb2e2f6cccc79a4ee946514709ac31d8a2789a2deddd8b81f47e53870",
+      "replayAudit": {
+        "appliedShots": {
+          "home": 0,
+          "away": 11
+        },
+        "shotDistancesMetres": {
+          "home": [],
+          "away": [
+            60.3,
+            34.3,
+            27.6,
+            43.8,
+            32.8,
+            15.8,
+            62.5,
+            64.3,
+            61.3,
+            16.9,
+            61.9
+          ]
+        },
+        "decisionSources": {
+          "0:deterministic-goalkeeper": 49,
+          "0:nova-micro": 251,
+          "1:upstream-llm": 258,
+          "1:upstream-parse-fallback": 27,
+          "1:upstream-llm+local-adapter": 15
+        },
+        "decisionErrors": {},
+        "operationallyClean": true
+      }
+    }
+  ],
+  "schemaVersion": "afc-workshop-comparison/v1",
+  "completedMatches": 7,
+  "plannedMatches": 12,
+  "selection": {
+    "indexes": [
+      4,
+      5,
+      7
+    ],
+    "reason": "clean aggressive behavior, only goal, and strongest close-range creation",
+    "warning": "match 5 is operationally impaired by rejected upstream MOVE_TO commands",
+    "repositoryArtifacts": "Only authoritative audit replays 4, 5, and 7 are retained. Other audit paths and all visualReplay paths are provenance records for locally generated artifacts that are intentionally not stored in Git."
+  }
+}
