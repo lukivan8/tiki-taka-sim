@@ -1,0 +1,65 @@
+{
+  "match_id": "71a90c70dd65",
+  "phase": "prefreeze-gauntlet",
+  "started_utc": "2026-08-29T01:22:32Z",
+  "finished_utc": "2026-08-29T01:24:56Z",
+  "home_team": "release-switch-shield-g5",
+  "away_team": "strict-switch-counter-g4",
+  "home_hash": "692e83ee34a9d1beed7ad2586cc46906dbd3f75eba49d88a82314b6f64613724",
+  "away_hash": "6bbafafba7a7780b92c6b70ae4135c86cbe74ba8ec18f5769121128e9da690c4",
+  "seed": 3405,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 0,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 467,
+    "mask-forced": 132,
+    "deterministic-recovery": 1
+  },
+  "latency_ms": {
+    "minimum": 1.463,
+    "median": 1234.865,
+    "maximum": 4765.023
+  },
+  "commands": {
+    "IDLE": 132,
+    "MOVE_TO": 284,
+    "PASS": 15,
+    "INTERCEPT": 58,
+    "PRESS_BALL": 16,
+    "DRIBBLE": 27,
+    "MARK": 65,
+    "GK_DISTRIBUTE": 2,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 17,
+    "passes": 16,
+    "shots": 1,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 27,
+    "kickerRecaptures": 5,
+    "completedPasses": 7,
+    "interceptedPasses": 8,
+    "looseBallSeconds": 48.76666666666518,
+    "clusterFrames": 854,
+    "duelFrames": 1954,
+    "minimumPlayerDistance": 1.0500778870357315,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 9,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260829T012232Z-71a90c70dd65-release-switch-shield-g5-vs-strict-switch-counter-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260829T012232Z-71a90c70dd65-release-switch-shield-g5-vs-strict-switch-counter-g4.frames.ndjson",
+  "replay_sha256": "808ac634058834b34bc3767a9fcd0a20b1d2a8d6e71c689f3212a9de6b4f944f",
+  "recording_sha256": "c52675390a68b79d1e7eaa7e4ba8a670f6958af00d81f8da7ef858b6dc54c850"
+}

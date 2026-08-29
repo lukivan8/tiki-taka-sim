@@ -1,0 +1,22 @@
+schemaVersion: afc-team/v1
+teamId: release-and-run
+teamVersion: v1
+displayName: Release and Run
+backend: nova-micro
+formationPreset: 3-1
+implementation:
+  source: agent.py
+  entrypoint: python3 teams/release-and-run/agent.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: one-call-per-player-per-tick
+    failurePolicy: explicit-idle
+strategyFamily: release-and-run-counter
+description: A stateless 3-1 counterattacking variant that carries into space,
+  releases the ball under immediate pressure, sends wingbacks sprinting beyond
+  defenders, and shoots early from the final quarter.

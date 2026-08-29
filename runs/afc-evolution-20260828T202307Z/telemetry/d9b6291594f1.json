@@ -1,0 +1,67 @@
+{
+  "match_id": "d9b6291594f1",
+  "phase": "top4-league",
+  "started_utc": "2026-08-28T23:15:40Z",
+  "finished_utc": "2026-08-28T23:18:05Z",
+  "home_team": "strict-wide-pocket-g3",
+  "away_team": "release-deep-denial-g4",
+  "home_hash": "87f330493b3e105bd43006d786b9ae741c487147f11dff8f37a2e1800c58bb9a",
+  "away_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "seed": 2706,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 1,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 475,
+    "mask-forced": 123,
+    "deterministic-recovery": 1,
+    "deterministic-fallback": 1
+  },
+  "latency_ms": {
+    "minimum": 0.748,
+    "median": 1228.298,
+    "maximum": 4771.97
+  },
+  "commands": {
+    "IDLE": 125,
+    "MOVE_TO": 279,
+    "PASS": 10,
+    "PRESS_BALL": 10,
+    "INTERCEPT": 64,
+    "DRIBBLE": 30,
+    "SLIDE_TACKLE": 1,
+    "MARK": 76,
+    "GK_DISTRIBUTE": 4,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 15,
+    "passes": 14,
+    "shots": 1,
+    "tackles": 1,
+    "successfulTackles": 1,
+    "possessionChanges": 21,
+    "kickerRecaptures": 3,
+    "completedPasses": 7,
+    "interceptedPasses": 5,
+    "looseBallSeconds": 45.89999999999868,
+    "clusterFrames": 1205,
+    "duelFrames": 2832,
+    "minimumPlayerDistance": 1.1180619401483596,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 4,
+    "goalkeeperChallenges": 2
+  },
+  "replay_path": "var/matches/matches/20260828T231540Z-d9b6291594f1-strict-wide-pocket-g3-vs-release-deep-denial-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260828T231540Z-d9b6291594f1-strict-wide-pocket-g3-vs-release-deep-denial-g4.frames.ndjson",
+  "replay_sha256": "85808c5e67ba21f95b1a45718fc4fba333be5f0346abd0106d04adea15d27a33",
+  "recording_sha256": "3fa4dc313cbeddbc46c6e77138348a351bc0df234d3c630dd550397db019ea15"
+}

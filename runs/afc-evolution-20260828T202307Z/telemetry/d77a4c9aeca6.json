@@ -1,0 +1,65 @@
+{
+  "match_id": "d77a4c9aeca6",
+  "phase": "top4-league-2",
+  "started_utc": "2026-08-28T23:35:46Z",
+  "finished_utc": "2026-08-28T23:38:54Z",
+  "home_team": "release-deep-denial-g4",
+  "away_team": "release-and-run",
+  "home_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "away_hash": "8cb4672d6d92b49918374f2505c69a3805c2927ab71e5d174461b53e9c5bb996",
+  "seed": 3002,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 2,
+  "harmful_fallback_count": 2,
+  "decision_sources": {
+    "nova-micro": 596,
+    "error-idle": 2,
+    "deterministic-recovery": 1,
+    "nova-retry": 1
+  },
+  "latency_ms": {
+    "minimum": 1033.181,
+    "median": 1329.008,
+    "maximum": 5092.553
+  },
+  "commands": {
+    "IDLE": 164,
+    "MOVE_TO": 318,
+    "PASS": 17,
+    "PRESS_BALL": 20,
+    "DRIBBLE": 12,
+    "INTERCEPT": 65,
+    "GK_DISTRIBUTE": 2,
+    "SLIDE_TACKLE": 2
+  },
+  "simulation_metrics": {
+    "kicks": 17,
+    "passes": 17,
+    "shots": 0,
+    "tackles": 2,
+    "successfulTackles": 0,
+    "possessionChanges": 26,
+    "kickerRecaptures": 4,
+    "completedPasses": 10,
+    "interceptedPasses": 4,
+    "looseBallSeconds": 74.44999999999706,
+    "clusterFrames": 323,
+    "duelFrames": 1301,
+    "minimumPlayerDistance": 1.0606209039354806,
+    "goalkeeperSaves": 0,
+    "pressChallenges": 9,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260828T233546Z-d77a4c9aeca6-release-deep-denial-g4-vs-release-and-run.ndjson",
+  "recording_path": "var/matches/recordings/20260828T233546Z-d77a4c9aeca6-release-deep-denial-g4-vs-release-and-run.frames.ndjson",
+  "replay_sha256": "b569811290d2c1db603e0c663f3a5e28fcbff4c1901de48b1e1805906d6ea9b0",
+  "recording_sha256": "cd0b44cbcd64fdb29b3441e76bb9febb30fc16fe2307330da4176d9d9cd73386"
+}

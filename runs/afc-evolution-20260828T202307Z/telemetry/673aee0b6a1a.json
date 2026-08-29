@@ -1,0 +1,66 @@
+{
+  "match_id": "673aee0b6a1a",
+  "phase": "top4-league",
+  "started_utc": "2026-08-28T23:13:08Z",
+  "finished_utc": "2026-08-28T23:15:39Z",
+  "home_team": "release-deep-denial-g4",
+  "away_team": "strict-wide-pocket-g3",
+  "home_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "away_hash": "87f330493b3e105bd43006d786b9ae741c487147f11dff8f37a2e1800c58bb9a",
+  "seed": 2706,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 3,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 485,
+    "mask-forced": 111,
+    "deterministic-fallback": 3,
+    "deterministic-recovery": 1
+  },
+  "latency_ms": {
+    "minimum": 0.539,
+    "median": 1245.782,
+    "maximum": 4922.656
+  },
+  "commands": {
+    "IDLE": 130,
+    "MOVE_TO": 275,
+    "PASS": 15,
+    "INTERCEPT": 69,
+    "MARK": 75,
+    "DRIBBLE": 24,
+    "GK_DISTRIBUTE": 5,
+    "PRESS_BALL": 5,
+    "SHOOT": 2
+  },
+  "simulation_metrics": {
+    "kicks": 20,
+    "passes": 18,
+    "shots": 2,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 21,
+    "kickerRecaptures": 0,
+    "completedPasses": 9,
+    "interceptedPasses": 6,
+    "looseBallSeconds": 44.666666666665414,
+    "clusterFrames": 1961,
+    "duelFrames": 2863,
+    "minimumPlayerDistance": 1.0500778870357315,
+    "goalkeeperSaves": 2,
+    "pressChallenges": 0,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T231308Z-673aee0b6a1a-release-deep-denial-g4-vs-strict-wide-pocket-g3.ndjson",
+  "recording_path": "var/matches/recordings/20260828T231308Z-673aee0b6a1a-release-deep-denial-g4-vs-strict-wide-pocket-g3.frames.ndjson",
+  "replay_sha256": "b288e48e6398b883bed2f6a92e5f0186ec1920d7d5ba8fdf64f707d1a9e5dc0a",
+  "recording_sha256": "a16d6aaad468a10d0c0fbcd7668abbce218cc83031ace3757d971a2a0cb466aa"
+}

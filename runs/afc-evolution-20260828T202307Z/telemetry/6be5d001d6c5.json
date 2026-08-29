@@ -1,0 +1,67 @@
+{
+  "match_id": "6be5d001d6c5",
+  "phase": "final-validation",
+  "started_utc": "2026-08-29T01:46:39Z",
+  "finished_utc": "2026-08-29T01:49:13Z",
+  "home_team": "release-deep-denial-g4",
+  "away_team": "nova-vertical",
+  "home_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "away_hash": "4dedda7a9c69f6c310f0cea31b8487a420d173d5de7bc0824684b6c45239565d",
+  "seed": 9104,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 5,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 479,
+    "mask-forced": 115,
+    "deterministic-recovery": 1,
+    "deterministic-fallback": 5
+  },
+  "latency_ms": {
+    "minimum": 0.762,
+    "median": 1221.803,
+    "maximum": 6175.891
+  },
+  "commands": {
+    "IDLE": 160,
+    "MOVE_TO": 320,
+    "PASS": 21,
+    "INTERCEPT": 62,
+    "GK_DISTRIBUTE": 4,
+    "PRESS_BALL": 15,
+    "DRIBBLE": 15,
+    "SLIDE_TACKLE": 1,
+    "SHOOT": 1,
+    "CLEAR": 1
+  },
+  "simulation_metrics": {
+    "kicks": 21,
+    "passes": 19,
+    "shots": 1,
+    "tackles": 1,
+    "successfulTackles": 0,
+    "possessionChanges": 24,
+    "kickerRecaptures": 1,
+    "completedPasses": 15,
+    "interceptedPasses": 4,
+    "looseBallSeconds": 51.93333333333167,
+    "clusterFrames": 860,
+    "duelFrames": 2138,
+    "minimumPlayerDistance": 1.0500778870357315,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 3,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260829T014639Z-6be5d001d6c5-release-deep-denial-g4-vs-nova-vertical.ndjson",
+  "recording_path": "var/matches/recordings/20260829T014639Z-6be5d001d6c5-release-deep-denial-g4-vs-nova-vertical.frames.ndjson",
+  "replay_sha256": "19ff408a85494aad98e03d670e7c18dbbe878a7d37c9757586ff9ffd9715ef17",
+  "recording_sha256": "1d3564d2927ad4ffe2cb784e1fd1471dc5d311df00d4f0a349bbd89463a885a2"
+}

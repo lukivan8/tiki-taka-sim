@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-switch-shield-g5
+teamVersion: g5
+displayName: Release Switch Shield G5
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/release-switch-shield-g5/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: inherited-with-recovery, failurePolicy: deterministic-role-recovery}
+strategyFamily: release-switch-shield
+description: A fifth-generation English robustification of the G4 champion that keeps the far wingback goal-side to deny the successful Strict Switch exploiter.

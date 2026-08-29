@@ -443,7 +443,7 @@ class Handler(SimpleHTTPRequestHandler):
                 teams = discover_teams()
                 if home_id not in teams or away_id not in teams:
                     raise ValueError("unknown team")
-                identity = self.server.gateway.authenticate(self.headers.get("authorization"))
+                identity = self.server.gateway.authenticate_match(self.headers.get("authorization"))
                 match = LiveMatch(home_id, away_id, int(payload.get("seed", 42)))
                 expected_calls = round(
                     match.parameters.timing["durationSeconds"] /
@@ -467,7 +467,7 @@ class Handler(SimpleHTTPRequestHandler):
                 self.send_json({"error": "match not found"}, 404)
             else:
                 try:
-                    identity = self.server.gateway.authenticate(self.headers.get("authorization"))
+                    identity = self.server.gateway.authenticate_match(self.headers.get("authorization"))
                     if identity.token_digest != match.owner_token_digest:
                         raise GatewayError(403, "match belongs to another invite token")
                     match.stop()

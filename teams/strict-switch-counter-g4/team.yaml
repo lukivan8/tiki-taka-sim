@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: strict-switch-counter-g4
+teamVersion: g4-counter
+displayName: Strict Switch Counter G4
+backend: nova-micro
+formationPreset: 1-1-1-2-high
+implementation: {source: live_team.py, entrypoint: python3 teams/strict-switch-counter-g4/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: inherited-with-recovery, failurePolicy: deterministic-semantic-recovery}
+strategyFamily: strict-switch-counter
+description: An English champion-exploiter mutation of Strict Wide Pocket G3 that switches away from G4's compact primary pressure before attacking the opposite wide shooting lane.

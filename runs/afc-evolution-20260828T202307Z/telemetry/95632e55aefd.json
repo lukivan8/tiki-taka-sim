@@ -1,0 +1,66 @@
+{
+  "match_id": "95632e55aefd",
+  "phase": "orthogonal-g1-screen",
+  "started_utc": "2026-08-28T22:30:49Z",
+  "finished_utc": "2026-08-28T22:33:07Z",
+  "home_team": "strict-wide-pocket-g1",
+  "away_team": "release-and-run",
+  "home_hash": "f34690119f289ddc114ebe7a9e97ac7b4e3ead2349fe6559c1aec11da458e0ba",
+  "away_hash": "8cb4672d6d92b49918374f2505c69a3805c2927ab71e5d174461b53e9c5bb996",
+  "seed": 2402,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 3,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 450,
+    "mask-forced": 147,
+    "deterministic-fallback": 3
+  },
+  "latency_ms": {
+    "minimum": 1.42,
+    "median": 1222.433,
+    "maximum": 4507.339
+  },
+  "commands": {
+    "IDLE": 125,
+    "MOVE_TO": 297,
+    "PASS": 14,
+    "PRESS_BALL": 11,
+    "INTERCEPT": 64,
+    "DRIBBLE": 26,
+    "SLIDE_TACKLE": 1,
+    "GK_DISTRIBUTE": 3,
+    "MARK": 58,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 18,
+    "passes": 17,
+    "shots": 1,
+    "tackles": 1,
+    "successfulTackles": 0,
+    "possessionChanges": 20,
+    "kickerRecaptures": 2,
+    "completedPasses": 10,
+    "interceptedPasses": 2,
+    "looseBallSeconds": 49.066666666665164,
+    "clusterFrames": 436,
+    "duelFrames": 2090,
+    "minimumPlayerDistance": 1.084777502951019,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 2,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T223049Z-95632e55aefd-strict-wide-pocket-g1-vs-release-and-run.ndjson",
+  "recording_path": "var/matches/recordings/20260828T223049Z-95632e55aefd-strict-wide-pocket-g1-vs-release-and-run.frames.ndjson",
+  "replay_sha256": "9589acbc588b13848243421b1089abc30011b7094aff765e1b2923f410ba77ce",
+  "recording_sha256": "f61b48d1111c798eac45952440d038e4ddc0a1e34550a3bd863957439dda1ff4"
+}

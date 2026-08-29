@@ -1,0 +1,66 @@
+{
+  "match_id": "658a42a6d150",
+  "phase": "champion-exploiter-screen",
+  "started_utc": "2026-08-28T23:57:34Z",
+  "finished_utc": "2026-08-28T23:59:10Z",
+  "home_team": "strict-switch-counter-g4",
+  "away_team": "release-deep-denial-g4",
+  "home_hash": "6bbafafba7a7780b92c6b70ae4135c86cbe74ba8ec18f5769121128e9da690c4",
+  "away_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "seed": 3101,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 0,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 430,
+    "mask-forced": 169,
+    "nova-retry": 1
+  },
+  "latency_ms": {
+    "minimum": 0.624,
+    "median": 1171.519,
+    "maximum": 3215.082
+  },
+  "commands": {
+    "IDLE": 118,
+    "MOVE_TO": 319,
+    "PASS": 13,
+    "PRESS_BALL": 17,
+    "INTERCEPT": 59,
+    "DRIBBLE": 24,
+    "SLIDE_TACKLE": 2,
+    "MARK": 44,
+    "SHOOT": 2,
+    "GK_DISTRIBUTE": 2
+  },
+  "simulation_metrics": {
+    "kicks": 17,
+    "passes": 15,
+    "shots": 2,
+    "tackles": 2,
+    "successfulTackles": 1,
+    "possessionChanges": 24,
+    "kickerRecaptures": 3,
+    "completedPasses": 8,
+    "interceptedPasses": 5,
+    "looseBallSeconds": 57.86666666666466,
+    "clusterFrames": 347,
+    "duelFrames": 1443,
+    "minimumPlayerDistance": 1.1439764056108301,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 7,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260828T235734Z-658a42a6d150-strict-switch-counter-g4-vs-release-deep-denial-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260828T235734Z-658a42a6d150-strict-switch-counter-g4-vs-release-deep-denial-g4.frames.ndjson",
+  "replay_sha256": "3e957946f5d6591bb42887b40ef968bb9837ea89cce5b82cd107fd8f54ffbea9",
+  "recording_sha256": "db8bdee1c72c5f37849158f900d655d4684f385315fb889c700522dfa2a99f15"
+}

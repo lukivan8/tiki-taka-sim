@@ -1,0 +1,67 @@
+{
+  "match_id": "47f7a38a2c78",
+  "phase": "initial-characterization",
+  "started_utc": "2026-08-28T20:52:53Z",
+  "finished_utc": "2026-08-28T20:54:46Z",
+  "home_team": "nova-strict",
+  "away_team": "simple-four-modes",
+  "home_hash": "e776dc269b790110cb6de4c4fc1e4063d7fa1bc2f21e7745fdf98dc5fe00436b",
+  "away_hash": "46d137026d0689fef3e0a48efd72c7c2fd772e1ac1557bec96435b6fa467dc40",
+  "seed": 1214,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 1,
+  "decision_sources": {
+    "nova-micro": 371,
+    "mask-forced": 170,
+    "deterministic-goalkeeper": 58,
+    "deterministic-fallback": 1
+  },
+  "latency_ms": {
+    "minimum": 0.125,
+    "median": 922.888,
+    "maximum": 3848.8
+  },
+  "commands": {
+    "IDLE": 63,
+    "MOVE_TO": 391,
+    "PASS": 11,
+    "PRESS_BALL": 21,
+    "INTERCEPT": 39,
+    "DRIBBLE": 22,
+    "SLIDE_TACKLE": 3,
+    "SHOOT": 4,
+    "MARK": 43,
+    "GK_DISTRIBUTE": 3
+  },
+  "simulation_metrics": {
+    "kicks": 18,
+    "passes": 14,
+    "shots": 4,
+    "tackles": 3,
+    "successfulTackles": 0,
+    "possessionChanges": 21,
+    "kickerRecaptures": 1,
+    "completedPasses": 6,
+    "interceptedPasses": 6,
+    "looseBallSeconds": 55.26666666666481,
+    "clusterFrames": 943,
+    "duelFrames": 1621,
+    "minimumPlayerDistance": 1.1335703328095066,
+    "goalkeeperSaves": 2,
+    "pressChallenges": 3,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T205253Z-47f7a38a2c78-nova-strict-vs-simple-four-modes.ndjson",
+  "recording_path": "var/matches/recordings/20260828T205253Z-47f7a38a2c78-nova-strict-vs-simple-four-modes.frames.ndjson",
+  "replay_sha256": "b86366cc6c6fd2861249077bb7973b03b4dfe027dd051b940c93099b64a2bb01",
+  "harmful_fallback_count": 0,
+  "recording_sha256": "8b855724ff08927bfa7b938056786c79bd68e5280f70520da00c32f5fc0a0df3"
+}

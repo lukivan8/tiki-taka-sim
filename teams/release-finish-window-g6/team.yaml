@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-finish-window-g6
+teamVersion: g6
+displayName: Release Finish Window G6
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/release-finish-window-g6/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: inherited-with-recovery, failurePolicy: deterministic-role-recovery}
+strategyFamily: release-balanced-finish-window
+description: A sixth-generation mixed experiment that retains Balanced G5 structure and forces a blocker-free shot inside a measured 22-metre finish window.

@@ -1,0 +1,67 @@
+{
+  "match_id": "95426c794acd",
+  "phase": "top4-league-2",
+  "started_utc": "2026-08-28T23:41:08Z",
+  "finished_utc": "2026-08-28T23:43:21Z",
+  "home_team": "strict-wide-pocket-g3",
+  "away_team": "release-and-run",
+  "home_hash": "87f330493b3e105bd43006d786b9ae741c487147f11dff8f37a2e1800c58bb9a",
+  "away_hash": "8cb4672d6d92b49918374f2505c69a3805c2927ab71e5d174461b53e9c5bb996",
+  "seed": 3003,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 3,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 433,
+    "mask-forced": 163,
+    "deterministic-fallback": 3,
+    "deterministic-recovery": 1
+  },
+  "latency_ms": {
+    "minimum": 0.44,
+    "median": 1202.842,
+    "maximum": 4694.816
+  },
+  "commands": {
+    "IDLE": 138,
+    "MOVE_TO": 300,
+    "PASS": 15,
+    "PRESS_BALL": 14,
+    "INTERCEPT": 63,
+    "DRIBBLE": 23,
+    "SLIDE_TACKLE": 1,
+    "GK_DISTRIBUTE": 3,
+    "MARK": 42,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 19,
+    "passes": 18,
+    "shots": 1,
+    "tackles": 1,
+    "successfulTackles": 0,
+    "possessionChanges": 23,
+    "kickerRecaptures": 3,
+    "completedPasses": 10,
+    "interceptedPasses": 4,
+    "looseBallSeconds": 51.783333333331676,
+    "clusterFrames": 214,
+    "duelFrames": 1420,
+    "minimumPlayerDistance": 1.084777502951019,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 3,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T234108Z-95426c794acd-strict-wide-pocket-g3-vs-release-and-run.ndjson",
+  "recording_path": "var/matches/recordings/20260828T234108Z-95426c794acd-strict-wide-pocket-g3-vs-release-and-run.frames.ndjson",
+  "replay_sha256": "a5079f9bbcf92b06acf31b7a5081b6bec96894fdb5107a18de04a837cdc1b006",
+  "recording_sha256": "58bba2177d6313bbd8b4904d5a2856e06f5d176ef5b3c15f93784b77228bff73"
+}

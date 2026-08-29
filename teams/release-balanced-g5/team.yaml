@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-balanced-g5
+teamVersion: g5
+displayName: Release Balanced G5
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/release-balanced-g5/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: inherited-with-recovery, failurePolicy: deterministic-role-recovery}
+strategyFamily: release-balanced-robustification
+description: A fifth-generation English crossover that retains Deep Denial without possession and restores aggressive Release and Run spacing during team control.

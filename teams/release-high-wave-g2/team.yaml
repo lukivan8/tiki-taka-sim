@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-high-wave-g2
+teamVersion: g2
+displayName: Release High Wave G2
+backend: nova-micro
+formationPreset: 1-3
+implementation: {source: live_team.py, entrypoint: python3 teams/release-high-wave-g2/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: one-call-per-player-per-tick, failurePolicy: explicit-idle}
+strategyFamily: release-high-wave-crossover
+description: A second-generation English crossover that combines Release and Run decisions with a legal 1-3 high starting wave for the short match horizon.

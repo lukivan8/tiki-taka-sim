@@ -48,10 +48,18 @@ class GatewayAccess:
     """Token authentication plus persistent daily and in-memory burst limits."""
 
     def __init__(self, token_file: Path, database_path: Path,
-                 inline_token: str | None = None):
+                 inline_token: str | None = None,
+                 allow_anonymous_matches: bool = False):
         self.token_file = token_file
         self.database_path = database_path
         self.inline_token = inline_token
+        self.allow_anonymous_matches = allow_anonymous_matches
+        anonymous_digest = hashlib.sha256(b"afc-hosted-anonymous-matches").hexdigest()
+        self.anonymous_match_identity = Identity(
+            name="hosted-anonymous", token_digest=anonymous_digest,
+            daily_limit=2_000_000_000, requests_per_minute=1_000_000,
+            max_concurrent=1_000_000,
+        )
         self.lock = threading.Lock()
         self.request_times: dict[str, deque[float]] = defaultdict(deque)
         self.active: dict[str, int] = defaultdict(int)
@@ -72,7 +80,10 @@ class GatewayAccess:
         inline_token = None
         if os.environ.get("AFC_NOVA_GATEWAY_URL"):
             inline_token = os.environ.get("AFC_GATEWAY_TOKEN")
-        return cls(token_file, database_path, inline_token)
+        allow_anonymous_matches = os.environ.get(
+            "AFC_ALLOW_ANONYMOUS_MATCHES", ""
+        ).lower() in {"1", "true", "yes", "on"}
+        return cls(token_file, database_path, inline_token, allow_anonymous_matches)
 
     def _initialize_database(self) -> None:
         self.database_path.parent.mkdir(parents=True, exist_ok=True)
@@ -133,6 +144,12 @@ class GatewayAccess:
             if hmac.compare_digest(supplied, token):
                 return identity
         raise GatewayError(401, "invalid AFC invite token")
+
+    def authenticate_match(self, authorization: str | None) -> Identity:
+        """Allow tokenless hosted matches without opening the inference API."""
+        if not authorization and self.allow_anonymous_matches:
+            return self.anonymous_match_identity
+        return self.authenticate(authorization)
 
     def _charge_daily(self, identity: Identity, units: int) -> int:
         day = datetime.now(timezone.utc).date().isoformat()
@@ -211,6 +228,9 @@ class NovaGateway:
 
     def authenticate(self, authorization: str | None) -> Identity:
         return self.access.authenticate(authorization)
+
+    def authenticate_match(self, authorization: str | None) -> Identity:
+        return self.access.authenticate_match(authorization)
 
     def infer(self, authorization: str | None, payload: dict[str, Any]) -> dict[str, Any]:
         identity = self.authenticate(authorization)

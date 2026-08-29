@@ -1,0 +1,20 @@
+schemaVersion: afc-team/v1
+teamId: aggressive-xg-wave-g3
+teamVersion: g3
+displayName: Aggressive xG Wave G3
+backend: nova-micro
+formationPreset: 1-1-1-2-high
+implementation:
+  source: live_team.py
+  entrypoint: python3 teams/aggressive-xg-wave-g3/live_team.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: one-call-per-player-per-tick
+    failurePolicy: deterministic-fallback
+strategyFamily: aggressive-xg-wave
+description: A Nova Vertical attacking crossover that preserves its repeatable chance production while adding phase-dependent inner-channel runs, far-side switches, run-after-release, and a mandatory close-finish guard.

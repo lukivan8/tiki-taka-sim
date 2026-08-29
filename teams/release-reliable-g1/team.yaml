@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-reliable-g1
+teamVersion: g1
+displayName: Release Reliable G1
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/release-reliable-g1/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: inherited-with-recovery, failurePolicy: deterministic-role-recovery}
+strategyFamily: release-reliable-generalist
+description: A reliability crossover that preserves the exact Release and Run tactics and adds only the validator-checked off-ball recovery guard proven in the Deep Denial lineage.

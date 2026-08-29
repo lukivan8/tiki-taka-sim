@@ -1,0 +1,66 @@
+{
+  "match_id": "33e585bd14bd",
+  "phase": "strict-g1-validation",
+  "started_utc": "2026-08-28T22:35:31Z",
+  "finished_utc": "2026-08-28T22:37:10Z",
+  "home_team": "strict-wide-pocket-g1",
+  "away_team": "nova-strict",
+  "home_hash": "f34690119f289ddc114ebe7a9e97ac7b4e3ead2349fe6559c1aec11da458e0ba",
+  "away_hash": "e776dc269b790110cb6de4c4fc1e4063d7fa1bc2f21e7745fdf98dc5fe00436b",
+  "seed": 2403,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 1,
+    "away": 1
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 4,
+  "harmful_fallback_count": 3,
+  "decision_sources": {
+    "nova-micro": 314,
+    "mask-forced": 282,
+    "error-idle": 3,
+    "deterministic-fallback": 1
+  },
+  "latency_ms": {
+    "minimum": 0.573,
+    "median": 1034.852,
+    "maximum": 3469.854
+  },
+  "commands": {
+    "IDLE": 104,
+    "MOVE_TO": 256,
+    "PASS": 17,
+    "MARK": 121,
+    "INTERCEPT": 76,
+    "CLEAR": 1,
+    "DRIBBLE": 14,
+    "SHOOT": 6,
+    "GK_DISTRIBUTE": 5
+  },
+  "simulation_metrics": {
+    "kicks": 29,
+    "passes": 22,
+    "shots": 6,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 27,
+    "kickerRecaptures": 0,
+    "completedPasses": 16,
+    "interceptedPasses": 4,
+    "looseBallSeconds": 56.59999999999807,
+    "clusterFrames": 293,
+    "duelFrames": 1635,
+    "minimumPlayerDistance": 1.0457133860330619,
+    "goalkeeperSaves": 3,
+    "pressChallenges": 0,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260828T223531Z-33e585bd14bd-strict-wide-pocket-g1-vs-nova-strict.ndjson",
+  "recording_path": "var/matches/recordings/20260828T223531Z-33e585bd14bd-strict-wide-pocket-g1-vs-nova-strict.frames.ndjson",
+  "replay_sha256": "f02d714b0886b973fae09dcabcda17aa75eca63b0d2e488e6fdd6346d592ef4c",
+  "recording_sha256": "eb15964288215200de86e69c3ae7fa2ba20597a4a052e93f09bcea40213849b5"
+}

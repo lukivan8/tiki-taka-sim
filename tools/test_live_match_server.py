@@ -24,7 +24,8 @@ from nova_backend import ModelDecision
 TEST_TOKEN = "test-token-that-is-long-enough-for-gateway-authentication"
 
 
-def test_gateway(directory: str, daily_limit: int = 5000) -> NovaGateway:
+def test_gateway(directory: str, daily_limit: int = 5000,
+                 allow_anonymous_matches: bool = False) -> NovaGateway:
     root = Path(directory)
     token_file = root / "tokens.json"
     token_file.write_text(json.dumps({
@@ -34,7 +35,10 @@ def test_gateway(directory: str, daily_limit: int = 5000) -> NovaGateway:
             "requestsPerMinute": 1000, "maxConcurrent": 10,
         }],
     }), encoding="utf-8")
-    return NovaGateway(GatewayAccess(token_file, root / "usage.sqlite3"))
+    return NovaGateway(GatewayAccess(
+        token_file, root / "usage.sqlite3",
+        allow_anonymous_matches=allow_anonymous_matches,
+    ))
 
 
 def authorization_headers(extra=None):
@@ -54,6 +58,43 @@ class SlowFakeStrategy(FakeStrategy):
 
 
 class LiveMatchTests(unittest.TestCase):
+    def test_hosted_match_can_run_without_token_while_inference_stays_protected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            server = LiveServer(
+                ("127.0.0.1", 0),
+                partial(Handler, directory=str(live_match_server.ROOT)),
+                test_gateway(directory, allow_anonymous_matches=True),
+            )
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            base = f"http://127.0.0.1:{server.server_address[1]}"
+            try:
+                request = urllib.request.Request(
+                    f"{base}/api/matches",
+                    json.dumps({"homeTeamId":"nova-baseline",
+                                "awayTeamId":"nova-baseline"}).encode(),
+                    {"content-type":"application/json"},
+                )
+                with patch("live_match_server.load_strategy", return_value=FakeStrategy()):
+                    created = json.load(urllib.request.urlopen(request))
+                    stop = urllib.request.Request(
+                        f"{base}/api/matches/{created['matchId']}/stop", b"{}",
+                        {"content-type":"application/json"}, method="POST",
+                    )
+                    self.assertEqual(urllib.request.urlopen(stop).status, 200)
+                    server.matches[created["matchId"]].thread.join(3)
+
+                inference = urllib.request.Request(
+                    f"{base}/api/inference", b"{}",
+                    {"content-type":"application/json"}, method="POST",
+                )
+                with self.assertRaises(urllib.error.HTTPError) as caught:
+                    urllib.request.urlopen(inference)
+                self.assertEqual(caught.exception.code, 401)
+            finally:
+                server.shutdown()
+                server.server_close()
+
     def test_catalog_discovers_the_nova_baseline(self):
         teams = discover_teams()
         self.assertIn("nova-baseline", teams)

@@ -1,0 +1,16 @@
+schemaVersion: afc-team/v1
+teamId: vertical-direct-shot-g1
+teamVersion: g1
+displayName: Vertical Direct Shot G1
+backend: nova-micro
+formationPreset: 1-1-1-2-high
+implementation:
+  source: live_team.py
+  entrypoint: python3 teams/vertical-direct-shot-g1/live_team.py
+  arguments: {playerProcesses: 5}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: one-call-per-player-per-tick, failurePolicy: deterministic-fallback}
+strategyFamily: vertical-direct-shot
+description: An English attacking mutation of Nova Vertical that treats every currently available shot as terminal and accelerates high-field progression.

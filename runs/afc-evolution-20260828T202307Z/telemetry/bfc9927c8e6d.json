@@ -1,0 +1,65 @@
+{
+  "match_id": "bfc9927c8e6d",
+  "phase": "shield-g5-robustification",
+  "started_utc": "2026-08-29T00:03:54Z",
+  "finished_utc": "2026-08-29T00:06:03Z",
+  "home_team": "release-switch-shield-g5",
+  "away_team": "strict-switch-counter-g4",
+  "home_hash": "692e83ee34a9d1beed7ad2586cc46906dbd3f75eba49d88a82314b6f64613724",
+  "away_hash": "6bbafafba7a7780b92c6b70ae4135c86cbe74ba8ec18f5769121128e9da690c4",
+  "seed": 3101,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 0,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 461,
+    "mask-forced": 138,
+    "deterministic-recovery": 1
+  },
+  "latency_ms": {
+    "minimum": 0.685,
+    "median": 1235.455,
+    "maximum": 5387.484
+  },
+  "commands": {
+    "IDLE": 122,
+    "MOVE_TO": 307,
+    "PASS": 12,
+    "INTERCEPT": 66,
+    "PRESS_BALL": 13,
+    "DRIBBLE": 23,
+    "MARK": 51,
+    "GK_DISTRIBUTE": 5,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 17,
+    "passes": 16,
+    "shots": 1,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 22,
+    "kickerRecaptures": 2,
+    "completedPasses": 9,
+    "interceptedPasses": 5,
+    "looseBallSeconds": 56.416666666664746,
+    "clusterFrames": 781,
+    "duelFrames": 2207,
+    "minimumPlayerDistance": 1.0500778870357315,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 4,
+    "goalkeeperChallenges": 2
+  },
+  "replay_path": "var/matches/matches/20260829T000354Z-bfc9927c8e6d-release-switch-shield-g5-vs-strict-switch-counter-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260829T000354Z-bfc9927c8e6d-release-switch-shield-g5-vs-strict-switch-counter-g4.frames.ndjson",
+  "replay_sha256": "31dbfe2679c0a1c0c99089d81016199006452406f644446a6a1a67c16e0b976c",
+  "recording_sha256": "9f457e357736d3efca04e8cbbcb56771c8f87a82651349b0064e6573a4e86fd2"
+}

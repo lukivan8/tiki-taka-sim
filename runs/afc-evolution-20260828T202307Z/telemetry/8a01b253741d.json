@@ -1,0 +1,63 @@
+{
+  "match_id": "8a01b253741d",
+  "phase": "initial-characterization",
+  "started_utc": "2026-08-28T20:26:38Z",
+  "finished_utc": "2026-08-28T20:28:27Z",
+  "home_team": "simple-four-modes",
+  "away_team": "vertical-wingbacks",
+  "home_hash": "46d137026d0689fef3e0a48efd72c7c2fd772e1ac1557bec96435b6fa467dc40",
+  "away_hash": "862f8f28168be3cce9828d29d56f5464f500da663e37a5f11bb6d46139de5d58",
+  "seed": 1101,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 0,
+  "decision_sources": {
+    "deterministic-goalkeeper": 59,
+    "nova-micro": 541
+  },
+  "latency_ms": {
+    "minimum": 0.07,
+    "median": 1153.089,
+    "maximum": 3972.004
+  },
+  "commands": {
+    "MOVE_TO": 405,
+    "DRIBBLE": 36,
+    "IDLE": 86,
+    "PRESS_BALL": 36,
+    "PASS": 9,
+    "INTERCEPT": 19,
+    "SLIDE_TACKLE": 8,
+    "GK_DISTRIBUTE": 1
+  },
+  "simulation_metrics": {
+    "kicks": 10,
+    "passes": 10,
+    "shots": 0,
+    "tackles": 8,
+    "successfulTackles": 6,
+    "possessionChanges": 28,
+    "kickerRecaptures": 5,
+    "completedPasses": 6,
+    "interceptedPasses": 3,
+    "looseBallSeconds": 33.916666666666025,
+    "clusterFrames": 14,
+    "duelFrames": 1354,
+    "minimumPlayerDistance": 1.1567529601858033,
+    "goalkeeperSaves": 0,
+    "pressChallenges": 11,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T202638Z-8a01b253741d-simple-four-modes-vs-vertical-wingbacks.ndjson",
+  "recording_path": "var/matches/recordings/20260828T202638Z-8a01b253741d-simple-four-modes-vs-vertical-wingbacks.frames.ndjson",
+  "replay_sha256": "5489dc1e79db0ad81cd2de93ae0e47cc457bfae843e1551ff73af35924dc5d6e",
+  "harmful_fallback_count": 0,
+  "recording_sha256": "b530ec8fe76369d34a17094ee77eda6a9d4ec4246f55ccd40158eca62ac73622"
+}

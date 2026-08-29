@@ -1,0 +1,20 @@
+schemaVersion: afc-team/v1
+teamId: aggressive-xg-wave-g5
+teamVersion: g5
+displayName: Aggressive xG Wave G5
+backend: nova-micro
+formationPreset: 1-1-1-2-high
+implementation:
+  source: live_team.py
+  entrypoint: python3 teams/aggressive-xg-wave-g5/live_team.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: inherited-with-quality-and-recovery-guards
+    failurePolicy: deterministic-semantic-recovery
+strategyFamily: aggressive-xg-wave
+description: A fifth-generation attacking crossover that preserves G4's penetration rate, removes optional speculative shots beyond 24 metres, and repairs exhausted off-ball movement through validator-checked role recovery.

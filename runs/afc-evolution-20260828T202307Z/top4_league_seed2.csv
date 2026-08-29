@@ -1,0 +1,13 @@
+home,away,seed
+release-and-run,nova-vertical,3001
+nova-vertical,release-and-run,3001
+release-and-run,release-deep-denial-g4,3002
+release-deep-denial-g4,release-and-run,3002
+release-and-run,strict-wide-pocket-g3,3003
+strict-wide-pocket-g3,release-and-run,3003
+nova-vertical,release-deep-denial-g4,3004
+release-deep-denial-g4,nova-vertical,3004
+nova-vertical,strict-wide-pocket-g3,3005
+strict-wide-pocket-g3,nova-vertical,3005
+release-deep-denial-g4,strict-wide-pocket-g3,3006
+strict-wide-pocket-g3,release-deep-denial-g4,3006

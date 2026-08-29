@@ -1,0 +1,64 @@
+{
+  "match_id": "335033f96cab",
+  "phase": "anchor-stabilization",
+  "started_utc": "2026-08-29T00:51:58Z",
+  "finished_utc": "2026-08-29T00:55:01Z",
+  "home_team": "release-switch-shield-g5",
+  "away_team": "vertical-wingbacks",
+  "home_hash": "692e83ee34a9d1beed7ad2586cc46906dbd3f75eba49d88a82314b6f64613724",
+  "away_hash": "862f8f28168be3cce9828d29d56f5464f500da663e37a5f11bb6d46139de5d58",
+  "seed": 3306,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 1,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 1,
+  "harmful_fallback_count": 1,
+  "decision_sources": {
+    "nova-micro": 598,
+    "deterministic-recovery": 1,
+    "error-idle": 1
+  },
+  "latency_ms": {
+    "minimum": 953.625,
+    "median": 1333.475,
+    "maximum": 7628.723
+  },
+  "commands": {
+    "IDLE": 182,
+    "MOVE_TO": 298,
+    "PASS": 14,
+    "PRESS_BALL": 30,
+    "INTERCEPT": 53,
+    "GK_DISTRIBUTE": 2,
+    "DRIBBLE": 20,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 15,
+    "passes": 14,
+    "shots": 1,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 24,
+    "kickerRecaptures": 4,
+    "completedPasses": 9,
+    "interceptedPasses": 2,
+    "looseBallSeconds": 54.21666666666487,
+    "clusterFrames": 356,
+    "duelFrames": 1401,
+    "minimumPlayerDistance": 1.06716049382716,
+    "goalkeeperSaves": 0,
+    "pressChallenges": 10,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260829T005158Z-335033f96cab-release-switch-shield-g5-vs-vertical-wingbacks.ndjson",
+  "recording_path": "var/matches/recordings/20260829T005158Z-335033f96cab-release-switch-shield-g5-vs-vertical-wingbacks.frames.ndjson",
+  "replay_sha256": "3aaf4e9c78f87c905097a9621549d32cebd6c2b8559a5c0fcfbe297dce68b24d",
+  "recording_sha256": "dd483b0d1ac647241ad53b661719cc3a99341c4411295c9353b6c39a0ed894ac"
+}

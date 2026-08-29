@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: strict-wide-pocket-g3
+teamVersion: g3
+displayName: Strict Wide Pocket G3
+backend: nova-micro
+formationPreset: 1-1-1-2-high
+implementation: {source: live_team.py, entrypoint: python3 teams/strict-wide-pocket-g3/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: inherited-with-recovery, failurePolicy: deterministic-semantic-recovery}
+strategyFamily: strict-wide-pocket
+description: A third-generation boundary repair that preserves the wide-pocket attack and supplies a validated inward carry when the owner reaches the forward touchline edge.

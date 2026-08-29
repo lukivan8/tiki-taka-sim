@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-deep-denial-g3
+teamVersion: g3
+displayName: Release Deep Denial G3
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/release-deep-denial-g3/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: retry-after-explicit-idle, failurePolicy: explicit-idle}
+strategyFamily: release-deep-denial
+description: A third-generation English reliability child that preserves Deep Denial tactics and retries the model once only after the inherited path exhausts semantic repair.

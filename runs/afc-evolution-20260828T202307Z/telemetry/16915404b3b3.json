@@ -1,0 +1,66 @@
+{
+  "match_id": "16915404b3b3",
+  "phase": "release-g2-screen",
+  "started_utc": "2026-08-28T21:43:15Z",
+  "finished_utc": "2026-08-28T21:45:45Z",
+  "home_team": "release-high-wave-g2",
+  "away_team": "nova-vertical",
+  "home_hash": "58c35f2db920d9616ab49e065d65bcf890e2f996140daf501abaa91208d9e2f9",
+  "away_hash": "4dedda7a9c69f6c310f0cea31b8487a420d173d5de7bc0824684b6c45239565d",
+  "seed": 1803,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 5,
+  "harmful_fallback_count": 3,
+  "decision_sources": {
+    "nova-micro": 478,
+    "error-idle": 3,
+    "mask-forced": 117,
+    "deterministic-fallback": 2
+  },
+  "latency_ms": {
+    "minimum": 0.657,
+    "median": 1234.388,
+    "maximum": 6007.266
+  },
+  "commands": {
+    "IDLE": 129,
+    "MOVE_TO": 354,
+    "PASS": 17,
+    "INTERCEPT": 62,
+    "DRIBBLE": 19,
+    "SLIDE_TACKLE": 3,
+    "PRESS_BALL": 11,
+    "SHOOT": 2,
+    "GK_DISTRIBUTE": 3
+  },
+  "simulation_metrics": {
+    "kicks": 22,
+    "passes": 20,
+    "shots": 2,
+    "tackles": 3,
+    "successfulTackles": 0,
+    "possessionChanges": 23,
+    "kickerRecaptures": 1,
+    "completedPasses": 10,
+    "interceptedPasses": 5,
+    "looseBallSeconds": 55.38333333333147,
+    "clusterFrames": 91,
+    "duelFrames": 1891,
+    "minimumPlayerDistance": 1.1743869172510504,
+    "goalkeeperSaves": 2,
+    "pressChallenges": 1,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T214315Z-16915404b3b3-release-high-wave-g2-vs-nova-vertical.ndjson",
+  "recording_path": "var/matches/recordings/20260828T214315Z-16915404b3b3-release-high-wave-g2-vs-nova-vertical.frames.ndjson",
+  "replay_sha256": "a495fbdf8fbfcdd629e834b7d554f85fb3c7306b36506da092c21f4a2517a67c",
+  "recording_sha256": "54517c1163137f2a47cade1e94797f1423bdde9682cda2b84110795ad7078525"
+}

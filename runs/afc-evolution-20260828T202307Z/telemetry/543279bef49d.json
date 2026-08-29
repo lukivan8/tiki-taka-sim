@@ -1,0 +1,67 @@
+{
+  "match_id": "543279bef49d",
+  "phase": "initial-characterization",
+  "started_utc": "2026-08-28T20:50:54Z",
+  "finished_utc": "2026-08-28T20:52:53Z",
+  "home_team": "nova-strict",
+  "away_team": "release-and-run",
+  "home_hash": "e776dc269b790110cb6de4c4fc1e4063d7fa1bc2f21e7745fdf98dc5fe00436b",
+  "away_hash": "8cb4672d6d92b49918374f2505c69a3805c2927ab71e5d174461b53e9c5bb996",
+  "seed": 1213,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 4,
+  "decision_sources": {
+    "nova-micro": 438,
+    "mask-forced": 158,
+    "deterministic-fallback": 3,
+    "error-idle": 1
+  },
+  "latency_ms": {
+    "minimum": 1.2,
+    "median": 1206.188,
+    "maximum": 4834.585
+  },
+  "commands": {
+    "IDLE": 137,
+    "MOVE_TO": 298,
+    "PASS": 14,
+    "PRESS_BALL": 8,
+    "INTERCEPT": 72,
+    "DRIBBLE": 20,
+    "SLIDE_TACKLE": 1,
+    "GK_DISTRIBUTE": 4,
+    "MARK": 45,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 19,
+    "passes": 18,
+    "shots": 1,
+    "tackles": 1,
+    "successfulTackles": 0,
+    "possessionChanges": 23,
+    "kickerRecaptures": 4,
+    "completedPasses": 12,
+    "interceptedPasses": 4,
+    "looseBallSeconds": 56.299999999998086,
+    "clusterFrames": 16,
+    "duelFrames": 1630,
+    "minimumPlayerDistance": 1.1834366624717918,
+    "goalkeeperSaves": 2,
+    "pressChallenges": 5,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260828T205054Z-543279bef49d-nova-strict-vs-release-and-run.ndjson",
+  "recording_path": "var/matches/recordings/20260828T205054Z-543279bef49d-nova-strict-vs-release-and-run.frames.ndjson",
+  "replay_sha256": "4953e88341eacdd4fa8d08fde893794b571293eff68fd28516309520dd6d4f90",
+  "harmful_fallback_count": 1,
+  "recording_sha256": "b4fc465dce388ab75f9ad84c192bdb0fb32dc608a0e296dff6e953709f240c1f"
+}

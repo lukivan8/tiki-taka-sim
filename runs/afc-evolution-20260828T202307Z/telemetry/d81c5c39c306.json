@@ -1,0 +1,65 @@
+{
+  "match_id": "d81c5c39c306",
+  "phase": "anchor-stabilization",
+  "started_utc": "2026-08-29T00:23:43Z",
+  "finished_utc": "2026-08-29T00:26:00Z",
+  "home_team": "release-deep-denial-g4",
+  "away_team": "simple-four-modes",
+  "home_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "away_hash": "46d137026d0689fef3e0a48efd72c7c2fd772e1ac1557bec96435b6fa467dc40",
+  "seed": 3301,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 1,
+  "harmful_fallback_count": 1,
+  "decision_sources": {
+    "nova-micro": 539,
+    "deterministic-goalkeeper": 60,
+    "error-idle": 1
+  },
+  "latency_ms": {
+    "minimum": 0.131,
+    "median": 1112.129,
+    "maximum": 3997.001
+  },
+  "commands": {
+    "IDLE": 68,
+    "MOVE_TO": 432,
+    "PASS": 16,
+    "PRESS_BALL": 26,
+    "DRIBBLE": 19,
+    "SLIDE_TACKLE": 5,
+    "INTERCEPT": 32,
+    "SHOOT": 1,
+    "GK_DISTRIBUTE": 1
+  },
+  "simulation_metrics": {
+    "kicks": 16,
+    "passes": 15,
+    "shots": 1,
+    "tackles": 5,
+    "successfulTackles": 1,
+    "possessionChanges": 24,
+    "kickerRecaptures": 2,
+    "completedPasses": 8,
+    "interceptedPasses": 5,
+    "looseBallSeconds": 63.199999999997694,
+    "clusterFrames": 378,
+    "duelFrames": 1121,
+    "minimumPlayerDistance": 1.0606209039354806,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 7,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260829T002343Z-d81c5c39c306-release-deep-denial-g4-vs-simple-four-modes.ndjson",
+  "recording_path": "var/matches/recordings/20260829T002343Z-d81c5c39c306-release-deep-denial-g4-vs-simple-four-modes.frames.ndjson",
+  "replay_sha256": "c9755477a6332b62dd45addbe97d6dd9b1c764f38a27f6593e8d5c49d7528c98",
+  "recording_sha256": "5ecde3502b00bd5f41427509ef7c78b32cd595fbc78da4969eed9000ef0f0689"
+}

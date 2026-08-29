@@ -1,0 +1,13 @@
+home,away,seed
+release-deep-denial-g4,simple-four-modes,3301
+simple-four-modes,release-deep-denial-g4,3301
+release-deep-denial-g4,vertical-wingbacks,3302
+vertical-wingbacks,release-deep-denial-g4,3302
+release-and-run,simple-four-modes,3303
+simple-four-modes,release-and-run,3303
+release-and-run,vertical-wingbacks,3304
+vertical-wingbacks,release-and-run,3304
+release-switch-shield-g5,simple-four-modes,3305
+simple-four-modes,release-switch-shield-g5,3305
+release-switch-shield-g5,vertical-wingbacks,3306
+vertical-wingbacks,release-switch-shield-g5,3306

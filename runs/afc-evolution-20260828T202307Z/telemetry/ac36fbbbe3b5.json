@@ -1,0 +1,66 @@
+{
+  "match_id": "ac36fbbbe3b5",
+  "phase": "top4-league-2",
+  "started_utc": "2026-08-28T23:54:03Z",
+  "finished_utc": "2026-08-28T23:56:24Z",
+  "home_team": "strict-wide-pocket-g3",
+  "away_team": "release-deep-denial-g4",
+  "home_hash": "87f330493b3e105bd43006d786b9ae741c487147f11dff8f37a2e1800c58bb9a",
+  "away_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "seed": 3006,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 0,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 461,
+    "mask-forced": 137,
+    "deterministic-recovery": 2
+  },
+  "latency_ms": {
+    "minimum": 1.33,
+    "median": 1193.624,
+    "maximum": 4700.829
+  },
+  "commands": {
+    "IDLE": 117,
+    "MOVE_TO": 294,
+    "PASS": 6,
+    "PRESS_BALL": 17,
+    "INTERCEPT": 57,
+    "DRIBBLE": 33,
+    "SLIDE_TACKLE": 1,
+    "MARK": 69,
+    "GK_DISTRIBUTE": 3,
+    "SHOOT": 3
+  },
+  "simulation_metrics": {
+    "kicks": 12,
+    "passes": 9,
+    "shots": 3,
+    "tackles": 1,
+    "successfulTackles": 1,
+    "possessionChanges": 19,
+    "kickerRecaptures": 3,
+    "completedPasses": 3,
+    "interceptedPasses": 6,
+    "looseBallSeconds": 38.199999999999115,
+    "clusterFrames": 1137,
+    "duelFrames": 2663,
+    "minimumPlayerDistance": 1.1350261867480715,
+    "goalkeeperSaves": 2,
+    "pressChallenges": 5,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T235403Z-ac36fbbbe3b5-strict-wide-pocket-g3-vs-release-deep-denial-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260828T235403Z-ac36fbbbe3b5-strict-wide-pocket-g3-vs-release-deep-denial-g4.frames.ndjson",
+  "replay_sha256": "ebc3fb0e49163a27ff842b9379cd53ab80e894582b40a8d033474e97cdb5c5b9",
+  "recording_sha256": "ca30871dbb9c71db713c90f477ab7f4235c65502ddb44f266f61d7ca74aef764"
+}

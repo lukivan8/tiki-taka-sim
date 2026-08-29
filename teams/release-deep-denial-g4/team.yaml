@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-deep-denial-g4
+teamVersion: g4
+displayName: Release Deep Denial G4
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/release-deep-denial-g4/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: inherited-with-recovery, failurePolicy: deterministic-role-recovery}
+strategyFamily: release-deep-denial
+description: A fourth-generation mixed reliability child that uses a semantically validated role-anchor recovery only after all model attempts fail on an off-ball movement.

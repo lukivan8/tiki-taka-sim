@@ -1,0 +1,67 @@
+{
+  "match_id": "7cdaf9b009e6",
+  "phase": "top4-league",
+  "started_utc": "2026-08-28T23:01:54Z",
+  "finished_utc": "2026-08-28T23:04:06Z",
+  "home_team": "strict-wide-pocket-g3",
+  "away_team": "release-and-run",
+  "home_hash": "87f330493b3e105bd43006d786b9ae741c487147f11dff8f37a2e1800c58bb9a",
+  "away_hash": "8cb4672d6d92b49918374f2505c69a3805c2927ab71e5d174461b53e9c5bb996",
+  "seed": 2703,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 4,
+  "harmful_fallback_count": 1,
+  "decision_sources": {
+    "nova-micro": 430,
+    "mask-forced": 166,
+    "deterministic-fallback": 3,
+    "error-idle": 1
+  },
+  "latency_ms": {
+    "minimum": 0.587,
+    "median": 1203.013,
+    "maximum": 5312.985
+  },
+  "commands": {
+    "IDLE": 138,
+    "MOVE_TO": 309,
+    "PASS": 12,
+    "PRESS_BALL": 14,
+    "INTERCEPT": 64,
+    "DRIBBLE": 22,
+    "SLIDE_TACKLE": 1,
+    "GK_DISTRIBUTE": 4,
+    "MARK": 33,
+    "SHOOT": 3
+  },
+  "simulation_metrics": {
+    "kicks": 19,
+    "passes": 16,
+    "shots": 3,
+    "tackles": 1,
+    "successfulTackles": 0,
+    "possessionChanges": 22,
+    "kickerRecaptures": 2,
+    "completedPasses": 9,
+    "interceptedPasses": 4,
+    "looseBallSeconds": 52.5499999999983,
+    "clusterFrames": 215,
+    "duelFrames": 1561,
+    "minimumPlayerDistance": 1.084777502951019,
+    "goalkeeperSaves": 2,
+    "pressChallenges": 2,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T230154Z-7cdaf9b009e6-strict-wide-pocket-g3-vs-release-and-run.ndjson",
+  "recording_path": "var/matches/recordings/20260828T230154Z-7cdaf9b009e6-strict-wide-pocket-g3-vs-release-and-run.frames.ndjson",
+  "replay_sha256": "302da73e6c208aaf3e764ad8a271084c425d42136951cda63aa605b3edc6c32f",
+  "recording_sha256": "e3934eb0cf2b0bedfabe55303260be643c2855837914dfbb567f0c914b2a813d"
+}

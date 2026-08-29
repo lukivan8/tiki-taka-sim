@@ -1,0 +1,67 @@
+{
+  "match_id": "abe1ff57b96a",
+  "phase": "shield-g5-robustification",
+  "started_utc": "2026-08-29T00:02:16Z",
+  "finished_utc": "2026-08-29T00:03:54Z",
+  "home_team": "strict-switch-counter-g4",
+  "away_team": "release-switch-shield-g5",
+  "home_hash": "6bbafafba7a7780b92c6b70ae4135c86cbe74ba8ec18f5769121128e9da690c4",
+  "away_hash": "692e83ee34a9d1beed7ad2586cc46906dbd3f75eba49d88a82314b6f64613724",
+  "seed": 3101,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 1
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 1,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 465,
+    "mask-forced": 133,
+    "deterministic-recovery": 1,
+    "deterministic-fallback": 1
+  },
+  "latency_ms": {
+    "minimum": 0.6,
+    "median": 1215.653,
+    "maximum": 2690.237
+  },
+  "commands": {
+    "IDLE": 150,
+    "MOVE_TO": 287,
+    "PASS": 11,
+    "PRESS_BALL": 14,
+    "INTERCEPT": 60,
+    "DRIBBLE": 32,
+    "SLIDE_TACKLE": 1,
+    "MARK": 43,
+    "SHOOT": 1,
+    "GK_DISTRIBUTE": 1
+  },
+  "simulation_metrics": {
+    "kicks": 13,
+    "passes": 12,
+    "shots": 1,
+    "tackles": 1,
+    "successfulTackles": 1,
+    "possessionChanges": 22,
+    "kickerRecaptures": 6,
+    "completedPasses": 7,
+    "interceptedPasses": 3,
+    "looseBallSeconds": 46.31666666666532,
+    "clusterFrames": 83,
+    "duelFrames": 2096,
+    "minimumPlayerDistance": 1.1237137046224432,
+    "goalkeeperSaves": 0,
+    "pressChallenges": 8,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260829T000216Z-abe1ff57b96a-strict-switch-counter-g4-vs-release-switch-shield-g5.ndjson",
+  "recording_path": "var/matches/recordings/20260829T000216Z-abe1ff57b96a-strict-switch-counter-g4-vs-release-switch-shield-g5.frames.ndjson",
+  "replay_sha256": "7ef1c89c14d5472e8c7c5b70e04ce4c6f749c6cb13a4dfdf01c2f9e8773b9bbd",
+  "recording_sha256": "53f800f90fa606c6f20dfcda0195cca4b6a56440d6234629d2185aa8a3544163"
+}

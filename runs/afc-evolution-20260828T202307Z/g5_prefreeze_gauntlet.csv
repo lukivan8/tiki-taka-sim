@@ -1,0 +1,11 @@
+home,away,seed,phase,screen
+release-switch-shield-g5,release-deep-denial-g4,3401,prefreeze-gauntlet,false
+release-deep-denial-g4,release-switch-shield-g5,3401,prefreeze-gauntlet,false
+release-switch-shield-g5,release-and-run,3402,prefreeze-gauntlet,false
+release-and-run,release-switch-shield-g5,3402,prefreeze-gauntlet,false
+release-switch-shield-g5,nova-vertical,3403,prefreeze-gauntlet,false
+nova-vertical,release-switch-shield-g5,3403,prefreeze-gauntlet,false
+release-switch-shield-g5,simple-four-modes,3404,prefreeze-gauntlet,false
+simple-four-modes,release-switch-shield-g5,3404,prefreeze-gauntlet,false
+release-switch-shield-g5,strict-switch-counter-g4,3405,prefreeze-gauntlet,false
+strict-switch-counter-g4,release-switch-shield-g5,3405,prefreeze-gauntlet,false

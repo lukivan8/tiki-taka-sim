@@ -1,0 +1,67 @@
+{
+  "match_id": "7a11d2bf969f",
+  "phase": "initial-characterization",
+  "started_utc": "2026-08-28T20:59:26Z",
+  "finished_utc": "2026-08-28T21:01:43Z",
+  "home_team": "nova-vertical",
+  "away_team": "simple-four-modes",
+  "home_hash": "4dedda7a9c69f6c310f0cea31b8487a420d173d5de7bc0824684b6c45239565d",
+  "away_hash": "46d137026d0689fef3e0a48efd72c7c2fd772e1ac1557bec96435b6fa467dc40",
+  "seed": 1217,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 3,
+  "decision_sources": {
+    "nova-micro": 430,
+    "mask-forced": 108,
+    "deterministic-goalkeeper": 59,
+    "error-idle": 1,
+    "deterministic-fallback": 2
+  },
+  "latency_ms": {
+    "minimum": 0.07,
+    "median": 971.115,
+    "maximum": 7513.313
+  },
+  "commands": {
+    "IDLE": 90,
+    "MOVE_TO": 402,
+    "PASS": 13,
+    "PRESS_BALL": 16,
+    "INTERCEPT": 47,
+    "GK_DISTRIBUTE": 5,
+    "DRIBBLE": 24,
+    "SHOOT": 1,
+    "SLIDE_TACKLE": 2
+  },
+  "simulation_metrics": {
+    "kicks": 19,
+    "passes": 18,
+    "shots": 1,
+    "tackles": 2,
+    "successfulTackles": 0,
+    "possessionChanges": 25,
+    "kickerRecaptures": 2,
+    "completedPasses": 13,
+    "interceptedPasses": 1,
+    "looseBallSeconds": 51.41666666666503,
+    "clusterFrames": 145,
+    "duelFrames": 2290,
+    "minimumPlayerDistance": 1.1573131117837139,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 4,
+    "goalkeeperChallenges": 2
+  },
+  "replay_path": "var/matches/matches/20260828T205926Z-7a11d2bf969f-nova-vertical-vs-simple-four-modes.ndjson",
+  "recording_path": "var/matches/recordings/20260828T205926Z-7a11d2bf969f-nova-vertical-vs-simple-four-modes.frames.ndjson",
+  "replay_sha256": "6f25e27cd9f15b633ba0bceb0b184599c099dc43024350b5632aac588e042f5d",
+  "harmful_fallback_count": 1,
+  "recording_sha256": "a58786fcb67e67a560e9e49d9b8c13f03c897ce29bdbda66dd8f584f0d152097"
+}

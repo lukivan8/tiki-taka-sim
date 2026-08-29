@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: release-deep-denial-g2
+teamVersion: g2
+displayName: Release Deep Denial G2
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/release-deep-denial-g2/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: one-call-per-player-per-tick, failurePolicy: explicit-idle}
+strategyFamily: release-deep-denial
+description: A second-generation English robustification of Release and Run that denies the wide deep shooting pockets used by Nova Vertical.

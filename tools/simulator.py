@@ -42,6 +42,7 @@ class Player:
     sprinting: bool = False
     intent: dict[str, Any] | None = None
     control_blocked_until: int = 0
+    movement_blocked_until: int = 0
 
 
 @dataclass
@@ -71,7 +72,9 @@ class SimulationParameters:
                  "kickerRecontrolSeconds", "lostPossessionRecontrolSeconds", "kickerVelocityRetention"},
         "goalkeeping": {"goalLineOffset", "reactionDelaySeconds", "maximumPredictionSeconds",
                         "minimumIncomingSpeed", "lateralSpeed", "acceleration",
-                        "predictionMargin", "maximumLateralPosition"},
+                        "predictionMargin", "maximumLateralPosition",
+                        "controlledBallChallengeSeconds", "controlledBallStandOffDistance",
+                        "maximumRushDistance"},
         "passing": {"normalSpeed", "throughSpeed", "aerialSpeed", "goalkeeperThrowSpeed",
                     "goalkeeperKickSpeed", "targetLeadSeconds", "minimumTravelDistance"},
         "shooting": {"baseSpeed", "minimumPower", "maximumPower", "targetLeftY",
@@ -80,7 +83,9 @@ class SimulationParameters:
         "defending": {"defaultPressIntensity", "sprintPressThreshold", "tightMarkDistance",
                       "looseMarkDistance", "minimumMarkDistance", "maximumMarkDistance",
                       "interceptLookaheadSeconds", "tackleMinimumReach", "tackleMaximumReach",
-                      "tackleBallReleaseSpeed", "tackleRecoverySeconds"},
+                      "tackleBallReleaseSpeed", "tackleRecoverySeconds",
+                      "failedTackleRecoverySeconds", "pressChallengeRadius",
+                      "pressChallengeSeconds", "pressBallReleaseSpeed"},
         "formation": {"defaultPreset", "presets", "awayMirrorX", "awayMirrorY"},
         "rules": {"initialKickoffTeam", "kickoffPlayerId", "kickoffPlayerXOffset"},
     }
@@ -144,9 +149,11 @@ class World:
             "kickerRecaptures": 0, "completedPasses": 0,
             "interceptedPasses": 0, "looseBallSeconds": 0.0,
             "clusterFrames": 0, "duelFrames": 0, "minimumPlayerDistance": 999.0,
-            "goalkeeperSaves": 0,
+            "goalkeeperSaves": 0, "pressChallenges": 0, "goalkeeperChallenges": 0,
         }
         self._goalkeeper_threat_since: dict[Key, int | None] = {(0, 0): None, (1, 0): None}
+        self._press_contact_frames: dict[Key, int] = {}
+        self._goalkeeper_contact_frames: dict[Key, int] = {(0, 0): 0, (1, 0): 0}
         self._reset_positions(reset_score=False, kickoff_team=int(self.p.rules["initialKickoffTeam"]))
 
     @property
@@ -329,6 +336,12 @@ class World:
         success = victim in self.players and self.ball.owner == victim and (
             _distance(self.players[key].position, self.players[victim].position) <= reach
         )
+        recovery_key = "tackleRecoverySeconds" if success else "failedTackleRecoverySeconds"
+        self.players[key].movement_blocked_until = self.tick + round(
+            self.p.defending[recovery_key] * self.hz)
+        self.players[key].control_blocked_until = self.players[key].movement_blocked_until
+        self.players[key].intent = None
+        self.players[key].sprinting = False
         if success:
             old = self.ball.owner
             direction = _unit(self.players[victim].position[0] - self.players[key].position[0],
@@ -339,8 +352,6 @@ class World:
                                   direction[1] * self.p.defending["tackleBallReleaseSpeed"]]
             self.ball.last_kicker = key
             self.ball.intended_receiver = None
-            self.players[key].control_blocked_until = self.tick + round(
-                self.p.defending["tackleRecoverySeconds"] * self.hz)
             self.players[old].control_blocked_until = self.tick + round(
                 self.p.ball["lostPossessionRecontrolSeconds"] * self.hz)
             self.metrics["successfulTackles"] += 1
@@ -352,6 +363,7 @@ class World:
         frame_events: list[dict[str, Any]] = []
         self._move_players()
         self._separate_players()
+        self._resolve_controlled_ball_challenges(frame_events)
         self._move_ball(frame_events)
         self.tick += 1
         scoring_team = self._detect_goal()
@@ -366,6 +378,72 @@ class World:
         self._sample_metrics()
         return frame_events
 
+    def _resolve_controlled_ball_challenges(self, events: list[dict[str, Any]]) -> None:
+        """Turn sustained close pressure into a loose ball and let a keeper smother."""
+        owner = self.ball.owner
+        if owner is None:
+            self._press_contact_frames.clear()
+            for key in self._goalkeeper_contact_frames:
+                self._goalkeeper_contact_frames[key] = 0
+            return
+
+        owner_player = self.players[owner]
+        press_needed = max(1, round(self.p.defending["pressChallengeSeconds"] * self.hz))
+        ready_pressers: list[tuple[float, Key]] = []
+        for key, player in self.players.items():
+            eligible = (key[0] != owner[0] and player.intent is not None and
+                        player.intent.get("type") == "press" and
+                        _distance(player.position, owner_player.position) <=
+                        self.p.defending["pressChallengeRadius"])
+            self._press_contact_frames[key] = self._press_contact_frames.get(key, 0) + 1 if eligible else 0
+            if eligible and self._press_contact_frames[key] >= press_needed:
+                ready_pressers.append((_distance(player.position, owner_player.position), key))
+
+        for key in self._goalkeeper_contact_frames:
+            keeper = self.players[key]
+            in_box = ((key[0] == 0 and owner_player.position[0] <=
+                       -self.p.field["halfLength"] + self.p.ball["goalkeeperControlDepth"])
+                      or (key[0] == 1 and owner_player.position[0] >=
+                          self.p.field["halfLength"] - self.p.ball["goalkeeperControlDepth"]))
+            eligible = (key[0] != owner[0] and in_box and
+                        _distance(keeper.position, owner_player.position) <=
+                        self.p.ball["goalkeeperControlRadius"])
+            self._goalkeeper_contact_frames[key] = self._goalkeeper_contact_frames[key] + 1 if eligible else 0
+            needed = max(1, round(self.p.goalkeeping["controlledBallChallengeSeconds"] * self.hz))
+            if eligible and self._goalkeeper_contact_frames[key] >= needed:
+                self.ball.owner = key
+                self.ball.position = keeper.position.copy()
+                self.ball.velocity = [0.0, 0.0]
+                self.ball.intended_receiver = None
+                owner_player.control_blocked_until = self.tick + round(
+                    self.p.ball["lostPossessionRecontrolSeconds"] * self.hz)
+                self.metrics["possessionChanges"] += 1
+                self.metrics["goalkeeperChallenges"] += 1
+                events.append({"type": "GOALKEEPER_CHALLENGE", "player": self._event_key(key),
+                               "from": self._event_key(owner)})
+                self._press_contact_frames.clear()
+                for reset_key in self._goalkeeper_contact_frames:
+                    self._goalkeeper_contact_frames[reset_key] = 0
+                return
+
+        if not ready_pressers:
+            return
+        _, challenger = min(ready_pressers)
+        direction = _unit(owner_player.position[0] - self.players[challenger].position[0],
+                          owner_player.position[1] - self.players[challenger].position[1])
+        self.ball.owner = None
+        self.ball.position = owner_player.position.copy()
+        speed = self.p.defending["pressBallReleaseSpeed"]
+        self.ball.velocity = [direction[0] * speed, direction[1] * speed]
+        self.ball.last_kicker = challenger
+        self.ball.intended_receiver = None
+        owner_player.control_blocked_until = self.tick + round(
+            self.p.ball["lostPossessionRecontrolSeconds"] * self.hz)
+        self.metrics["pressChallenges"] += 1
+        events.append({"type": "PRESS_CHALLENGE", "player": self._event_key(challenger),
+                       "from": self._event_key(owner)})
+        self._press_contact_frames.clear()
+
     def _move_players(self) -> None:
         dt = 1.0 / self.hz
         positions = {key: player.position.copy() for key, player in self.players.items()}
@@ -378,7 +456,9 @@ class World:
             acceleration_override = None
             intent = player.intent
             reflex_target = self._goalkeeper_reflex_target(player)
-            if reflex_target is not None:
+            if self.tick < player.movement_blocked_until:
+                target = None
+            elif reflex_target is not None:
                 target = reflex_target
                 speed_override = self.p.goalkeeping["lateralSpeed"]
                 acceleration_override = self.p.goalkeeping["acceleration"]
@@ -449,10 +529,24 @@ class World:
     def _goalkeeper_reflex_target(self, player: Player) -> list[float] | None:
         """Return a 60 Hz save target without replacing the goalkeeper's strategic intent."""
         key = player.key
-        if key[1] != 0 or self.ball.owner is not None:
-            if key[1] == 0:
-                self._goalkeeper_threat_since[key] = None
+        if key[1] != 0:
             return None
+        if self.ball.owner is not None:
+            self._goalkeeper_threat_since[key] = None
+            owner = self.ball.owner
+            if owner[0] == key[0]:
+                return None
+            attacker = self.players[owner]
+            goal_x = -self.p.field["halfLength"] if key[0] == 0 else self.p.field["halfLength"]
+            depth = abs(attacker.position[0] - goal_x)
+            if depth > self.p.ball["goalkeeperControlDepth"]:
+                return None
+            dx, dy = attacker.position[0] - goal_x, attacker.position[1]
+            distance = math.hypot(dx, dy)
+            rush = min(self.p.goalkeeping["maximumRushDistance"], max(
+                0.0, distance-self.p.goalkeeping["controlledBallStandOffDistance"]))
+            ux, uy = _unit(dx, dy)
+            return [goal_x+ux*rush, uy*rush]
 
         goal_direction = -1.0 if key[0] == 0 else 1.0
         incoming_speed = self.ball.velocity[0] * goal_direction
@@ -604,6 +698,8 @@ class World:
                 self.players[key] = Player(key, [x, y], orientation=0.0 if team == 0 else math.pi)
         self.ball = Ball()
         self._goalkeeper_threat_since = {(0, 0): None, (1, 0): None}
+        self._press_contact_frames = {}
+        self._goalkeeper_contact_frames = {(0, 0): 0, (1, 0): 0}
         kickoff_key = (kickoff_team, int(self.p.rules["kickoffPlayerId"]))
         offset = self.p.rules["kickoffPlayerXOffset"] * (-1 if kickoff_team == 0 else 1)
         self.players[kickoff_key].position = [offset, 0.0]

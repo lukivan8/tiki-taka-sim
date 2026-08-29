@@ -1,0 +1,64 @@
+{
+  "match_id": "3b4464f0686c",
+  "phase": "shield-g5-broad",
+  "started_utc": "2026-08-29T00:06:39Z",
+  "finished_utc": "2026-08-29T00:09:12Z",
+  "home_team": "release-switch-shield-g5",
+  "away_team": "release-deep-denial-g4",
+  "home_hash": "692e83ee34a9d1beed7ad2586cc46906dbd3f75eba49d88a82314b6f64613724",
+  "away_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "seed": 3201,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 1,
+  "harmful_fallback_count": 1,
+  "decision_sources": {
+    "nova-micro": 598,
+    "deterministic-recovery": 1,
+    "error-idle": 1
+  },
+  "latency_ms": {
+    "minimum": 971.809,
+    "median": 1298.76,
+    "maximum": 5068.656
+  },
+  "commands": {
+    "IDLE": 150,
+    "MOVE_TO": 332,
+    "PASS": 14,
+    "PRESS_BALL": 22,
+    "INTERCEPT": 62,
+    "GK_DISTRIBUTE": 5,
+    "DRIBBLE": 14,
+    "SLIDE_TACKLE": 1
+  },
+  "simulation_metrics": {
+    "kicks": 18,
+    "passes": 18,
+    "shots": 0,
+    "tackles": 1,
+    "successfulTackles": 1,
+    "possessionChanges": 28,
+    "kickerRecaptures": 3,
+    "completedPasses": 12,
+    "interceptedPasses": 3,
+    "looseBallSeconds": 66.68333333333084,
+    "clusterFrames": 260,
+    "duelFrames": 1436,
+    "minimumPlayerDistance": 1.0738601690075873,
+    "goalkeeperSaves": 0,
+    "pressChallenges": 7,
+    "goalkeeperChallenges": 3
+  },
+  "replay_path": "var/matches/matches/20260829T000639Z-3b4464f0686c-release-switch-shield-g5-vs-release-deep-denial-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260829T000639Z-3b4464f0686c-release-switch-shield-g5-vs-release-deep-denial-g4.frames.ndjson",
+  "replay_sha256": "694f82693463bd544cd8f3c3cc0e716ce1ab2aa48db9e1dd1ccbc6ef3778ce8e",
+  "recording_sha256": "5549c2ab671af30e50f4e2d917ba2223cd0103ad1ebe3d9f1ac29944d121d682"
+}

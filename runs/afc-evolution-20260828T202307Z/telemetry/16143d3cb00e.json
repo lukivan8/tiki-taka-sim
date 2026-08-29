@@ -1,0 +1,65 @@
+{
+  "match_id": "16143d3cb00e",
+  "phase": "champion-exploiter-side-swap",
+  "started_utc": "2026-08-28T23:59:33Z",
+  "finished_utc": "2026-08-29T00:01:09Z",
+  "home_team": "release-deep-denial-g4",
+  "away_team": "strict-switch-counter-g4",
+  "home_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "away_hash": "6bbafafba7a7780b92c6b70ae4135c86cbe74ba8ec18f5769121128e9da690c4",
+  "seed": 3101,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 0,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 455,
+    "mask-forced": 144,
+    "deterministic-recovery": 1
+  },
+  "latency_ms": {
+    "minimum": 0.548,
+    "median": 1186.629,
+    "maximum": 4913.417
+  },
+  "commands": {
+    "IDLE": 128,
+    "MOVE_TO": 298,
+    "PASS": 11,
+    "INTERCEPT": 68,
+    "PRESS_BALL": 9,
+    "DRIBBLE": 27,
+    "MARK": 54,
+    "GK_DISTRIBUTE": 3,
+    "SHOOT": 2
+  },
+  "simulation_metrics": {
+    "kicks": 15,
+    "passes": 13,
+    "shots": 2,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 19,
+    "kickerRecaptures": 2,
+    "completedPasses": 6,
+    "interceptedPasses": 6,
+    "looseBallSeconds": 44.3833333333321,
+    "clusterFrames": 636,
+    "duelFrames": 2725,
+    "minimumPlayerDistance": 1.0500778870357315,
+    "goalkeeperSaves": 2,
+    "pressChallenges": 3,
+    "goalkeeperChallenges": 1
+  },
+  "replay_path": "var/matches/matches/20260828T235933Z-16143d3cb00e-release-deep-denial-g4-vs-strict-switch-counter-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260828T235933Z-16143d3cb00e-release-deep-denial-g4-vs-strict-switch-counter-g4.frames.ndjson",
+  "replay_sha256": "c09cac2fba170b23db7c123d59c7064d04c3807992bf7e6a17b852995fe30fef",
+  "recording_sha256": "6bb3dfe9d8c13e64ec390dc28dd4ced2e0b42c7a8dc3173de77980d23b2d6d7c"
+}

@@ -1,0 +1,13 @@
+schemaVersion: afc-team/v1
+teamId: simple-pressure-carry-g1
+teamVersion: g1
+displayName: Simple Pressure Carry G1
+backend: nova-micro
+formationPreset: 3-1
+implementation: {source: live_team.py, entrypoint: python3 teams/simple-pressure-carry-g1/live_team.py, arguments: {playerProcesses: 5}}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference: {mode: strands-pydantic-structured-output, modelCallPolicy: one-call-per-player-per-tick, failurePolicy: explicit-idle}
+strategyFamily: simple-pressure-carry
+description: An English orthogonal child of Simple Four Modes that increases primary pressure and preserves forward carry after recovery.

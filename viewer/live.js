@@ -26,7 +26,7 @@ function authHeaders(extra = {}) {
 
 inviteToken.addEventListener('input', () => {
   sessionStorage.setItem('afcInviteToken', inviteToken.value.trim());
-  startButton.disabled = !inviteToken.value.trim() || !teams.length;
+  startButton.disabled = !teams.length;
 });
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, character => ({
@@ -54,7 +54,7 @@ async function loadTeams() {
     <div><strong>${escapeHtml(team.name)}</strong><span>${escapeHtml(team.style)}</span></div>
     <p>${escapeHtml(team.description)}</p>
   </article>`).join('');
-  startButton.disabled = !inviteToken.value.trim();
+  startButton.disabled = !teams.length;
   updatePreview();
 }
 

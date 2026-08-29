@@ -1,0 +1,66 @@
+{
+  "match_id": "0632568a7eb2",
+  "phase": "initial-characterization",
+  "started_utc": "2026-08-28T20:54:46Z",
+  "finished_utc": "2026-08-28T20:56:55Z",
+  "home_team": "vertical-wingbacks",
+  "away_team": "nova-strict",
+  "home_hash": "862f8f28168be3cce9828d29d56f5464f500da663e37a5f11bb6d46139de5d58",
+  "away_hash": "e776dc269b790110cb6de4c4fc1e4063d7fa1bc2f21e7745fdf98dc5fe00436b",
+  "seed": 1215,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 3,
+  "decision_sources": {
+    "nova-micro": 416,
+    "mask-forced": 181,
+    "error-idle": 2,
+    "deterministic-fallback": 1
+  },
+  "latency_ms": {
+    "minimum": 1.295,
+    "median": 1189.36,
+    "maximum": 4706.904
+  },
+  "commands": {
+    "IDLE": 131,
+    "MOVE_TO": 312,
+    "PASS": 14,
+    "MARK": 38,
+    "INTERCEPT": 76,
+    "DRIBBLE": 17,
+    "SHOOT": 4,
+    "GK_DISTRIBUTE": 6,
+    "PRESS_BALL": 2
+  },
+  "simulation_metrics": {
+    "kicks": 23,
+    "passes": 19,
+    "shots": 4,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 24,
+    "kickerRecaptures": 0,
+    "completedPasses": 12,
+    "interceptedPasses": 7,
+    "looseBallSeconds": 52.4999999999983,
+    "clusterFrames": 243,
+    "duelFrames": 1515,
+    "minimumPlayerDistance": 1.0500778870357315,
+    "goalkeeperSaves": 5,
+    "pressChallenges": 1,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260828T205446Z-0632568a7eb2-vertical-wingbacks-vs-nova-strict.ndjson",
+  "recording_path": "var/matches/recordings/20260828T205446Z-0632568a7eb2-vertical-wingbacks-vs-nova-strict.frames.ndjson",
+  "replay_sha256": "4fb9c004be4ac0e78a5dfa22781819682599f0eb5d6bf1fc14e2daeddc98d1f1",
+  "harmful_fallback_count": 2,
+  "recording_sha256": "4c0fc978e461490a2177899056bec75834225756ef9a1cfc234014ee2448b32b"
+}

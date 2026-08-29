@@ -1,0 +1,66 @@
+{
+  "match_id": "e4cf075195e5",
+  "phase": "strict-g3-champion-pair",
+  "started_utc": "2026-08-28T22:44:37Z",
+  "finished_utc": "2026-08-28T22:46:15Z",
+  "home_team": "strict-wide-pocket-g3",
+  "away_team": "release-and-run",
+  "home_hash": "87f330493b3e105bd43006d786b9ae741c487147f11dff8f37a2e1800c58bb9a",
+  "away_hash": "8cb4672d6d92b49918374f2505c69a3805c2927ab71e5d174461b53e9c5bb996",
+  "seed": 2601,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 2,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 421,
+    "mask-forced": 177,
+    "deterministic-fallback": 2
+  },
+  "latency_ms": {
+    "minimum": 0.741,
+    "median": 1193.949,
+    "maximum": 2793.212
+  },
+  "commands": {
+    "IDLE": 139,
+    "MOVE_TO": 315,
+    "PASS": 18,
+    "PRESS_BALL": 10,
+    "INTERCEPT": 72,
+    "DRIBBLE": 16,
+    "SLIDE_TACKLE": 1,
+    "GK_DISTRIBUTE": 2,
+    "MARK": 26,
+    "SHOOT": 1
+  },
+  "simulation_metrics": {
+    "kicks": 21,
+    "passes": 20,
+    "shots": 1,
+    "tackles": 1,
+    "successfulTackles": 0,
+    "possessionChanges": 25,
+    "kickerRecaptures": 4,
+    "completedPasses": 11,
+    "interceptedPasses": 5,
+    "looseBallSeconds": 65.84999999999755,
+    "clusterFrames": 40,
+    "duelFrames": 1169,
+    "minimumPlayerDistance": 1.1481582389377365,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 4,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260828T224437Z-e4cf075195e5-strict-wide-pocket-g3-vs-release-and-run.ndjson",
+  "recording_path": "var/matches/recordings/20260828T224437Z-e4cf075195e5-strict-wide-pocket-g3-vs-release-and-run.frames.ndjson",
+  "replay_sha256": "20c1bb337c5dc7fc81d0e5495c68cc11f6161c46061ba8d7287341f497431cc4",
+  "recording_sha256": "aa0795807c7601337807038a354d6ecbcfb90b5c85fe20c2f7712140c1a9f4a2"
+}

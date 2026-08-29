@@ -1,0 +1,20 @@
+schemaVersion: afc-team/v1
+teamId: aggressive-xg-wave-g2
+teamVersion: g2
+displayName: Aggressive xG Wave G2
+backend: nova-micro
+formationPreset: 1-1-1-2-high
+implementation:
+  source: live_team.py
+  entrypoint: python3 teams/aggressive-xg-wave-g2/live_team.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: inherited-with-recovery
+    failurePolicy: deterministic-semantic-recovery
+strategyFamily: aggressive-xg-wave
+description: A second-generation attacking crossover with inner-channel arrival geometry and a distance-and-angle finish gate that preserves progression from low-value shooting positions.

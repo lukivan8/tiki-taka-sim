@@ -1,0 +1,66 @@
+{
+  "match_id": "87234b2ae5b9",
+  "phase": "final-validation",
+  "started_utc": "2026-08-29T01:58:47Z",
+  "finished_utc": "2026-08-29T02:01:09Z",
+  "home_team": "strict-switch-counter-g4",
+  "away_team": "release-deep-denial-g4",
+  "home_hash": "6bbafafba7a7780b92c6b70ae4135c86cbe74ba8ec18f5769121128e9da690c4",
+  "away_hash": "ff7060ffc0c4d91ba809a9571ce99fc9ff46fe7b4cc26d685f60036a268ace1d",
+  "seed": 9106,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 1,
+    "away": 0
+  },
+  "rated": true,
+  "rating_exclusion_reason": null,
+  "decision_count": 600,
+  "fallback_count": 1,
+  "harmful_fallback_count": 0,
+  "decision_sources": {
+    "nova-micro": 455,
+    "mask-forced": 144,
+    "deterministic-fallback": 1
+  },
+  "latency_ms": {
+    "minimum": 0.588,
+    "median": 1210.753,
+    "maximum": 5361.396
+  },
+  "commands": {
+    "IDLE": 144,
+    "MOVE_TO": 281,
+    "PASS": 11,
+    "PRESS_BALL": 14,
+    "INTERCEPT": 54,
+    "DRIBBLE": 34,
+    "SLIDE_TACKLE": 2,
+    "MARK": 55,
+    "GK_DISTRIBUTE": 3,
+    "SHOOT": 2
+  },
+  "simulation_metrics": {
+    "kicks": 15,
+    "passes": 13,
+    "shots": 2,
+    "tackles": 2,
+    "successfulTackles": 2,
+    "possessionChanges": 21,
+    "kickerRecaptures": 2,
+    "completedPasses": 9,
+    "interceptedPasses": 1,
+    "looseBallSeconds": 32.06666666666613,
+    "clusterFrames": 553,
+    "duelFrames": 2391,
+    "minimumPlayerDistance": 1.0536541075647208,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 3,
+    "goalkeeperChallenges": 2
+  },
+  "replay_path": "var/matches/matches/20260829T015847Z-87234b2ae5b9-strict-switch-counter-g4-vs-release-deep-denial-g4.ndjson",
+  "recording_path": "var/matches/recordings/20260829T015847Z-87234b2ae5b9-strict-switch-counter-g4-vs-release-deep-denial-g4.frames.ndjson",
+  "replay_sha256": "807f8e71019f74bcc2dd562e72ff3884b386a1dd042da40ffc14efd5d132e2a1",
+  "recording_sha256": "cd884fff08de68578e5c5656207feec5e0d249a2fc6b7fd5f33890a031984c05"
+}

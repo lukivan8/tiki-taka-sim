@@ -1,0 +1,64 @@
+{
+  "match_id": "e47ea5c8d39a",
+  "phase": "initial-characterization",
+  "started_utc": "2026-08-28T20:34:53Z",
+  "finished_utc": "2026-08-28T20:37:14Z",
+  "home_team": "kd-verticalis",
+  "away_team": "nova-vertical",
+  "home_hash": "db32d6ca2ac1fcb4a7e12f7ab9369b51ea3f0bf66f981a5e0cf381aad311d2e6",
+  "away_hash": "4dedda7a9c69f6c310f0cea31b8487a420d173d5de7bc0824684b6c45239565d",
+  "seed": 1203,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 0,
+    "away": 0
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 9,
+  "decision_sources": {
+    "nova-micro": 458,
+    "mask-forced": 133,
+    "error-idle": 6,
+    "deterministic-fallback": 3
+  },
+  "latency_ms": {
+    "minimum": 0.757,
+    "median": 1248.166,
+    "maximum": 4868.91
+  },
+  "commands": {
+    "IDLE": 88,
+    "MOVE_TO": 367,
+    "PASS": 22,
+    "INTERCEPT": 106,
+    "SHOOT": 1,
+    "GK_DISTRIBUTE": 4,
+    "DRIBBLE": 12
+  },
+  "simulation_metrics": {
+    "kicks": 26,
+    "passes": 25,
+    "shots": 1,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 28,
+    "kickerRecaptures": 0,
+    "completedPasses": 17,
+    "interceptedPasses": 6,
+    "looseBallSeconds": 60.549999999997844,
+    "clusterFrames": 522,
+    "duelFrames": 1483,
+    "minimumPlayerDistance": 1.1524726377654284,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 0,
+    "goalkeeperChallenges": 2
+  },
+  "replay_path": "var/matches/matches/20260828T203453Z-e47ea5c8d39a-kd-verticalis-vs-nova-vertical.ndjson",
+  "recording_path": "var/matches/recordings/20260828T203453Z-e47ea5c8d39a-kd-verticalis-vs-nova-vertical.frames.ndjson",
+  "replay_sha256": "6844785f1120741f73bff5d282a0126526631baee0d09ecba9733b9dcdb63ac5",
+  "harmful_fallback_count": 6,
+  "recording_sha256": "4c3f61b966101a30d52a2242f9a46aab3a5f03bd929d6283cd86d583e9101109"
+}

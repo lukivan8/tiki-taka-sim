@@ -1,0 +1,20 @@
+schemaVersion: afc-team/v1
+teamId: aggressive-xg-wave-g4
+teamVersion: g4
+displayName: Aggressive xG Wave G4
+backend: nova-micro
+formationPreset: 1-1-1-2-high
+implementation:
+  source: live_team.py
+  entrypoint: python3 teams/aggressive-xg-wave-g4/live_team.py
+  arguments:
+    playerProcesses: 5
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: inherited-with-penetration-guard
+    failurePolicy: deterministic-fallback
+strategyFamily: aggressive-xg-wave
+description: A fourth-generation attacking crossover that breaks G3's safe-pass loop by forcing a validated forward or diagonal carry when no genuinely open progressive pass exists.

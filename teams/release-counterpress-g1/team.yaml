@@ -1,0 +1,19 @@
+schemaVersion: afc-team/v1
+teamId: release-counterpress-g1
+teamVersion: g1
+displayName: Release Counterpress G1
+backend: nova-micro
+formationPreset: 3-1
+implementation:
+  source: live_team.py
+  entrypoint: python3 teams/release-counterpress-g1/live_team.py
+  arguments: {playerProcesses: 5}
+model:
+  family: Amazon Nova
+  name: us.amazon.nova-micro-v1:0
+  inference:
+    mode: strands-pydantic-structured-output
+    modelCallPolicy: one-call-per-player-per-tick
+    failurePolicy: explicit-idle
+strategyFamily: release-counterpress
+description: An English tactical mutation of Release and Run that attacks high-start opponents with one aggressive primary presser while preserving three-player recovery structure.

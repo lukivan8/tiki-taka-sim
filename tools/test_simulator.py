@@ -54,6 +54,88 @@ class SimulationV2Tests(unittest.TestCase):
         right = world.players[(1, 2)].position
         self.assertGreaterEqual(((left[0] - right[0]) ** 2 + (left[1] - right[1]) ** 2) ** 0.5, 1.15)
 
+    def test_sustained_close_press_can_dispossess_an_owner(self):
+        world = self.world()
+        defender, owner = (0, 1), (1, 4)
+        world.players[defender].position = [-10.0, 0.0]
+        world.players[owner].position = [-8.76, 0.0]
+        world.ball.owner = owner
+        world.ball.position = world.players[owner].position.copy()
+        world.apply_commands({
+            defender: {"type": "PRESS_BALL", "intensity": 1.0},
+            owner: {"type": "DRIBBLE", "target": {"x": -35, "y": 0}, "sprint": False},
+        })
+        events = []
+        for _ in range(world.hz):
+            events.extend(world.advance_one())
+            if world.ball.owner != owner:
+                break
+        self.assertNotEqual(world.ball.owner, owner)
+        self.assertEqual(world.metrics["pressChallenges"], 1)
+        self.assertTrue(any(event["type"] == "PRESS_CHALLENGE" for event in events))
+
+    def test_failed_slide_tackle_has_real_movement_recovery(self):
+        world = self.world()
+        defender, owner = (0, 1), (1, 4)
+        world.players[defender].position = [-10.0, 0.0]
+        world.players[owner].position = [10.0, 0.0]
+        world.ball.owner = owner
+        world.apply_commands({
+            defender: {"type": "SLIDE_TACKLE", "targetPlayerId": 4,
+                       "distance": 2.15, "sprint": True},
+        })
+        blocked_until = world.players[defender].movement_blocked_until
+        self.assertGreater(blocked_until, world.tick)
+        start = world.players[defender].position.copy()
+        world.apply_commands({
+            defender: {"type": "MOVE_TO", "target": {"x": 20, "y": 0}, "sprint": True},
+        })
+        for _ in range(blocked_until-world.tick):
+            world.advance_one()
+        self.assertAlmostEqual(world.players[defender].position[0], start[0], places=5)
+
+    def test_goalkeeper_challenges_a_controlled_ball_before_goal_line(self):
+        world = self.world()
+        attacker, goalkeeper = (1, 4), (0, 0)
+        world.players[attacker].position = [-47.0, 1.5]
+        world.players[goalkeeper].position = [-50.0, 0.0]
+        world.ball.owner = attacker
+        world.ball.position = world.players[attacker].position.copy()
+        world.apply_commands({
+            attacker: {"type": "DRIBBLE", "target": {"x": -54.9, "y": 1.5}, "sprint": False},
+            goalkeeper: {"type": "MOVE_TO", "target": {"x": -50, "y": 0}, "sprint": False},
+        })
+        events = []
+        for _ in range(world.hz*3):
+            events.extend(world.advance_one())
+            if world.ball.owner == goalkeeper or world.score != [0, 0]:
+                break
+        self.assertEqual(world.score, [0, 0])
+        self.assertEqual(world.ball.owner, goalkeeper)
+        self.assertEqual(world.metrics["goalkeeperChallenges"], 1)
+        self.assertTrue(any(event["type"] == "GOALKEEPER_CHALLENGE" for event in events))
+
+    def test_goalkeeper_closes_wide_owner_angle_before_the_shot(self):
+        world = self.world()
+        shooter, goalkeeper = (1, 4), (0, 0)
+        world.players[shooter].position = [-44.0, -19.0]
+        world.players[goalkeeper].position = [-50.0, -3.0]
+        world.ball.owner = shooter
+        world.ball.position = world.players[shooter].position.copy()
+        world.apply_commands({shooter: {"type": "IDLE"}})
+        for _ in range(world.hz):
+            world.advance_one()
+        self.assertLess(world.players[goalkeeper].position[1], -8.0)
+
+        world.apply_commands({shooter: {"type": "SHOOT", "power": 1.0,
+                                        "aimLocation": "CENTER"}})
+        for _ in range(world.hz*3):
+            world.advance_one()
+            if world.ball.owner == goalkeeper or world.score != [0, 0]:
+                break
+        self.assertEqual(world.score, [0, 0])
+        self.assertEqual(world.ball.owner, goalkeeper)
+
     def test_every_formation_starts_in_its_own_half(self):
         parameters = SimulationParameters.load_arena(ARENA)[1]
         self.assertEqual(list(parameters.formation["presets"]), [

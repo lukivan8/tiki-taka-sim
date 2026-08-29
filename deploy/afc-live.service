@@ -16,6 +16,7 @@ Environment=PYTHONDONTWRITEBYTECODE=1
 Environment=AWS_REGION=us-east-1
 Environment=AFC_GATEWAY_TOKENS_FILE=/home/lukivan8/.config/tiki-taka-sim/gateway-tokens.json
 Environment=AFC_GATEWAY_USAGE_DB=/home/lukivan8/dev/tiki-taka-sim/var/gateway-usage.sqlite3
+Environment=AFC_ALLOW_ANONYMOUS_MATCHES=1
 
 [Install]
 WantedBy=multi-user.target

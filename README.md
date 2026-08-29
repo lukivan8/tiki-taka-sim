@@ -191,10 +191,12 @@ make create-team NAME=alice-v2 DISPLAY_NAME="Alice v2" SOURCE=alice-press FORMAT
 
 ## Публичный сервер и защита расходов
 
-`POST /api/inference`, `POST /api/matches` и остановка матча требуют
-`Authorization: Bearer <invite-token>`. На публичной странице invite вводится в
-поле `Invite token` и хранится только в `sessionStorage` вкладки. Просмотр сайта,
-каталога и уже созданного replay не расходует Nova-вызовы.
+`POST /api/inference` всегда требует `Authorization: Bearer <invite-token>`.
+Для hosted-арены можно включить `AFC_ALLOW_ANONYMOUS_MATCHES=1`: тогда запуск и
+остановка матчей на этой странице работают без ручного токена, но удалённый
+inference gateway остаётся закрытым. Если режим выключен, `POST /api/matches`
+и остановка матча также требуют invite-token. Поле `Invite token` хранится только
+в `sessionStorage` вкладки. Просмотр сайта, каталога и replay не расходует Nova-вызовы.
 
 Cloudflare Tunnel публикует только origin `127.0.0.1:8300`; приложение независимо
 проверяет персональный invite и ведёт постоянный суточный счётчик в SQLite. При

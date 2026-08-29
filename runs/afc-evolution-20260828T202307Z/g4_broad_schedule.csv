@@ -1,0 +1,5 @@
+home,away,seed
+release-deep-denial-g4,release-and-run,2101
+release-and-run,release-deep-denial-g4,2101
+release-deep-denial-g4,simple-four-modes,2102
+simple-four-modes,release-deep-denial-g4,2102

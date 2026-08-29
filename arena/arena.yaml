@@ -1,5 +1,5 @@
 schemaVersion: afc-arena/v2
-arenaVersion: nova-baseline-v1
+arenaVersion: nova-baseline-v2
 replaySchemaVersion: afc-replay/v2
 description: Canonical 60 Hz football simulation for the AWS Nova team.
 
@@ -52,8 +52,8 @@ simulationParameters:
     lostPossessionRecontrolSeconds: 0.18
     kickerVelocityRetention: 0.35
   goalkeeping:
-    # Tactical commands still arrive every 2s; this reflex loop is evaluated on
-    # every 60Hz physics tick and only takes over for a ball travelling at goal.
+    # Tactical commands still arrive every 2s; goalkeeper reactions are
+    # evaluated on every 60Hz physics tick for shots and controlled close-downs.
     goalLineOffset: 5.0
     reactionDelaySeconds: 0.18
     maximumPredictionSeconds: 3.0
@@ -62,6 +62,9 @@ simulationParameters:
     acceleration: 22.0
     predictionMargin: 1.0
     maximumLateralPosition: 4.2
+    controlledBallChallengeSeconds: 0.12
+    controlledBallStandOffDistance: 1.2
+    maximumRushDistance: 12.0
   passing:
     normalSpeed: 18.0
     throughSpeed: 22.0
@@ -92,6 +95,10 @@ simulationParameters:
     tackleMaximumReach: 2.15
     tackleBallReleaseSpeed: 4.5
     tackleRecoverySeconds: 0.35
+    failedTackleRecoverySeconds: 0.65
+    pressChallengeRadius: 1.55
+    pressChallengeSeconds: 0.30
+    pressBallReleaseSpeed: 3.8
   formation:
     defaultPreset: 1-1-2
     presets:

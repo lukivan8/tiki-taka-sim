@@ -1,0 +1,67 @@
+{
+  "match_id": "7201183557d7",
+  "phase": "strict-g2-validation",
+  "started_utc": "2026-08-28T22:40:09Z",
+  "finished_utc": "2026-08-28T22:41:35Z",
+  "home_team": "strict-wide-pocket-g2",
+  "away_team": "nova-strict",
+  "home_hash": "c8df789e0ea8170cafbf1df413a5dc87b458ada170cec32738f2a0ef2a7021e5",
+  "away_hash": "e776dc269b790110cb6de4c4fc1e4063d7fa1bc2f21e7745fdf98dc5fe00436b",
+  "seed": 2403,
+  "arena_version": "nova-baseline-v2",
+  "model": "us.amazon.nova-micro-v1:0",
+  "score": {
+    "home": 1,
+    "away": 1
+  },
+  "rated": false,
+  "rating_exclusion_reason": "harmful idle fallback",
+  "decision_count": 600,
+  "fallback_count": 5,
+  "harmful_fallback_count": 1,
+  "decision_sources": {
+    "nova-micro": 277,
+    "mask-forced": 316,
+    "deterministic-recovery": 2,
+    "error-idle": 1,
+    "deterministic-fallback": 4
+  },
+  "latency_ms": {
+    "minimum": 0.443,
+    "median": 14.334,
+    "maximum": 2675.53
+  },
+  "commands": {
+    "IDLE": 96,
+    "MOVE_TO": 272,
+    "PASS": 22,
+    "MARK": 113,
+    "INTERCEPT": 82,
+    "CLEAR": 2,
+    "DRIBBLE": 6,
+    "SHOOT": 4,
+    "GK_DISTRIBUTE": 3
+  },
+  "simulation_metrics": {
+    "kicks": 31,
+    "passes": 25,
+    "shots": 4,
+    "tackles": 0,
+    "successfulTackles": 0,
+    "possessionChanges": 28,
+    "kickerRecaptures": 0,
+    "completedPasses": 20,
+    "interceptedPasses": 4,
+    "looseBallSeconds": 70.3499999999973,
+    "clusterFrames": 267,
+    "duelFrames": 1168,
+    "minimumPlayerDistance": 1.0457133860330619,
+    "goalkeeperSaves": 1,
+    "pressChallenges": 0,
+    "goalkeeperChallenges": 0
+  },
+  "replay_path": "var/matches/matches/20260828T224009Z-7201183557d7-strict-wide-pocket-g2-vs-nova-strict.ndjson",
+  "recording_path": "var/matches/recordings/20260828T224009Z-7201183557d7-strict-wide-pocket-g2-vs-nova-strict.frames.ndjson",
+  "replay_sha256": "3cc5b6b33e223ca96c88957eb7dfdbe6a6d638b9025f912849d72f06f4ae3fcf",
+  "recording_sha256": "5982e6c0678b92f4db063232c30a6f013f2ca66a6c5156044f051479dc53b1c8"
+}

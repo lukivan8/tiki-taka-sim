@@ -1,0 +1,13 @@
+home,away,seed
+release-deep-denial-g4,release-switch-shield-g5,9101
+release-switch-shield-g5,release-deep-denial-g4,9101
+release-deep-denial-g4,simple-four-modes,9102
+simple-four-modes,release-deep-denial-g4,9102
+release-switch-shield-g5,simple-four-modes,9103
+simple-four-modes,release-switch-shield-g5,9103
+release-deep-denial-g4,nova-vertical,9104
+nova-vertical,release-deep-denial-g4,9104
+release-switch-shield-g5,nova-vertical,9105
+nova-vertical,release-switch-shield-g5,9105
+release-deep-denial-g4,strict-switch-counter-g4,9106
+strict-switch-counter-g4,release-deep-denial-g4,9106
